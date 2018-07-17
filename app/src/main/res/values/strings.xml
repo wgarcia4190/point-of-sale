@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">POS</string>
     <string name="xml_tracking_id">123123123</string>
+    <string name="logo">Logo</string>
+    <string name="sign_up">Registrarse</string>
+    <string name="login">Login</string>
 </resources>

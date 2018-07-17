@@ -8,22 +8,35 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="888f4ba3efa26608a10711a7d6d82f1fd9289d1d" />
 
         <activity
-            android:name=".view.main.SplashScreenActivity"
+            android:name=".view.main.splash.SplashScreenActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/FullScreen">
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".view.main.login.LoginActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 

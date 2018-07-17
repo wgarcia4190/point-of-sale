@@ -8,9 +8,32 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <style name="FullScreen">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="TextField">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Button" parent="Base.Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:fontFamily">@font/medium</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="TitleField" parent="TextField">
+        <item name="android:fontFamily">@font/regular</item>
+        <item name="android:textSize">@dimen/title_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
 </resources>

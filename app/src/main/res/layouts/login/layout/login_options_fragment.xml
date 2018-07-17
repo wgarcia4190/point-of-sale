@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".view.main.splash.SplashScreenActivity">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="@dimen/logo_size"
+        android:layout_height="@dimen/logo_size"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/logo_m_t"
+        android:contentDescription="@string/logo"
+        android:scaleType="fitCenter"
+        android:tint="@color/white"
+        app:srcCompat="@drawable/ic_logo" />
+
+    <TextView
+        style="@style/TitleField"
+        android:layout_below="@+id/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/logo_text_m_t"
+        android:text="Point of Sale" />
+
+    <LinearLayout
+        android:layout_width="@dimen/login_button_w"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/login_buttons_container_m_b">
+
+        <Button
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/login_button_m_b"
+            android:background="@drawable/shape_transparent_button_border_white"
+            android:text="@string/sign_up" />
+
+        <Button
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:text="@string/login"
+            android:textColor="@color/colorPrimaryDark" />
+    </LinearLayout>
+
+</RelativeLayout>

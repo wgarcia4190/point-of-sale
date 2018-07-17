@@ -94,6 +94,8 @@ dependencies {
     implementation "de.hdodenhof:circleimageview:$rounded_image_version"
     implementation "com.github.esafirm.android-image-picker:imagepicker:$image_picker_version"
     implementation "com.github.esafirm.android-image-picker:rximagepicker:$image_picker_version"
+    implementation "com.daimajia.easing:library:$daimajia_easing_version"
+    implementation "com.daimajia.androidanimations:library:$daimajia_androidanimations_version"
 
 
     testImplementation 'junit:junit:4.12'

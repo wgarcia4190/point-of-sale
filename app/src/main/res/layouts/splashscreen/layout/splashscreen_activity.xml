@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.SplashScreenActivity">
+    android:background="@color/colorPrimaryDark"
+    tools:context=".view.main.splash.SplashScreenActivity">
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="@dimen/splash_logo_size"
+        android:layout_height="@dimen/splash_logo_size"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/logo_m_t"
+        android:contentDescription="@string/logo"
+        android:scaleType="fitCenter"
+        android:tint="@color/white"
+        app:srcCompat="@drawable/ic_logo" />
 
-
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
