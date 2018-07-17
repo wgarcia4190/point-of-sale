@@ -36,4 +36,34 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="MediumField" parent="TitleField">
+        <item name="android:fontFamily">@font/medium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MediumLink" parent="Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:fontFamily">@font/medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="EditText" parent="Base.V7.Widget.AppCompat.EditText">
+        <item name="android:fontFamily">@font/regular</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:textColorHint">@color/white</item>
+    </style>
+
+    <style name="Separator">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
 </resources>

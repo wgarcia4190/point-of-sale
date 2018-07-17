@@ -2,10 +2,12 @@ package com.devcorerd.pos.core.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.devcorerd.pos.R
 import com.devcorerd.pos.core.Application
 import com.devcorerd.pos.core.api.Presenter
 import com.devcorerd.pos.core.exception.ViewCannotBeNullException
@@ -15,7 +17,7 @@ import com.google.android.gms.analytics.Tracker
 /**
  * Created by wgarcia on 7/16/2018.
  */
-class FragmentBase: Fragment() {
+open class FragmentBase: Fragment() {
 
     protected lateinit var tracker: Tracker
     protected var presenter: Presenter? = null
@@ -43,5 +45,14 @@ class FragmentBase: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         presenter?.initService(activity as AppCompatActivity?)
+    }
+
+    protected fun addFragmentToStack(fragment: FragmentBase) {
+        val transaction: FragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+
+        transaction.addToBackStack(null)
+        transaction.hide(this)
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        transaction.replace(R.id.container, fragment, fragment.tag).commit()
     }
 }

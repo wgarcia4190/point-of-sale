@@ -12,5 +12,8 @@ class LoginActivity: ActivityBase(layout = R.layout.login_activity, isFullScreen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportFragmentManager.beginTransaction().replace(R.id.container,
+                LoginOptionsFragment.newInstance()).commit()
     }
 }

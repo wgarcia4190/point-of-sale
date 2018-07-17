@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".view.main.splash.SplashScreenActivity">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="@dimen/logo_size"
+        android:layout_height="@dimen/logo_size"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/login_m_t"
+        android:contentDescription="@string/logo"
+        android:scaleType="fitCenter"
+        android:tint="@color/white"
+        app:srcCompat="@drawable/ic_logo" />
+
+    <TextView
+        android:id="@+id/appName"
+        style="@style/TitleField"
+        android:layout_below="@+id/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/logo_text_m_t"
+        android:text="@string/app_name" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/appName"
+        android:layout_marginStart="@dimen/login_controls_m_h"
+        android:layout_marginEnd="@dimen/login_controls_m_h"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatEditText
+            style="@style/EditText"
+            android:inputType="textEmailAddress"
+            android:layout_height="@dimen/login_control_height"
+            android:drawableStart="@drawable/ic_email"
+            android:drawableEnd="@drawable/ic_email_negative"
+            android:hint="@string/email_hint"
+            android:gravity="center"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            style="@style/EditText"
+            android:inputType="textPassword"
+            android:layout_height="@dimen/login_control_height"
+            android:drawableStart="@drawable/ic_password"
+            android:drawableEnd="@drawable/ic_password_show"
+            android:layout_marginTop="@dimen/login_controls_n_m_t"
+            android:hint="@string/password_hint"
+            android:gravity="center"/>
+
+        <Button
+            style="@style/MediumLink"
+            android:text="@string/forgot_password"
+            android:layout_gravity="end"
+            android:textSize="@dimen/forgot_password_size"
+            android:layout_marginTop="@dimen/forgot_password_m_t"
+            android:layout_marginBottom="@dimen/forgot_password_m_b"/>
+
+        <Button
+            android:id="@+id/login"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:text="@string/login"
+            android:textColor="@color/colorPrimaryDark" />
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/connect_with_m_v"
+            android:layout_marginTop="@dimen/connect_with_m_v">
+            
+            <View
+                style="@style/Separator"/>
+
+            <TextView
+                style="@style/MediumField"
+                android:layout_weight="1"
+                android:textAllCaps="true"
+                android:textSize="@dimen/connect_with_text"
+                android:textAlignment="center"
+                android:text="@string/connect_with"
+                tools:ignore="InefficientWeight" />
+
+            <View
+                style="@style/Separator"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                style="@style/Button"
+                android:id="@+id/facebook"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@color/facebook"
+                android:text="@string/facebook"
+                android:layout_marginEnd="@dimen/connect_with_m_h"
+                android:drawableStart="@drawable/ic_facebook"/>
+
+            <Button
+                style="@style/Button"
+                android:id="@+id/google"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@color/google"
+                android:text="@string/google"
+                android:layout_marginStart="@dimen/connect_with_m_h"
+                android:drawableStart="@drawable/ic_google"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

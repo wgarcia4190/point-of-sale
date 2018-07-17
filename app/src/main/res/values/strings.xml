@@ -1,7 +1,13 @@
 <resources>
-    <string name="app_name">POS</string>
+    <string name="app_name">Point of Sale</string>
     <string name="xml_tracking_id">123123123</string>
     <string name="logo">Logo</string>
     <string name="sign_up">Registrarse</string>
     <string name="login">Login</string>
+    <string name="forgot_password">¿Olvidó su contraseña?</string>
+    <string name="email_hint">Correo Electrónico</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="connect_with">Conectarse con</string>
+    <string name="facebook">Facebook</string>
+    <string name="google">Google</string>
 </resources>
