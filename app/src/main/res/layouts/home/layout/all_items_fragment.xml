@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <include
+                layout="@layout/dropdown"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dropdown_height"
+                android:layout_marginEnd="@dimen/home_cat_separator_m_v"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/deselected" />
+
+            <ImageButton
+                style="@style/ImageButton"
+                android:layout_width="@dimen/home_search_size"
+                android:layout_height="@dimen/home_search_size"
+                android:layout_marginEnd="@dimen/home_cat_separator_m_v"
+                android:layout_marginStart="@dimen/home_cat_separator_m_v"
+                android:contentDescription="@string/content_description"
+                android:tint="@color/black"
+                app:srcCompat="@drawable/ic_search" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/SeparatorBig"
+            android:background="@color/deselected" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/productList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

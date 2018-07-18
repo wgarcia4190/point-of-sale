@@ -28,6 +28,8 @@
     <style name="TextField">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
     </style>
 
     <style name="Button" parent="Base.Widget.AppCompat.Button.Borderless.Colored">
@@ -107,15 +109,21 @@
         <item name="tabIndicatorHeight">2dp</item>
     </style>
 
-    <style name="ToolbarIcon">
-        <item name="android:layout_width">25dp</item>
-        <item name="android:layout_height">25dp</item>
-        <item name="android:layout_alignParentEnd">true</item>
+    <style name="ImageButton" parent="Widget.AppCompat.ImageButton">
         <item name="android:scaleType">fitCenter</item>
         <item name="android:tint">@color/white</item>
         <item name="android:background">@null</item>
-        <item name="android:layout_centerVertical">true</item>
+        <item name="android:contentDescription">@string/content_description</item>
         <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
     </style>
+
+    <style name="ToolbarIcon" parent="ImageButton">
+        <item name="android:layout_width">@dimen/toolbar_icon_size</item>
+        <item name="android:layout_height">@dimen/toolbar_icon_size</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+
 
 </resources>

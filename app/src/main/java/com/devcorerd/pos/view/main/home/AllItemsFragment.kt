@@ -14,7 +14,7 @@ class AllItemsFragment: FragmentBase(){
         fun newInstance():
                 AllItemsFragment {
             val fragmentBase = AllItemsFragment()
-            val layout: Int = R.layout.empty_fragment
+            val layout: Int = R.layout.all_items_fragment
 
             fragmentBase.createBundle(layout)
             return fragmentBase

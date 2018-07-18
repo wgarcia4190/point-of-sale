@@ -5,6 +5,7 @@
     <string name="sign_up">Registrarse</string>
     <string name="login">Login</string>
     <string name="forgot_password">¿Olvidó su contraseña?</string>
+    <string name="content_description">contentDescription</string>
     <string name="email_hint">Correo Electrónico</string>
     <string name="password_hint">Contraseña</string>
     <string name="connect_with">Conectarse con</string>

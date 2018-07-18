@@ -20,7 +20,6 @@
 
     <View
         style="@style/SeparatorBig"
-        android:id="@+id/separator"
         android:background="@color/deselected"/>
 
     <android.support.v4.view.ViewPager
