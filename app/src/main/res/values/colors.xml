@@ -8,4 +8,6 @@
 
     <color name="facebook">#3A589B</color>
     <color name="google">#DA4B42</color>
+
+    <color name="deselected">#DDDDDD</color>
 </resources>

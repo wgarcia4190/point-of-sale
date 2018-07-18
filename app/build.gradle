@@ -43,6 +43,7 @@ android {
     sourceSets {
         main {
             res.srcDirs = [
+                    'src/main/res/layouts/home',
                     'src/main/res/layouts/login',
                     'src/main/res/layouts/splashscreen',
                     'src/main/res/layouts',

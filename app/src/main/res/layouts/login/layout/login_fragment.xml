@@ -30,9 +30,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/appName"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="@dimen/login_controls_m_h"
         android:layout_marginEnd="@dimen/login_controls_m_h"
+        android:layout_marginBottom="@dimen/login_controls_m_b"
         android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatEditText
@@ -55,8 +56,9 @@
             android:gravity="center"/>
 
         <Button
-            style="@style/MediumLink"
+            style="@style/LightLink"
             android:text="@string/forgot_password"
+            android:textAllCaps="false"
             android:layout_gravity="end"
             android:textSize="@dimen/forgot_password_size"
             android:layout_marginTop="@dimen/forgot_password_m_t"
@@ -82,7 +84,7 @@
                 style="@style/Separator"/>
 
             <TextView
-                style="@style/MediumField"
+                style="@style/LightField"
                 android:layout_weight="1"
                 android:textAllCaps="true"
                 android:textSize="@dimen/connect_with_text"
@@ -116,6 +118,7 @@
                 android:layout_weight="1"
                 android:background="@color/google"
                 android:text="@string/google"
+                android:drawablePadding="@dimen/google_button_d_p_n"
                 android:layout_marginStart="@dimen/connect_with_m_h"
                 android:drawableStart="@drawable/ic_google"/>
         </LinearLayout>

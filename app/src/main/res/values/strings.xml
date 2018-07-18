@@ -10,4 +10,8 @@
     <string name="connect_with">Conectarse con</string>
     <string name="facebook">Facebook</string>
     <string name="google">Google</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="all">Todos</string>
+    <string name="favorites">Favoritos</string>
 </resources>
