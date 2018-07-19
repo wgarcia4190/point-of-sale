@@ -13,6 +13,8 @@
 
     <dimen name="title_size">22sp</dimen>
 
+    <dimen name="border_width">2dp</dimen>
+
     <dimen name="splash_logo_size">150dp</dimen>
     <dimen name="logo_size">100dp</dimen>
     <dimen name="logo_m_t">200dp</dimen>
@@ -45,6 +47,11 @@
     <dimen name="home_button_text">18sp</dimen>
     <dimen name="home_cat_separator_m_v">10dp</dimen>
     <dimen name="home_search_size">25dp</dimen>
+    <dimen name="home_products_m_v">10dp</dimen>
+    <dimen name="home_products_m_h">10dp</dimen>
+    <dimen name="home_products_image_size_s">40dp</dimen>
+    <dimen name="home_products_image_m_e">10dp</dimen>
+    <dimen name="home_products_text_size_s">15sp</dimen>
 
     <dimen name="tab_icon">30dp</dimen>
     <dimen name="tab_text">16sp</dimen>

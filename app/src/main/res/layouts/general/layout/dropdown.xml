@@ -1,11 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dropdownContainer"
+    style="@style/Clickable"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dropdown_height"
-    android:clickable="true"
-    android:focusable="true"
-    android:background="?attr/selectableItemBackgroundBorderless"
     android:orientation="horizontal">
 
     <TextView
@@ -17,7 +15,7 @@
         android:layout_weight="1"
         android:paddingEnd="@dimen/dropdown_p_s"
         android:paddingStart="@dimen/dropdown_p_s"
-        android:text="Todas las Categorias"
+        android:text="@string/all_categories"
         android:textColor="@color/black"
         android:textSize="@dimen/dropdown_text_size" />
 

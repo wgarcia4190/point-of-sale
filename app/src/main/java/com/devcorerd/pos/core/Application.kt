@@ -51,4 +51,6 @@ class Application: MultiDexApplication(){
         }
         return tracker!!
     }
+
+    fun Double.format(digits: Int) = String.format("%.${digits}f", this)
 }

@@ -15,11 +15,11 @@ class UIHelper private constructor() {
         @JvmStatic
         fun startActivity(firstActivity: Activity, secondActivity: Class<*>) {
             val mainIntent = Intent(firstActivity, secondActivity)
-            val options = ActivityOptions.makeCustomAnimation(firstActivity, android.R.anim.slide_out_right, android.R.anim.slide_in_left)
+            //val options = ActivityOptions.makeCustomAnimation(firstActivity, android.R.anim.slide_out_right, android.R.anim.slide_in_left)
 
             mainIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-            firstActivity.startActivity(mainIntent, options.toBundle())
+            firstActivity.startActivity(mainIntent)//, options.toBundle())
             firstActivity.finish()
         }
     }
