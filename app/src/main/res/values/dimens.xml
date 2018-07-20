@@ -16,6 +16,12 @@
 
     <dimen name="border_width">2dp</dimen>
 
+    <dimen name="badge_radius">50dp</dimen>
+    <dimen name="badge_size">20dp</dimen>
+    <dimen name="badge_text">12sp</dimen>
+    <dimen name="badge_container_width">38dp</dimen>
+    <dimen name="badge_m_t">6dp</dimen>
+
     <dimen name="splash_logo_size">150dp</dimen>
     <dimen name="logo_size">100dp</dimen>
     <dimen name="logo_m_t">200dp</dimen>

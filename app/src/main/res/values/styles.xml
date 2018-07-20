@@ -149,5 +149,16 @@
         <item name="android:foreground">?attr/selectableItemBackground</item>
     </style>
 
+    <style name="Badge" parent="LightField">
+        <item name="android:layout_height">@dimen/badge_size</item>
+        <item name="android:layout_width">@dimen/badge_size</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:background">@drawable/shape_badge</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/badge_text</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 
 </resources>

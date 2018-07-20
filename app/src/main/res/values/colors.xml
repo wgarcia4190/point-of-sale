@@ -11,4 +11,5 @@
     <color name="google">#DA4B42</color>
 
     <color name="deselected">#DDDDDD</color>
+    <color name="badge">#f00000</color>
 </resources>

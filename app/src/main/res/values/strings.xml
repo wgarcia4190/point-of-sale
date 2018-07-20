@@ -16,4 +16,5 @@
     <string name="all">Todos</string>
     <string name="favorites">Favoritos</string>
     <string name="all_categories">Todas las Categorias</string>
+    <string name="zero">0</string>
 </resources>

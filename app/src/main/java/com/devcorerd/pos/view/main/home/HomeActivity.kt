@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
+import android.view.View
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.ui.ActivityBase
 import com.devcorerd.pos.helper.CircleAnimationHelper
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.home_activity.*
 class HomeActivity : ActivityBase(R.layout.home_activity),
         NavigationView.OnNavigationItemSelectedListener {
 
-    private val cartCounter = 0
+    private var cartCounter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,14 +53,16 @@ class HomeActivity : ActivityBase(R.layout.home_activity),
         return true
     }
 
-    public fun makeFlyAnimation(imageView: CircleImageView){
+    fun makeFlyAnimation(imageView: CircleImageView){
         CircleAnimationHelper().attachActivity(this).setTargetView(imageView)
                 .setCircleDuration(200).setMoveDuration(400).setDestView(cartButton)
                 .setAnimationListener(object : Animator.AnimatorListener{
                     override fun onAnimationRepeat(animation: Animator?) {}
 
                     override fun onAnimationEnd(animation: Animator?) {
-                        print("add to cart")
+                        updateCount(1)
+                        if(badge.visibility == View.GONE)
+                            badge.visibility = View.VISIBLE
                     }
 
                     override fun onAnimationCancel(animation: Animator?) {}
@@ -67,6 +70,11 @@ class HomeActivity : ActivityBase(R.layout.home_activity),
                     override fun onAnimationStart(animation: Animator?) {}
 
                 }).startAnimation()
+    }
+
+    fun updateCount(count: Int){
+        cartCounter += count
+        badge.text = cartCounter.toString()
     }
 
 }
