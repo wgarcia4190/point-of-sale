@@ -10,6 +10,7 @@
     <dimen name="dropdown_p_s">10dp</dimen>
 
     <dimen name="toolbar_icon_size">25dp</dimen>
+    <dimen name="toolbar_m_e">10dp</dimen>
 
     <dimen name="title_size">22sp</dimen>
 

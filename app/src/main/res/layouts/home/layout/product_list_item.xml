@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/productContainer"
     style="@style/Clickable"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <View
-        style="@style/SeparatorSmall"
-        android:layout_marginBottom="@dimen/home_products_m_v" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/home_products_m_h"
         android:layout_marginStart="@dimen/home_products_m_h"
+        android:layout_marginTop="@dimen/home_products_m_v"
         android:orientation="horizontal">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <com.devcorerd.pos.view.custom.CircleImageView
             android:id="@+id/productImage"
             android:layout_width="@dimen/home_products_image_size_s"
             android:layout_height="@dimen/home_products_image_size_s"
             android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/home_products_image_m_e"
             android:contentDescription="@string/content_description"
             android:scaleType="centerCrop"
             app:civ_border_color="@color/white"
-            android:layout_marginEnd="@dimen/home_products_image_m_e"
             app:civ_border_width="@dimen/border_width" />
 
         <TextView

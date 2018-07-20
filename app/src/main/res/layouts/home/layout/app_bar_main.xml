@@ -21,20 +21,31 @@
             app:elevation="0dp"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
-                <Button
-                    style="@style/Button"
-                    android:text="@string/app_name"
-                    android:layout_centerInParent="true"/>
+            <LinearLayout
+                style="@style/Clickable"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
-                <ImageButton
+                <TextView
+                    style="@style/ToolbarButton"
+                    android:layout_marginEnd="@dimen/toolbar_m_e"
+                    android:text="@string/app_name" />
+
+                <ImageView
+                    android:id="@+id/cartButton"
                     style="@style/ToolbarIcon"
-                    app:srcCompat="@drawable/ic_customer" />
+                    android:contentDescription="@string/content_description"
+                    app:srcCompat="@drawable/ic_cart" />
 
-            </RelativeLayout>
+            </LinearLayout>
+
+            <ImageButton
+                style="@style/ToolbarIcon"
+                android:contentDescription="@string/content_description"
+                app:srcCompat="@drawable/ic_customer" />
+
 
         </android.support.v7.widget.Toolbar>
 
