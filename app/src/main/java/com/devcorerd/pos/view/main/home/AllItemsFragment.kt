@@ -28,7 +28,9 @@ class AllItemsFragment : FragmentBase() {
             ProductListViewHolder(view)
         }, object:  OnClickListener<Product>{
             override fun onClick(entity: Product?, `object`: Any?) {
-                (activity!! as HomeActivity).makeFlyAnimation(`object` as CircleImageView)
+                (activity!! as HomeActivity).makeFlyAnimation(`object` as CircleImageView,
+                        entity?.productQuantity)
+                (activity!! as HomeActivity).updateCharge(entity!!)
             }
 
         })

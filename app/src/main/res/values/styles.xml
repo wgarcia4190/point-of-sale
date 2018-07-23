@@ -84,6 +84,13 @@
         <item name="android:textSize">@dimen/login_controls_size</item>
     </style>
 
+    <style name="EditTextNotEditable" parent="EditText">
+        <item name="android:clickable">false</item>
+        <item name="android:cursorVisible">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
+
     <style name="Separator">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">1.5dp</item>
@@ -100,6 +107,12 @@
     <style name="SeparatorSmall">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="SeparatorVertical">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/white</item>
     </style>
 

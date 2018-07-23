@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_white_background_border_deselected"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/searchCustomer"
+            style="@style/Clickable"
+            android:layout_width="0dp"
+            android:layout_margin="@dimen/customer_m"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/customer_image"
+                android:layout_height="@dimen/customer_image"
+                android:contentDescription="@string/content_description"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_customer_search" />
+
+            <TextView
+                style="@style/LightField"
+                android:layout_marginTop="@dimen/customer_m_t_text"
+                android:text="@string/search"
+                android:textColor="@color/black"
+                android:textSize="@dimen/customer_text" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/SeparatorVertical"
+            android:background="@color/deselected" />
+
+        <LinearLayout
+            android:id="@+id/addCustomer"
+            style="@style/Clickable"
+            android:layout_width="0dp"
+            android:layout_margin="@dimen/customer_m"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/customer_image"
+                android:layout_height="@dimen/customer_image"
+                android:contentDescription="@string/content_description"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_add_customer" />
+
+            <TextView
+                style="@style/LightField"
+                android:layout_marginTop="@dimen/customer_m_t_text"
+                android:text="@string/add"
+                android:textColor="@color/black"
+                android:textSize="@dimen/customer_text" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

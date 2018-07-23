@@ -7,11 +7,14 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/chargeButton"
         style="@style/ButtonLower"
         android:layout_height="@dimen/home_button_height"
         android:layout_margin="@dimen/home_button_m"
         android:background="@color/colorPrimary"
-        android:text="Cobro $0.00"
+        android:enabled="false"
+        android:text="@string/charge"
+        android:textColor="@color/deselected"
         android:textSize="@dimen/home_button_text" />
 
     <android.support.design.widget.TabLayout
@@ -20,7 +23,7 @@
 
     <View
         style="@style/SeparatorBig"
-        android:background="@color/deselected"/>
+        android:background="@color/deselected" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"

@@ -8,10 +8,29 @@
     tools:context=".view.main.home.HomeActivity"
     tools:openDrawer="start">
 
-    <include
-        layout="@layout/app_bar_main"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/app_bar_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true" />
+
+        <include
+            android:id="@+id/customerContainer"
+            layout="@layout/customer_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="@dimen/customer_m_h"
+            android:layout_marginStart="@dimen/customer_m_h"
+            android:layout_marginTop="@dimen/customer_m_v"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navView"

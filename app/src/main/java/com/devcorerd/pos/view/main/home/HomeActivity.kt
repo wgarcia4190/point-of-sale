@@ -7,9 +7,12 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.view.View
+import com.daimajia.androidanimations.library.Techniques
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.ui.ActivityBase
+import com.devcorerd.pos.helper.AnimationHelper
 import com.devcorerd.pos.helper.CircleAnimationHelper
+import com.devcorerd.pos.model.entity.Product
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.home_activity.*
@@ -22,12 +25,17 @@ class HomeActivity : ActivityBase(R.layout.home_activity),
         NavigationView.OnNavigationItemSelectedListener {
 
     private var cartCounter = 0
+    private var cartTotal: Double = 0.0
+
+    private lateinit var homeFragment: HomeFragment
+    private val products: MutableList<Product> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        homeFragment = HomeFragment.newInstance()
         supportFragmentManager.beginTransaction().replace(R.id.container,
-                HomeFragment.newInstance()).commit()
+                homeFragment).commit()
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -38,6 +46,7 @@ class HomeActivity : ActivityBase(R.layout.home_activity),
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+        setupEvents()
     }
 
     override fun onBackPressed() {
@@ -53,15 +62,31 @@ class HomeActivity : ActivityBase(R.layout.home_activity),
         return true
     }
 
-    fun makeFlyAnimation(imageView: CircleImageView){
+    private fun setupEvents() {
+        customerButton.setOnClickListener {
+            AnimationHelper.animateView(customerContainer, Techniques.ZoomIn, onStartCallback = {
+                customerContainer.visibility = View.VISIBLE
+            })
+        }
+
+        customerContainer.setOnClickListener {
+            if (customerContainer.visibility == View.VISIBLE) {
+                AnimationHelper.animateView(customerContainer, Techniques.ZoomOut, onEndCallback = {
+                    customerContainer.visibility = View.GONE
+                })
+            }
+        }
+    }
+
+    fun makeFlyAnimation(imageView: CircleImageView, quantity: Int?) {
         CircleAnimationHelper().attachActivity(this).setTargetView(imageView)
                 .setCircleDuration(200).setMoveDuration(400).setDestView(cartButton)
-                .setAnimationListener(object : Animator.AnimatorListener{
+                .setAnimationListener(object : Animator.AnimatorListener {
                     override fun onAnimationRepeat(animation: Animator?) {}
 
                     override fun onAnimationEnd(animation: Animator?) {
-                        updateCount(1)
-                        if(badge.visibility == View.GONE)
+                        updateCount(quantity!!)
+                        if (badge.visibility == View.GONE)
                             badge.visibility = View.VISIBLE
                     }
 
@@ -72,9 +97,17 @@ class HomeActivity : ActivityBase(R.layout.home_activity),
                 }).startAnimation()
     }
 
-    fun updateCount(count: Int){
+    fun updateCount(count: Int) {
         cartCounter += count
         badge.text = cartCounter.toString()
+    }
+
+    fun updateCharge(product: Product) {
+        products.add(product)
+        cartTotal += (product.price * product.productQuantity)
+        homeFragment.updateCharge(cartTotal)
+
+        product.productQuantity = 1
     }
 
 }

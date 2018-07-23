@@ -13,6 +13,7 @@ import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.ViewPagerAdapter
 import com.devcorerd.pos.core.ui.FragmentBase
 import com.devcorerd.pos.core.ui.Tab
+import com.devcorerd.pos.model.entity.Product
 import kotlinx.android.synthetic.main.home_fragment.*
 
 @Suppress("DEPRECATION")
@@ -103,5 +104,13 @@ class HomeFragment : FragmentBase() {
         val tabIcon = customTab.findViewById(R.id.tabIcon) as ImageView
         tabIcon.setColorFilter(ContextCompat.getColor(activity!!, color),
                 PorterDuff.Mode.SRC_IN)
+    }
+
+    fun updateCharge(price: Double){
+        val charge: String = resources.getString(R.string.charge_wildcard)
+                .replace("{price}", String.format("%.2f", price))
+        chargeButton.isEnabled = true
+        chargeButton.setTextColor(resources.getColor(R.color.white))
+        chargeButton.text = charge
     }
 }

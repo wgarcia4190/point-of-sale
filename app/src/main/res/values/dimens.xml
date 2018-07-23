@@ -56,11 +56,21 @@
     <dimen name="home_search_size">25dp</dimen>
     <dimen name="home_products_m_v">10dp</dimen>
     <dimen name="home_products_m_h">10dp</dimen>
-    <dimen name="home_products_image_size_s">40dp</dimen>
+    <dimen name="home_products_image_size_s">60dp</dimen>
     <dimen name="home_products_image_m_e">10dp</dimen>
-    <dimen name="home_products_text_size_s">15sp</dimen>
+    <dimen name="home_products_name_text_size_s">14sp</dimen>
+    <dimen name="home_products_text_size_s">14sp</dimen>
+    <dimen name="home_products_name_m_b">1dp</dimen>
+    <dimen name="home_products_quantity_h_s">30dp</dimen>
 
     <dimen name="tab_icon">30dp</dimen>
     <dimen name="tab_text">16sp</dimen>
+
+    <dimen name="customer_image">40dp</dimen>
+    <dimen name="customer_m">10dp</dimen>
+    <dimen name="customer_m_v">10dp</dimen>
+    <dimen name="customer_m_h">5dp</dimen>
+    <dimen name="customer_m_t_text">3dp</dimen>
+    <dimen name="customer_text">14sp</dimen>
 
 </resources>

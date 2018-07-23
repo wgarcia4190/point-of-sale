@@ -1,7 +1,6 @@
 package com.devcorerd.pos.view.viewholder
 
 import android.content.Context
-import android.graphics.Color
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -10,12 +9,7 @@ import com.devcorerd.pos.core.adapter.ViewHolder
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.view.custom.CircleImageView
-import com.devcorerd.pos.R.id.imageView
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.LayerDrawable
-import android.graphics.drawable.ColorDrawable
-
-
+import com.devcorerd.pos.view.custom.QuantitySelector
 
 
 /**
@@ -31,6 +25,10 @@ class ProductListViewHolder(view: View) : ViewHolder<Product>(view) {
         view.findViewById<LinearLayout>(R.id.productContainer)
     }
 
+    private val quantitySelector: QuantitySelector by lazy {
+        view.findViewById<QuantitySelector>(R.id.productQuantity)
+    }
+
     private val productName: TextView by lazy { view.findViewById<TextView>(R.id.productName) }
     private val productPrice: TextView by lazy { view.findViewById<TextView>(R.id.productPrice) }
 
@@ -42,6 +40,7 @@ class ProductListViewHolder(view: View) : ViewHolder<Product>(view) {
             productImage.setColor(entity.representation)
 
         productContainer.setOnClickListener {
+            entity.setQuantity(quantitySelector.getQuantity())
             listener?.onClick(entity, productImage)
         }
 
