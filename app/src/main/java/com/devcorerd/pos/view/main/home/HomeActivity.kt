@@ -10,11 +10,13 @@ import android.view.View
 import com.daimajia.androidanimations.library.Techniques
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.ui.ActivityBase
+import com.devcorerd.pos.customer.CustomerListFragment
 import com.devcorerd.pos.helper.AnimationHelper
 import com.devcorerd.pos.helper.CircleAnimationHelper
 import com.devcorerd.pos.model.entity.Product
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.customer_container.*
 import kotlinx.android.synthetic.main.home_activity.*
 
 /**
@@ -75,6 +77,12 @@ class HomeActivity : ActivityBase(R.layout.home_activity),
                     customerContainer.visibility = View.GONE
                 })
             }
+        }
+
+        searchCustomer.setOnClickListener {
+            customerContainer.performClick()
+            supportFragmentManager.beginTransaction().add(R.id.mainContainer,
+                    CustomerListFragment.newInstance()).commit()
         }
     }
 

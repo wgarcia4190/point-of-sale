@@ -16,6 +16,8 @@
 
     <dimen name="border_width">2dp</dimen>
 
+    <dimen name="edit_text_height">50dp</dimen>
+
     <dimen name="badge_radius">50dp</dimen>
     <dimen name="badge_size">20dp</dimen>
     <dimen name="badge_text">12sp</dimen>
@@ -72,5 +74,11 @@
     <dimen name="customer_m_h">5dp</dimen>
     <dimen name="customer_m_t_text">3dp</dimen>
     <dimen name="customer_text">14sp</dimen>
+    <dimen name="customer_avatar_size">60dp</dimen>
+    <dimen name="customer_avatar_m_e">10dp</dimen>
+    <dimen name="customer_avatar_name_size">14sp</dimen>
+    <dimen name="customer_avatar_name_m_b">3dp</dimen>
+    <dimen name="customer_avatar_data_size">12sp</dimen>
+    <dimen name="customer_avatar_data_m_e">2dp</dimen>
 
 </resources>

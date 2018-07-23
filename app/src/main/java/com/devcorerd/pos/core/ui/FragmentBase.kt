@@ -55,4 +55,13 @@ open class FragmentBase: Fragment() {
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         transaction.replace(R.id.container, fragment, fragment.tag).commit()
     }
+
+    protected fun stachFragmentToTop(fragment: FragmentBase) {
+        val transaction: FragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+
+        transaction.addToBackStack(null)
+        transaction.hide(this)
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        transaction.add(R.id.container, fragment, fragment.tag).commit()
+    }
 }
