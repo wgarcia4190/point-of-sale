@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.ViewHolder
+import com.devcorerd.pos.helper.Helper
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.view.custom.CircleImageView
@@ -38,6 +39,8 @@ class ProductListViewHolder(view: View) : ViewHolder<Product>(view) {
 
         if (!entity.hasImage)
             productImage.setColor(entity.representation)
+        else
+            productImage.setImageBitmap(Helper.getBitmapFromString(entity.representation))
 
         productContainer.setOnClickListener {
             entity.setQuantity(quantitySelector.getQuantity())

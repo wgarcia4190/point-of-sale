@@ -82,6 +82,7 @@
         <item name="android:lines">1</item>
         <item name="android:textColorHint">@color/white</item>
         <item name="android:textSize">@dimen/login_controls_size</item>
+        <item name="android:textCursorDrawable">@null</item>
     </style>
 
     <style name="EditTextDeselected" parent="EditText">
@@ -89,6 +90,23 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:background">@null</item>
         <item name="android:layout_height">@dimen/edit_text_height</item>
+    </style>
+
+    <style name="EditTextLine" parent="EditText">
+        <item name="android:textColorHint">@color/deselected</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_height">@dimen/edit_text_height_big</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textCursorDrawable">@drawable/shape_caret</item>
+        <item name="android:background">@drawable/shape_edit_text_line</item>
+        <item name="android:padding">@dimen/customer_add_p</item>
+    </style>
+
+    <style name="TextLabel" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/deselected</item>
+        <item name="colorAccent">@color/deselected</item>
+        <item name="colorControlNormal">@color/deselected</item>
+        <item name="colorControlActivated">@color/deselected</item>
     </style>
 
     <style name="EditTextNotEditable" parent="EditText">

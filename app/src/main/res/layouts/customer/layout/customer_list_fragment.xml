@@ -29,6 +29,11 @@
             android:gravity="center_vertical"
             android:layout_gravity="center_vertical|start"/>
 
+        <ImageButton
+            android:id="@+id/addCustomerButton"
+            style="@style/ToolbarIcon"
+            app:srcCompat="@drawable/ic_add_customer"/>
+
     </android.support.v7.widget.Toolbar>
 
     <View
@@ -56,9 +61,11 @@
             style="@style/EditTextDeselected"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:inputType="textNoSuggestions"
             android:hint="@string/search_customer_hint"/>
 
         <ImageView
+            android:id="@+id/clearSearch"
             style="@style/ImageView"
             android:layout_width="@dimen/home_search_size"
             android:layout_height="@dimen/home_search_size"
@@ -66,7 +73,8 @@
             android:layout_marginStart="@dimen/home_cat_separator_m_v"
             android:contentDescription="@string/content_description"
             android:tint="@color/deselected"
-            app:srcCompat="@drawable/ic_x" />
+            app:srcCompat="@drawable/ic_x"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

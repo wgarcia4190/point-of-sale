@@ -9,6 +9,7 @@ import com.devcorerd.pos.core.adapter.Adapter
 import com.devcorerd.pos.core.ui.FragmentBase
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.model.entity.Product
+import com.devcorerd.pos.model.presenter.ProductPresenter
 import com.devcorerd.pos.view.viewholder.ProductListViewHolder
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.all_items_fragment.*
@@ -43,7 +44,7 @@ class AllItemsFragment : FragmentBase() {
             val fragmentBase = AllItemsFragment()
             val layout: Int = R.layout.all_items_fragment
 
-            fragmentBase.createBundle(layout)
+            fragmentBase.createBundle(layout, ProductPresenter())
             return fragmentBase
         }
     }
@@ -51,17 +52,15 @@ class AllItemsFragment : FragmentBase() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        productList = mutableListOf(Product("Platano", "Platano Verde", "Viveres",
-                'U', 10.00, "1000", "12345dd",
-                "#FF0000", false, false, DateTime.now(),
-                DateTime.now()),
-                Product("Platano", "Platano Verde", "Viveres",
-                        'U', 10.00, "1000", "12345dd",
-                        "#FF0000", false, false, DateTime.now(),
-                        DateTime.now()))
+        (presenter as ProductPresenter).getProducts({products: MutableList<Product> ->
+            productList = products
 
-        productListRV.setHasFixedSize(false)
-        productListRV.layoutManager = LinearLayoutManager(context!!)
-        productListRV.adapter = adapter
+            productListRV.setHasFixedSize(false)
+            productListRV.layoutManager = LinearLayoutManager(context!!)
+            productListRV.adapter = adapter
+        }, {error: Throwable ->
+            print(error.message)
+        })
+
     }
 }

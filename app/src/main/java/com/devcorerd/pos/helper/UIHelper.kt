@@ -3,6 +3,7 @@ package com.devcorerd.pos.helper
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
+import android.widget.EditText
 
 /**
  * @author Ing. Wilson Garcia
@@ -21,6 +22,12 @@ class UIHelper private constructor() {
 
             firstActivity.startActivity(mainIntent)//, options.toBundle())
             firstActivity.finish()
+        }
+
+        fun clearEditText(vararg editTexts: EditText){
+            for(editText in editTexts){
+                editText.setText("")
+            }
         }
     }
 }

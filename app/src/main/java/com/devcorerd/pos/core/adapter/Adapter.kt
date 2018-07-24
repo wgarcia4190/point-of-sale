@@ -22,4 +22,14 @@ class Adapter<T, V>(var data: MutableList<T>? = mutableListOf(), var context: Co
     override fun onBindViewHolder(holder: V, position: Int) {
         holder.bindElement(data!![position], context, listener)
     }
+
+    fun swap(newData: MutableList<T>) {
+        this.data = newData
+        notifyDataSetChanged()
+    }
+
+    fun add(newData: T) {
+        this.data!!.add(newData)
+        notifyItemChanged(this.data!!.size - 1)
+    }
 }

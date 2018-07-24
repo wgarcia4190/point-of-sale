@@ -6,5 +6,6 @@ package com.devcorerd.pos.helper
 class ConstantsHelper private constructor(){
     companion object {
         const val layoutKey: String = "LayoutKey"
+        const val applicationJson = "application/json"
     }
 }

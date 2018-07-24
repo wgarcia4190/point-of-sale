@@ -8,6 +8,7 @@ import com.devcorerd.pos.helper.PreferencesHelper
 import com.google.android.gms.analytics.GoogleAnalytics
 import com.google.android.gms.analytics.Tracker
 import net.danlew.android.joda.JodaTimeAndroid
+import ru.arturvasilov.sqlite.core.SQLite
 
 /**
  * Created by wgarcia on 7/16/2018.
@@ -25,6 +26,7 @@ class Application: MultiDexApplication(){
     override fun onCreate() {
         super.onCreate()
 
+        SQLite.initialize(this)
         JodaTimeAndroid.init(this)
         PreferencesHelper.instance.createPreferences(this)
         analytics = GoogleAnalytics.getInstance(this)

@@ -48,20 +48,31 @@ open class FragmentBase: Fragment() {
     }
 
     protected fun addFragmentToStack(fragment: FragmentBase) {
-        val transaction: FragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
-
-        transaction.addToBackStack(null)
-        transaction.hide(this)
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        transaction.replace(R.id.container, fragment, fragment.tag).commit()
+        addFragmentToStack(fragment, R.id.container)
     }
 
-    protected fun stachFragmentToTop(fragment: FragmentBase) {
+    protected fun addFragmentToStack(fragment: FragmentBase, layout: Int) {
+        addFragmentToStack(fragment, layout, true)
+    }
+
+    protected fun addFragmentToStack(fragment: FragmentBase, layout: Int, hideThis: Boolean) {
         val transaction: FragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
 
         transaction.addToBackStack(null)
-        transaction.hide(this)
+        if(hideThis)
+            transaction.hide(this)
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        transaction.add(R.id.container, fragment, fragment.tag).commit()
+        transaction.replace(layout, fragment, fragment.tag).commit()
+    }
+
+    protected fun stackFragmentToTop(fragment: FragmentBase, layout: Int, hideThis: Boolean) {
+        val transaction: FragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+
+        transaction.addToBackStack(null)
+
+        if(hideThis)
+            transaction.hide(this)
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        transaction.add(layout, fragment, fragment.tag).commit()
     }
 }

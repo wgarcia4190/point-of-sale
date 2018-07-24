@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <provider
+            android:name=".core.db.SQLiteProvider"
+            android:authorities="com.devcorerd.pos"
+            android:exported="false"/>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="888f4ba3efa26608a10711a7d6d82f1fd9289d1d" />

@@ -9,9 +9,9 @@ data class Product(val name: String, val description: String, val category: Stri
                    val soldBy: Char, val price: Double, val sku: String, val barcode: String?,
                    val representation: String, val hasImage: Boolean, val isFavorite: Boolean,
                    val creationDate: DateTime, val modificationDate: DateTime,
-                   var productQuantity: Int = 1){
+                   var productQuantity: Int = 1) {
 
-    fun setQuantity(quantity: Int){
+    fun setQuantity(quantity: Int) {
         this.productQuantity = quantity
     }
 }

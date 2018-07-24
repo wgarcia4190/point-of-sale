@@ -10,7 +10,7 @@ import android.view.View
 import com.daimajia.androidanimations.library.Techniques
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.ui.ActivityBase
-import com.devcorerd.pos.customer.CustomerListFragment
+import com.devcorerd.pos.view.main.customer.CustomerListFragment
 import com.devcorerd.pos.helper.AnimationHelper
 import com.devcorerd.pos.helper.CircleAnimationHelper
 import com.devcorerd.pos.model.entity.Product
@@ -66,18 +66,19 @@ class HomeActivity : ActivityBase(R.layout.home_activity),
 
     private fun setupEvents() {
         customerButton.setOnClickListener {
-            AnimationHelper.animateView(customerContainer, Techniques.ZoomIn, onStartCallback = {
+            /*AnimationHelper.animateView(customerContainer, Techniques.ZoomIn, onStartCallback = {
                 customerContainer.visibility = View.VISIBLE
-            })
+            })*/
+            searchCustomer.performClick()
         }
 
-        customerContainer.setOnClickListener {
+        /*customerContainer.setOnClickListener {
             if (customerContainer.visibility == View.VISIBLE) {
                 AnimationHelper.animateView(customerContainer, Techniques.ZoomOut, onEndCallback = {
                     customerContainer.visibility = View.GONE
                 })
             }
-        }
+        }*/
 
         searchCustomer.setOnClickListener {
             customerContainer.performClick()

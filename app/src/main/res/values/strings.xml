@@ -23,5 +23,9 @@
     <string name="search">Buscar</string>
     <string name="add">Agregar</string>
     <string name="select_customer">Seleccionar Cliente</string>
+    <string name="add_customer">Agregar Nuevo Cliente</string>
     <string name="search_customer_hint">Nombre, Correo Electrónico, Teléfono</string>
+    <string name="name">Nombre</string>
+    <string name="last_name">Apellido</string>
+    <string name="phone">Teléfono</string>
 </resources>

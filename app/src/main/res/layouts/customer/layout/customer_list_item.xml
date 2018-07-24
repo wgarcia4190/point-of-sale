@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Clickable"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/customerContainer"
+        style="@style/Clickable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/customer_m"
+        android:padding="@dimen/customer_m"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/customerImage"
             style="@style/ImageViewNoTint"
             android:layout_width="@dimen/customer_avatar_size"
             android:layout_height="@dimen/customer_avatar_size"
@@ -39,22 +43,22 @@
                 <TextView
                     android:id="@+id/phone"
                     style="@style/LightField"
+                    android:layout_marginEnd="@dimen/customer_avatar_data_m_e"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/customer_avatar_data_size"
-                    android:layout_marginEnd="@dimen/customer_avatar_data_m_e"/>
+                    android:textSize="@dimen/customer_avatar_data_size" />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/deselected"
-                    android:layout_marginEnd="@dimen/customer_avatar_data_m_e"/>
+                    android:layout_marginEnd="@dimen/customer_avatar_data_m_e"
+                    android:background="@color/deselected" />
 
                 <TextView
                     android:id="@+id/email"
                     style="@style/LightField"
+                    android:layout_marginEnd="@dimen/customer_avatar_data_m_e"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/customer_avatar_data_size"
-                    android:layout_marginEnd="@dimen/customer_avatar_data_m_e"/>
+                    android:textSize="@dimen/customer_avatar_data_size" />
 
             </LinearLayout>
         </LinearLayout>
