@@ -6,6 +6,7 @@ import com.devcorerd.pos.core.api.Presenter
 import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.model.service.ProductService
 import com.devcorerd.pos.model.table.ProductTable
+import ru.arturvasilov.sqlite.core.Where
 import ru.arturvasilov.sqlite.rx.RxSQLite
 
 /**
@@ -43,7 +44,19 @@ class ProductPresenter(private val context: Context?,
             errorCallback(error)
 
         })
+    }
 
+    fun getFavoriteProducts(successCallback: (products: MutableList<Product>) -> Unit,
+                    errorCallback: (error: Throwable) -> Unit){
+
+        RxSQLite.get().query(ProductTable.TABLE,
+                Where.create().equalTo("isFavorite", 1))
+                .subscribe({ products: MutableList<Product>? ->
+            successCallback(products!!)
+        },{error: Throwable ->
+            errorCallback(error)
+
+        })
     }
 
 }

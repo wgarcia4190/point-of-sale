@@ -28,4 +28,10 @@
     <string name="name">Nombre</string>
     <string name="last_name">Apellido</string>
     <string name="phone">Teléfono</string>
+    <string name="sales">Ventas</string>
+    <string name="transactions">Transacciones</string>
+    <string name="items">Articulos</string>
+    <string name="reports">Reportes</string>
+    <string name="settings">Configuraciones</string>
+    <string name="support">Soporte</string>
 </resources>

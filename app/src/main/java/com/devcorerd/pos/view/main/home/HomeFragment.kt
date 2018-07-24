@@ -13,7 +13,10 @@ import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.ViewPagerAdapter
 import com.devcorerd.pos.core.ui.FragmentBase
 import com.devcorerd.pos.core.ui.Tab
+import com.devcorerd.pos.listener.OnCustomerSelected
+import com.devcorerd.pos.model.entity.Customer
 import com.devcorerd.pos.model.entity.Product
+import kotlinx.android.synthetic.main.customer_header.*
 import kotlinx.android.synthetic.main.home_fragment.*
 
 @Suppress("DEPRECATION")
@@ -21,7 +24,7 @@ import kotlinx.android.synthetic.main.home_fragment.*
  * @author Ing. Wilson Garcia
  * Created on 7/17/18
  */
-class HomeFragment : FragmentBase() {
+class HomeFragment : FragmentBase(),OnCustomerSelected {
 
     private val tabs: MutableList<Tab> by lazy {
         mutableListOf(
@@ -51,7 +54,7 @@ class HomeFragment : FragmentBase() {
     private fun setupViewPager() {
         val viewPagerAdapter = ViewPagerAdapter(activity!!.supportFragmentManager)
         viewPagerAdapter.addFragment(AllItemsFragment.newInstance(), tabs[0].text)
-        viewPagerAdapter.addFragment(AllItemsFragment.newInstance(), tabs[1].text)
+        viewPagerAdapter.addFragment(FavoriteItemsFragment.newInstance(), tabs[1].text)
 
         viewPager.adapter = viewPagerAdapter
         viewPager.offscreenPageLimit = 2
@@ -112,5 +115,12 @@ class HomeFragment : FragmentBase() {
         chargeButton.isEnabled = true
         chargeButton.setTextColor(resources.getColor(R.color.white))
         chargeButton.text = charge
+    }
+
+    override fun onCustomerSelected(customer: Customer) {
+        customerHeader.visibility = View.VISIBLE
+        customerName.text = customer.getFullName()
+        customerPhone.text = customer.phone
+        customerEmail.text = customer.email
     }
 }

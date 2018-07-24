@@ -11,6 +11,7 @@ import com.devcorerd.pos.helper.Helper
 import com.devcorerd.pos.helper.TextWatcher
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.listener.OnCustomerAddedListener
+import com.devcorerd.pos.listener.OnCustomerSelected
 import com.devcorerd.pos.model.entity.Customer
 import com.devcorerd.pos.model.presenter.CustomerPresenter
 import com.devcorerd.pos.view.viewholder.CustomerListViewHolder
@@ -23,6 +24,8 @@ class CustomerListFragment : FragmentBase(), OnCustomerAddedListener {
     private lateinit var customerList: MutableList<Customer>
     private var tempCustomerList: MutableList<Customer> = mutableListOf()
 
+    private lateinit var listener: OnCustomerSelected
+
     private val adapter: Adapter<Customer, CustomerListViewHolder> by lazy {
         Adapter(customerList, customerRVList.context, {
             val view: View = LayoutInflater.from(customerRVList.context)
@@ -30,6 +33,7 @@ class CustomerListFragment : FragmentBase(), OnCustomerAddedListener {
             CustomerListViewHolder(view)
         }, object : OnClickListener<Customer> {
             override fun onClick(entity: Customer?, `object`: Any?) {
+                listener.onCustomerSelected(entity!!)
                 Helper.hideKeyboard(activity!!)
                 backButton.performClick()
             }
@@ -38,11 +42,12 @@ class CustomerListFragment : FragmentBase(), OnCustomerAddedListener {
 
     companion object {
         @JvmStatic
-        fun newInstance():
+        fun newInstance(listener: OnCustomerSelected):
                 CustomerListFragment {
             val fragmentBase = CustomerListFragment()
             val layout: Int = R.layout.customer_list_fragment
 
+            fragmentBase.listener = listener
             fragmentBase.createBundle(layout, CustomerPresenter())
             return fragmentBase
         }

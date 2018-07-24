@@ -62,7 +62,7 @@
                 android:id="@+id/customerButton"
                 style="@style/ToolbarIcon"
                 android:contentDescription="@string/content_description"
-                app:srcCompat="@drawable/ic_customer" />
+                app:srcCompat="@drawable/ic_customer_search" />
 
 
         </android.support.v7.widget.Toolbar>

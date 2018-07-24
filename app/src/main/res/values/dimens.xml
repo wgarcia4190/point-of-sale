@@ -14,6 +14,7 @@
     <dimen name="toolbar_m_e">10dp</dimen>
 
     <dimen name="title_size">22sp</dimen>
+    <dimen name="sub_title_size">16sp</dimen>
 
     <dimen name="border_width">2dp</dimen>
 
@@ -88,5 +89,14 @@
     <dimen name="customer_add_m_b">6dp</dimen>
     <dimen name="customer_add_m_t">30dp</dimen>
     <dimen name="customer_add_p">10dp</dimen>
+    <dimen name="customer_more_height">30dp</dimen>
+    <dimen name="customer_more_m_v">10dp</dimen>
+    <dimen name="customer_more_m_h">5dp</dimen>
+
+    <dimen name="header_title_text">18sp</dimen>
+    <dimen name="header_subtitle_text">16sp</dimen>
+    <dimen name="header_avatar_size">50dp</dimen>
+    <dimen name="header_p">20dp</dimen>
+    <dimen name="header_p_b">15dp</dimen>
 
 </resources>

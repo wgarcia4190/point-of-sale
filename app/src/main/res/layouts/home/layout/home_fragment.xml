@@ -6,6 +6,8 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    <include layout="@layout/customer_header"/>
+
     <Button
         android:id="@+id/chargeButton"
         style="@style/ButtonLower"

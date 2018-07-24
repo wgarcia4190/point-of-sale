@@ -48,6 +48,7 @@ class HomeActivity : ActivityBase(R.layout.home_activity),
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+        navView.menu.getItem(0).isChecked = true
         setupEvents()
     }
 
@@ -83,7 +84,7 @@ class HomeActivity : ActivityBase(R.layout.home_activity),
         searchCustomer.setOnClickListener {
             customerContainer.performClick()
             supportFragmentManager.beginTransaction().add(R.id.mainContainer,
-                    CustomerListFragment.newInstance()).commit()
+                    CustomerListFragment.newInstance(homeFragment)).commit()
         }
     }
 
