@@ -31,7 +31,9 @@ import org.json.JSONObject
 import java.io.File
 import java.util.concurrent.Executors
 import android.graphics.Bitmap
-
+import com.devcorerd.pos.listener.OnCategorySelected
+import com.devcorerd.pos.model.entity.Category
+import com.devcorerd.pos.view.main.category.CategorySelectorFragment
 
 
 @Suppress("DEPRECATION")
@@ -39,7 +41,7 @@ import android.graphics.Bitmap
  * @author Ing. Wilson Garcia
  * Created on 7/24/18
  */
-class AddProductFragment : FragmentBase(), OnScanCompleted {
+class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
 
     private var measureUnit: Char = 'U'
     private lateinit var listener: OnProductAddedListener
@@ -116,6 +118,11 @@ class AddProductFragment : FragmentBase(), OnScanCompleted {
             } else
                 stackFragmentToTop(BarcodeReaderFragment.newInstance(this), R.id.mainContainer,
                         false)
+        }
+
+        categoryButton.setOnClickListener {
+            stackFragmentToTop(CategorySelectorFragment.newInstance(this), R.id.mainContainer,
+                    false)
         }
     }
 
@@ -210,5 +217,11 @@ class AddProductFragment : FragmentBase(), OnScanCompleted {
             })
         }
     }
+
+    override fun onCategorySelected(category: Category) {
+        categoryName.text = category.name
+    }
+
+
 
 }

@@ -14,7 +14,7 @@
     <dimen name="toolbar_m_e">10dp</dimen>
 
     <dimen name="title_size">22sp</dimen>
-    <dimen name="sub_title_size">16sp</dimen>
+    <dimen name="sub_title_size">15sp</dimen>
 
     <dimen name="border_width">2dp</dimen>
 
@@ -116,5 +116,9 @@
     <dimen name="add_item_radio_m_e">5dp</dimen>
     <dimen name="add_item_radio_m_e_b">10dp</dimen>
     <dimen name="add_item_barcode_size">35dp</dimen>
+
+    <dimen name="category_selector_add_m">28dp</dimen>
+    <dimen name="category_selector_list_m_t">12dp</dimen>
+    <dimen name="category_selector_item_m_v">15dp</dimen>
 
 </resources>

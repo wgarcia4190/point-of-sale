@@ -5,6 +5,7 @@ import android.support.multidex.MultiDex
 import android.support.multidex.MultiDexApplication
 import com.devcorerd.pos.R
 import com.devcorerd.pos.helper.PreferencesHelper
+import com.devcorerd.pos.model.table.CategoryTable
 import com.google.android.gms.analytics.GoogleAnalytics
 import com.google.android.gms.analytics.Tracker
 import net.danlew.android.joda.JodaTimeAndroid

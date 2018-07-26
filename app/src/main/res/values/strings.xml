@@ -47,6 +47,7 @@
     <string name="sku">SKU</string>
     <string name="barcode">Código de Barra</string>
     <string name="save_product">Guardar Producto</string>
+    <string name="create_category">Crear Categoria</string>
 
     <string name="toolbar_image_title">Tap para seleccionar</string>
 
