@@ -6,10 +6,12 @@
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="dark_gray">#7a7a7a</color>
 
     <color name="facebook">#3A589B</color>
     <color name="google">#DA4B42</color>
 
     <color name="deselected">#DDDDDD</color>
     <color name="badge">#f00000</color>
+    <color name="favorite">#fcaf17</color>
 </resources>

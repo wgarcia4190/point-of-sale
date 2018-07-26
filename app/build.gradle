@@ -103,12 +103,19 @@ dependencies {
     implementation "com.github.esafirm.android-image-picker:rximagepicker:$image_picker_version"
     implementation "com.daimajia.easing:library:$daimajia_easing_version"
     implementation "com.daimajia.androidanimations:library:$daimajia_androidanimations_version"
+    implementation "me.dm7.barcodescanner:zbar:$zbar"
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.10'
 
     /** Database **/
     implementation "ru.arturvasilov:sqlite:$db"
+
+    /** Glide */
+    implementation "com.github.bumptech.glide:glide:$glide_version"
 
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
 }

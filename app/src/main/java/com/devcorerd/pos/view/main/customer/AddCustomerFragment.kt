@@ -13,6 +13,7 @@ import com.devcorerd.pos.model.entity.Customer
 import com.devcorerd.pos.model.presenter.CustomerPresenter
 import kotlinx.android.synthetic.main.add_customer_fragment.*
 
+@Suppress("DEPRECATION")
 /**
  * @author Ing. Wilson Garcia
  * Created on 7/24/18

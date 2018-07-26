@@ -59,4 +59,16 @@ class ProductPresenter(private val context: Context?,
         })
     }
 
+    fun updateProduct(product: Product, successCallback: () -> Unit,
+                      errorCallback: (error: Throwable) -> Unit) {
+        RxSQLite.get().update(ProductTable.TABLE,
+                Where.create().equalTo("name", product.name), product)
+                .subscribe({
+                    successCallback()
+                },{error: Throwable ->
+                    errorCallback(error)
+
+                })
+    }
+
 }

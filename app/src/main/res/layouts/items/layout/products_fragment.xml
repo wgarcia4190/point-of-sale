@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:contentInsetEnd="16dp"
+        app:elevation="0dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            style="@style/ToolbarIcon"
+            android:layout_gravity="center_vertical|start"
+            app:srcCompat="@drawable/ic_chevron"
+            android:layout_marginEnd="@dimen/toolbar_m_e"
+            android:rotation="90"/>
+
+        <TextView
+            style="@style/ToolbarButton"
+            android:text="@string/products"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical|start"/>
+
+        <ImageButton
+            android:id="@+id/addProductButton"
+            style="@style/ToolbarIcon"
+            app:srcCompat="@drawable/ic_add"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <View
+        style="@style/SeparatorSmall"
+        android:background="@color/deselected" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <include
+            layout="@layout/dropdown"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dropdown_height"
+            android:layout_marginEnd="@dimen/home_cat_separator_m_v"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/deselected" />
+
+        <ImageButton
+            style="@style/ImageButton"
+            android:layout_width="@dimen/home_search_size"
+            android:layout_height="@dimen/home_search_size"
+            android:layout_marginEnd="@dimen/home_cat_separator_m_v"
+            android:layout_marginStart="@dimen/home_cat_separator_m_v"
+            android:contentDescription="@string/content_description"
+            android:tint="@color/black"
+            app:srcCompat="@drawable/ic_search" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/SeparatorSmall"
+        android:background="@color/deselected" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/productListRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

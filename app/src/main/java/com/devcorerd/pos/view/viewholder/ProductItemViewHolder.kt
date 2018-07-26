@@ -1,7 +1,9 @@
 package com.devcorerd.pos.view.viewholder
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.view.View
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.devcorerd.pos.R
@@ -9,14 +11,14 @@ import com.devcorerd.pos.core.adapter.ViewHolder
 import com.devcorerd.pos.helper.Helper
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.model.entity.Product
+import com.devcorerd.pos.model.presenter.ProductPresenter
 import com.devcorerd.pos.view.custom.CircleImageView
-import com.devcorerd.pos.view.custom.QuantitySelector
-
 
 /**
- * Created by wgarcia on 7/19/2018.
+ * @author Ing. Wilson Garcia
+ * Created on 7/25/18
  */
-class ProductListViewHolder(view: View) : ViewHolder<Product>(view) {
+class ProductItemViewHolder(view: View, val presenter: ProductPresenter) : ViewHolder<Product>(view) {
 
     private val productImage: CircleImageView by lazy {
         view.findViewById<CircleImageView>(R.id.productImage)
@@ -26,8 +28,8 @@ class ProductListViewHolder(view: View) : ViewHolder<Product>(view) {
         view.findViewById<LinearLayout>(R.id.productContainer)
     }
 
-    private val quantitySelector: QuantitySelector by lazy {
-        view.findViewById<QuantitySelector>(R.id.productQuantity)
+    private val favoriteButton: ImageButton by lazy {
+        view.findViewById<ImageButton>(R.id.favoriteButton)
     }
 
     private val productName: TextView by lazy { view.findViewById<TextView>(R.id.productName) }
@@ -42,9 +44,27 @@ class ProductListViewHolder(view: View) : ViewHolder<Product>(view) {
         else
             productImage.setImageBitmap(Helper.getBitmapFromString(entity.representation))
 
+        if(entity.isFavorite)
+            favoriteButton.setColorFilter(ContextCompat.getColor(context, R.color.favorite),
+                    android.graphics.PorterDuff.Mode.SRC_IN)
+
         productContainer.setOnClickListener {
-            entity.setQuantity(quantitySelector.getQuantity())
-            listener?.onClick(entity, productImage)
+            listener?.onClick(entity, null)
+        }
+
+        favoriteButton.setOnClickListener {
+            entity.isFavorite = !entity.isFavorite
+            presenter.updateProduct(entity, {
+                if(entity.isFavorite)
+                    favoriteButton.setColorFilter(ContextCompat.getColor(context, R.color.favorite),
+                        android.graphics.PorterDuff.Mode.SRC_IN)
+                else
+                    favoriteButton.setColorFilter(ContextCompat.getColor(context, R.color.black),
+                            android.graphics.PorterDuff.Mode.SRC_IN)
+
+            }, {
+                error: Throwable ->
+            })
         }
 
     }

@@ -91,7 +91,7 @@
         android:enabled="false"
         android:text="@string/add_customer"
         android:textColor="@color/deselected"
-        android:textSize="@dimen/home_button_text" />
+        android:textSize="@dimen/button_text_size" />
 
 
 </LinearLayout>

@@ -65,6 +65,14 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="RadioButton" parent="LightField">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/add_item_text_size</item>
+        <item name="buttonTint">@color/black</item>
+    </style>
+
     <style name="LightLink" parent="Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:fontFamily">@font/light</item>
@@ -100,6 +108,11 @@
         <item name="android:textCursorDrawable">@drawable/shape_caret</item>
         <item name="android:background">@drawable/shape_edit_text_line</item>
         <item name="android:padding">@dimen/customer_add_p</item>
+    </style>
+
+    <style name="EditTextUnderscore" parent="EditTextLine">
+        <item name="android:background">@drawable/shape_edit_text_underscore</item>
+        <item name="android:padding">0dp</item>
     </style>
 
     <style name="TextLabel" parent="TextAppearance.AppCompat">
@@ -159,6 +172,11 @@
         <item name="android:contentDescription">@string/content_description</item>
     </style>
 
+    <style name="CameraImageView">
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:contentDescription">@string/content_description</item>
+    </style>
+
     <style name="ImageViewNoTint">
         <item name="android:scaleType">fitCenter</item>
         <item name="android:contentDescription">@string/content_description</item>
@@ -207,6 +225,12 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/badge_text</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ImagePickerTheme" parent="ef_BaseTheme">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 

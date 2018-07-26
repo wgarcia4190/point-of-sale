@@ -14,6 +14,7 @@ import com.devcorerd.pos.core.adapter.ViewPagerAdapter
 import com.devcorerd.pos.core.ui.FragmentBase
 import com.devcorerd.pos.core.ui.Tab
 import com.devcorerd.pos.listener.OnCustomerSelected
+import com.devcorerd.pos.listener.OnUpdateToolbarListener
 import com.devcorerd.pos.model.entity.Customer
 import com.devcorerd.pos.model.entity.Product
 import kotlinx.android.synthetic.main.customer_header.*
@@ -26,6 +27,7 @@ import kotlinx.android.synthetic.main.home_fragment.*
  */
 class HomeFragment : FragmentBase(),OnCustomerSelected {
 
+    private lateinit var listener: OnUpdateToolbarListener
     private val tabs: MutableList<Tab> by lazy {
         mutableListOf(
                 Tab(getString(R.string.all), R.drawable.ic_list),
@@ -34,11 +36,12 @@ class HomeFragment : FragmentBase(),OnCustomerSelected {
 
     companion object {
         @JvmStatic
-        fun newInstance():
+        fun newInstance(listener: OnUpdateToolbarListener):
                 HomeFragment {
             val fragmentBase = HomeFragment()
             val layout: Int = R.layout.home_fragment
 
+            fragmentBase.listener = listener
             fragmentBase.createBundle(layout)
             return fragmentBase
         }
@@ -49,10 +52,12 @@ class HomeFragment : FragmentBase(),OnCustomerSelected {
 
         setupViewPager()
         setupEvents()
+
+        listener.onUpdateToolbar(null)
     }
 
     private fun setupViewPager() {
-        val viewPagerAdapter = ViewPagerAdapter(activity!!.supportFragmentManager)
+        val viewPagerAdapter = ViewPagerAdapter(childFragmentManager)
         viewPagerAdapter.addFragment(AllItemsFragment.newInstance(), tabs[0].text)
         viewPagerAdapter.addFragment(FavoriteItemsFragment.newInstance(), tabs[1].text)
 

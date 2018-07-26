@@ -1,6 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/productsButton"
+        style="@style/Clickable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/items_m_v"
+            android:layout_marginEnd="@dimen/items_m_h"
+            android:layout_marginStart="@dimen/items_m_h"
+            android:layout_marginTop="@dimen/items_m_v"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/ImageView"
+                android:layout_width="@dimen/items_icon_size"
+                android:layout_height="@dimen/items_icon_size"
+                android:layout_marginEnd="@dimen/items_icon_m_e"
+                android:contentDescription="@string/content_description"
+                android:tint="@color/black"
+                app:srcCompat="@drawable/ic_list" />
+
+            <TextView
+                style="@style/LightField"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/products"
+                android:textColor="@color/black"
+                android:textSize="@dimen/items_text_size" />
+
+
+        </LinearLayout>
+
+        <View
+            style="@style/SeparatorSmall"
+            android:background="@color/deselected" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/categoriesButton"
+        style="@style/Clickable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/items_m_v"
+            android:layout_marginEnd="@dimen/items_m_h"
+            android:layout_marginStart="@dimen/items_m_h"
+            android:layout_marginTop="@dimen/items_m_v"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/ImageView"
+                android:layout_width="@dimen/items_icon_size"
+                android:layout_height="@dimen/items_icon_size"
+                android:layout_marginEnd="@dimen/items_icon_m_e"
+                android:contentDescription="@string/content_description"
+                android:tint="@color/black"
+                app:srcCompat="@drawable/ic_categories" />
+
+            <TextView
+                style="@style/LightField"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/categories"
+                android:textColor="@color/black"
+                android:textSize="@dimen/items_text_size" />
+
+
+        </LinearLayout>
+
+        <View
+            style="@style/SeparatorSmall"
+            android:background="@color/deselected" />
+
+    </LinearLayout>
+</LinearLayout>

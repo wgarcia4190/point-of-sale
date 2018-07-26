@@ -7,5 +7,7 @@ class ConstantsHelper private constructor(){
     companion object {
         const val layoutKey: String = "LayoutKey"
         const val applicationJson = "application/json"
+        const val writeReadCode: Int = 7901
+        const val cameraCode: Int = 8901
     }
 }

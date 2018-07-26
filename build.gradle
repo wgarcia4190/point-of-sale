@@ -13,6 +13,7 @@ buildscript {
     ext.retrofit_version = '2.2.0'
     ext.okhttp3_version = '3.4.0'
     ext.rxandroid_version = '1.0.1'
+    ext.glide_version = '4.7.1'
     ext.fabric_tools_version = '1.25.4'
     ext.joda_version = '2.9.9.3'
     ext.rounded_image_version = '2.2.0'
@@ -20,6 +21,7 @@ buildscript {
     ext.daimajia_easing_version = '2.0@aar'
     ext.daimajia_androidanimations_version = '2.3@aar'
     ext.db = '0.2.0'
+    ext.zbar = '1.9.8'
 
     repositories {
         google()

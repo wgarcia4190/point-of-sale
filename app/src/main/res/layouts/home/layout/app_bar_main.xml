@@ -21,8 +21,15 @@
             app:elevation="0dp"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
+            <TextView
+                android:id="@+id/toolbarTitle"
+                style="@style/ToolbarButton"
+                android:layout_gravity="center_vertical|start"
+                android:gravity="center_vertical"
+                android:visibility="gone" />
 
             <LinearLayout
+                android:id="@+id/cartButtonContainer"
                 style="@style/Clickable"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"

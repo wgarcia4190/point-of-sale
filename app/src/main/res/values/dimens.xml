@@ -99,4 +99,22 @@
     <dimen name="header_p">20dp</dimen>
     <dimen name="header_p_b">15dp</dimen>
 
+    <dimen name="items_m_v">20dp</dimen>
+    <dimen name="items_m_h">15dp</dimen>
+    <dimen name="items_icon_size">25dp</dimen>
+    <dimen name="items_text_size">18sp</dimen>
+    <dimen name="items_icon_m_e">10dp</dimen>
+    <dimen name="items_image_size">40dp</dimen>
+    <dimen name="items_favorite_size">25dp</dimen>
+    <dimen name="add_item_p_h">20dp</dimen>
+    <dimen name="add_item_image_size">100dp</dimen>
+    <dimen name="add_item_image_m_t">30dp</dimen>
+    <dimen name="add_item_image_text_size">13sp</dimen>
+    <dimen name="add_item_image_text_m_b">20dp</dimen>
+    <dimen name="add_item_text_size">15sp</dimen>
+    <dimen name="add_item_chevron_size">25dp</dimen>
+    <dimen name="add_item_radio_m_e">5dp</dimen>
+    <dimen name="add_item_radio_m_e_b">10dp</dimen>
+    <dimen name="add_item_barcode_size">35dp</dimen>
+
 </resources>
