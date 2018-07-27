@@ -4,10 +4,8 @@ import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import com.devcorerd.pos.core.api.Presenter
 import com.devcorerd.pos.model.entity.Category
-import com.devcorerd.pos.model.entity.Customer
 import com.devcorerd.pos.model.service.CustomerService
 import com.devcorerd.pos.model.table.CategoryTable
-import com.devcorerd.pos.model.table.CustomerTable
 import ru.arturvasilov.sqlite.rx.RxSQLite
 
 /**
@@ -37,7 +35,7 @@ class CategoryPresenter(private val context: Context?,
     fun getCategory(successCallback: (category: Category?) -> Unit) {
 
         RxSQLite.get().query(CategoryTable.TABLE).subscribe({ categories: MutableList<Category>? ->
-            if(categories != null && categories.isNotEmpty())
+            if (categories != null && categories.isNotEmpty())
                 successCallback(categories[0])
             else
                 successCallback(null)
@@ -49,7 +47,7 @@ class CategoryPresenter(private val context: Context?,
     }
 
     fun getCategories(successCallback: (categories: MutableList<Category>) -> Unit,
-                     errorCallback: (error: Throwable) -> Unit) {
+                      errorCallback: (error: Throwable) -> Unit) {
 
         RxSQLite.get().query(CategoryTable.TABLE).subscribe({ categories: MutableList<Category>? ->
             successCallback(categories!!)

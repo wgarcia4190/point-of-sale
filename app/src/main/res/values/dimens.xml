@@ -119,6 +119,6 @@
 
     <dimen name="category_selector_add_m">28dp</dimen>
     <dimen name="category_selector_list_m_t">12dp</dimen>
-    <dimen name="category_selector_item_m_v">15dp</dimen>
+    <dimen name="category_selector_item_m_v">6dp</dimen>
 
 </resources>
