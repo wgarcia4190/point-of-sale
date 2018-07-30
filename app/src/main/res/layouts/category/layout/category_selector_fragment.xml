@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:clickable="false"
+    android:clickable="true"
+    android:focusable="true"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -38,10 +39,11 @@
         android:background="@color/deselected" />
 
     <LinearLayout
+        android:id="@+id/addCategoryButton"
         style="@style/Clickable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/category_selector_add_m"
+        android:padding="@dimen/category_selector_add_m"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 

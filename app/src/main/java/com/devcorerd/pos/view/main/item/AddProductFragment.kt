@@ -3,6 +3,7 @@ package com.devcorerd.pos.view.main.item
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
@@ -30,7 +31,6 @@ import org.joda.time.DateTime
 import org.json.JSONObject
 import java.io.File
 import java.util.concurrent.Executors
-import android.graphics.Bitmap
 import com.devcorerd.pos.listener.OnCategorySelected
 import com.devcorerd.pos.model.entity.Category
 import com.devcorerd.pos.view.main.category.CategorySelectorFragment
@@ -47,6 +47,8 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
     private lateinit var listener: OnProductAddedListener
     private lateinit var imagePicker: ImagePicker
     private var selectedImage: String? = null
+    private var defaultCategoryColor: String = ConstantsHelper.defaultCategoryColor
+    private var defaultCategoryName: String = ConstantsHelper.defaultCategoryName
 
     private val barcodePresenter: BarcodePresenter = BarcodePresenter()
 
@@ -79,9 +81,9 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
 
         addProductButton.setOnClickListener {
             val hasImage = selectedImage != null
-            val representation = if (hasImage) selectedImage!! else "#ff0000"
-            val product: Product = Product(name.text.toString(), description.text.toString(),
-                    "Sin Categoria", measureUnit, price.text.toString().toDouble(),
+            val representation = if (hasImage) selectedImage!! else defaultCategoryColor
+            val product = Product(name.text.toString(), description.text.toString(),
+                    defaultCategoryName, measureUnit, price.text.toString().toDouble(),
                     sku.text.toString(), barcodeText.text.toString(), representation,
                     hasImage, false, DateTime.now(), DateTime.now())
 
@@ -219,7 +221,11 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
     }
 
     override fun onCategorySelected(category: Category) {
+        defaultCategoryName = category.name
+        defaultCategoryColor = category.color
         categoryName.text = category.name
+
+        productImage.setBackgroundColor(Color.parseColor(category.color))
     }
 
 

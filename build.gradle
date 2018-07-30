@@ -20,6 +20,7 @@ buildscript {
     ext.image_picker_version = '1.13.0'
     ext.daimajia_easing_version = '2.0@aar'
     ext.daimajia_androidanimations_version = '2.3@aar'
+    ext.color_picker_version = '1.1.8'
     ext.db = '0.2.0'
     ext.zbar = '1.9.8'
 

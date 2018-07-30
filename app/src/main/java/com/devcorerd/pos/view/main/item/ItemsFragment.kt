@@ -5,12 +5,13 @@ import android.view.View
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.ui.FragmentBase
 import com.devcorerd.pos.listener.OnUpdateToolbarListener
+import com.devcorerd.pos.view.main.category.CategoriesFragment
 import kotlinx.android.synthetic.main.items_fragment.*
 
 /**
  * Created by wgarcia on 7/24/2018.
  */
-class ItemsFragment: FragmentBase(){
+class ItemsFragment : FragmentBase() {
 
     private lateinit var listener: OnUpdateToolbarListener
 
@@ -34,10 +35,15 @@ class ItemsFragment: FragmentBase(){
         setupEvents()
     }
 
-    private fun setupEvents(){
+    private fun setupEvents() {
         productsButton.setOnClickListener {
             activity!!.supportFragmentManager.beginTransaction().add(R.id.mainContainer,
                     ProductsFragment.newInstance()).commit()
+        }
+
+        categoriesButton.setOnClickListener {
+            activity!!.supportFragmentManager.beginTransaction().add(R.id.mainContainer,
+                    CategoriesFragment.newInstance()).commit()
         }
     }
 }

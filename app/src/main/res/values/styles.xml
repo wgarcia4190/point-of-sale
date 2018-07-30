@@ -70,7 +70,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/add_item_text_size</item>
-        <item name="buttonTint">@color/black</item>
+        <item name="buttonTint">@drawable/shape_radio_button</item>
     </style>
 
     <style name="LightLink" parent="Button">

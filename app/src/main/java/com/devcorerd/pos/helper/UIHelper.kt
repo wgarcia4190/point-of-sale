@@ -1,5 +1,6 @@
 package com.devcorerd.pos.helper
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Context
@@ -7,8 +8,10 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.support.v4.widget.CircularProgressDrawable
+import android.support.v7.widget.AppCompatRadioButton
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
@@ -28,9 +31,14 @@ import java.io.FileInputStream
  * Created on 7/16/18
  */
 
+@SuppressLint("StaticFieldLeak")
 class UIHelper private constructor() {
 
     companion object {
+
+        var selectedCategoryRadio: AppCompatRadioButton? = null
+        var selectedCategoryTextView: TextView? = null
+
         @JvmStatic
         fun startActivity(firstActivity: Activity, secondActivity: Class<*>) {
             val mainIntent = Intent(firstActivity, secondActivity)

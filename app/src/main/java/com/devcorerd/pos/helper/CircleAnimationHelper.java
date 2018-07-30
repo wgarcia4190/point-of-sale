@@ -24,6 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @author Ing. Wilson Garcia
  * Created on 7/19/18
  */
+@SuppressWarnings("ALL")
 public class CircleAnimationHelper {
     private static final int DEFAULT_DURATION = 500;
     private static final int DEFAULT_DURATION_DISAPPEAR = 200;
@@ -210,13 +211,11 @@ public class CircleAnimationHelper {
 
     private Bitmap drawViewToBitmap(View view, int width, int height) {
         Drawable drawable = new BitmapDrawable();
-//        view.layout(0, 0, width, height);
         Bitmap dest = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(dest);
         drawable.setBounds(new Rect(0, 0, width, height));
         drawable.draw(c);
         view.draw(c);
-//        view.layout(0, 0, width, height);
         return dest;
     }
 
@@ -226,7 +225,6 @@ public class CircleAnimationHelper {
         if (mImageView.getParent() != null)
             ((ViewGroup) mImageView.getParent()).removeView(mImageView);
         mImageView = null;
-        //mTarget.setVisibility(View.VISIBLE);
     }
 
     public CircleAnimationHelper setAnimationListener(Animator.AnimatorListener listener) {

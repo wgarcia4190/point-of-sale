@@ -105,6 +105,7 @@ dependencies {
     implementation "com.daimajia.easing:library:$daimajia_easing_version"
     implementation "com.daimajia.androidanimations:library:$daimajia_androidanimations_version"
     implementation "me.dm7.barcodescanner:zbar:$zbar"
+    implementation "petrov.kristiyan:colorpicker-library:$color_picker_version"
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.10'
 
     /** Database **/

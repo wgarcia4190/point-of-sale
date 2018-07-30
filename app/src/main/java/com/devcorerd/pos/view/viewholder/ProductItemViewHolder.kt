@@ -62,8 +62,8 @@ class ProductItemViewHolder(view: View, val presenter: ProductPresenter) : ViewH
                     favoriteButton.setColorFilter(ContextCompat.getColor(context, R.color.black),
                             android.graphics.PorterDuff.Mode.SRC_IN)
 
-            }, {
-                error: Throwable ->
+            }, { error: Throwable ->
+                error.printStackTrace()
             })
         }
 

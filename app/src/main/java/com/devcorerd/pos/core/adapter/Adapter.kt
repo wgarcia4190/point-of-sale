@@ -30,6 +30,6 @@ class Adapter<T, V>(var data: MutableList<T>? = mutableListOf(), var context: Co
 
     fun add(newData: T) {
         this.data!!.add(newData)
-        notifyItemChanged(this.data!!.size - 1)
+        notifyItemInserted(this.data!!.size - 1)
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.ui.ActivityBase
+import com.devcorerd.pos.helper.ConstantsHelper
 import com.devcorerd.pos.helper.UIHelper
 import com.devcorerd.pos.model.entity.Category
 import com.devcorerd.pos.model.presenter.CategoryPresenter
@@ -24,7 +25,8 @@ class SplashScreenActivity : ActivityBase(layout = R.layout.splashscreen_activit
             try {
                 (presenter as CategoryPresenter).getCategory { category: Category? ->
                     if (category == null) {
-                        val newCategory = Category("Sin Asignar", "#AAAAAA",
+                        val newCategory = Category(ConstantsHelper.defaultCategoryName,
+                                ConstantsHelper.defaultCategoryColor,
                                 DateTime.now(), DateTime.now())
                         (presenter as CategoryPresenter).addCategory(newCategory, {
                             UIHelper.startActivity(this, LoginActivity::class.java)

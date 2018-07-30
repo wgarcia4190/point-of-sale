@@ -9,5 +9,7 @@ class ConstantsHelper private constructor(){
         const val applicationJson = "application/json"
         const val writeReadCode: Int = 7901
         const val cameraCode: Int = 8901
+        const val defaultCategoryName = "Sin Asignar"
+        const val defaultCategoryColor = "#7a7a7a"
     }
 }
