@@ -1,9 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Clickable"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:contentInsetEnd="16dp"
+        app:elevation="0dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            style="@style/ToolbarIcon"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginEnd="@dimen/toolbar_m_e"
+            android:rotation="90"
+            app:srcCompat="@drawable/ic_chevron" />
+
+        <TextView
+            style="@style/ToolbarButton"
+            android:layout_gravity="center_vertical|start"
+            android:gravity="center_vertical"
+            android:text="@string/products" />
+
+        <ImageButton
+            android:id="@+id/addCategoryButton"
+            style="@style/ToolbarIcon"
+            app:srcCompat="@drawable/ic_add" />
+
+    </android.support.v7.widget.Toolbar>
 
     <View
         style="@style/SeparatorSmall"
@@ -30,8 +61,8 @@
             style="@style/EditTextDeselected"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:inputType="textNoSuggestions"
-            android:hint="@string/search_category_hint"/>
+            android:hint="@string/search_category_hint"
+            android:inputType="textNoSuggestions" />
 
         <ImageView
             android:id="@+id/clearSearch"
@@ -42,8 +73,8 @@
             android:layout_marginStart="@dimen/home_cat_separator_m_v"
             android:contentDescription="@string/content_description"
             android:tint="@color/deselected"
-            app:srcCompat="@drawable/ic_x"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_x" />
 
     </LinearLayout>
 
@@ -54,6 +85,6 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/categoryListRV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

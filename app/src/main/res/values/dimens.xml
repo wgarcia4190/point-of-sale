@@ -125,4 +125,7 @@
     <dimen name="add_category_m_t">20dp</dimen>
     <dimen name="add_category_p">5dp</dimen>
 
+    <dimen name="category_color_m_e">8dp</dimen>
+    <dimen name="category_name_text_size">15sp</dimen>
+
 </resources>

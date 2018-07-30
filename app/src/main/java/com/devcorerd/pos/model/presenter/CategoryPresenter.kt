@@ -4,8 +4,11 @@ import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import com.devcorerd.pos.core.api.Presenter
 import com.devcorerd.pos.model.entity.Category
+import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.model.service.CustomerService
 import com.devcorerd.pos.model.table.CategoryTable
+import com.devcorerd.pos.model.table.ProductTable
+import ru.arturvasilov.sqlite.core.Where
 import ru.arturvasilov.sqlite.rx.RxSQLite
 
 /**
@@ -43,7 +46,6 @@ class CategoryPresenter(private val context: Context?,
             error.printStackTrace()
             successCallback(null)
         }).dispose()
-
     }
 
     fun getCategories(successCallback: (categories: MutableList<Category>) -> Unit,
@@ -51,6 +53,18 @@ class CategoryPresenter(private val context: Context?,
 
         RxSQLite.get().query(CategoryTable.TABLE).subscribe({ categories: MutableList<Category>? ->
             successCallback(categories!!)
+        }, { error: Throwable ->
+            error.printStackTrace()
+            errorCallback(error)
+        }).dispose()
+    }
+
+    fun getProductsByCategory(categoryName: String, successCallback: (products: MutableList<Product>?) -> Unit,
+                              errorCallback: (error: Throwable) -> Unit){
+        RxSQLite.get().query(ProductTable.TABLE, Where.create()
+                .equalTo(ProductTable.category, categoryName))
+                .subscribe({ products: MutableList<Product>? ->
+            successCallback(products!!)
         }, { error: Throwable ->
             error.printStackTrace()
             errorCallback(error)
