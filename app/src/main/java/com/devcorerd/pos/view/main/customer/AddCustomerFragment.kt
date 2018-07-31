@@ -42,7 +42,7 @@ class AddCustomerFragment : FragmentBase() {
     }
 
     private fun setupEvents() {
-        setupTextWatcher(name, lastName, email, phone)
+        setupTextWatcher(name, lastName, email, socialID)
 
         backButton.setOnClickListener {
             activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
@@ -50,12 +50,12 @@ class AddCustomerFragment : FragmentBase() {
 
         addCustomerButton.setOnClickListener {
             val customer = Customer(name.text.toString(), lastName.text.toString(),
-                    phone.text.toString(), email.text.toString())
+                    socialID.text.toString(), email.text.toString())
 
             (presenter as CustomerPresenter).addCustomer(customer, {
                 listener.onCustomerAdded(customer)
 
-                UIHelper.clearEditText(name, lastName, email, phone)
+                UIHelper.clearEditText(name, lastName, email, socialID)
                 backButton.performClick()
             }, { error: Throwable ->
                 print(error.message)

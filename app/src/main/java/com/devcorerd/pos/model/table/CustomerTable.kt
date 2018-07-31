@@ -21,7 +21,7 @@ class CustomerTable : BaseTable<Customer>() {
 
         const val name = "name"
         const val lastName = "lastName"
-        const val phone = "phone"
+        const val socialID = "socialID"
         const val email = "email"
     }
 
@@ -32,15 +32,16 @@ class CustomerTable : BaseTable<Customer>() {
         TableBuilder.create(this)
                 .textColumn(name)
                 .textColumn(lastName)
-                .textColumn(phone)
+                .textColumn(socialID)
                 .textColumn(email)
+                .primaryKey(socialID)
                 .execute(database)
     }
 
     override fun fromCursor(cursor: Cursor): Customer {
         val name = cursor.getString(cursor.getColumnIndex(name))
         val lastName = cursor.getString(cursor.getColumnIndex(lastName))
-        val phone = cursor.getString(cursor.getColumnIndex(phone))
+        val phone = cursor.getString(cursor.getColumnIndex(socialID))
         val email = cursor.getString(cursor.getColumnIndex(email))
 
         return Customer(name, lastName, phone, email)
@@ -50,7 +51,7 @@ class CustomerTable : BaseTable<Customer>() {
         val values = ContentValues()
         values.put(name, customer.name)
         values.put(lastName, customer.lastName)
-        values.put(phone, customer.phone)
+        values.put(socialID, customer.socialID)
         values.put(email, customer.email)
 
         return values

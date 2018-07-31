@@ -71,13 +71,13 @@
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/phone"
+        android:id="@+id/socialID"
         style="@style/EditTextLine"
         android:layout_width="match_parent"
         android:layout_marginBottom="@dimen/customer_add_m_b"
         android:layout_marginEnd="@dimen/customer_add_m_h"
         android:layout_marginStart="@dimen/customer_add_m_h"
-        android:hint="@string/phone"
+        android:hint="@string/social_id"
         android:inputType="phone" />
 
     <Button
