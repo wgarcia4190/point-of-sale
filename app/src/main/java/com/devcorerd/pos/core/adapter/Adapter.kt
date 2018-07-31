@@ -32,4 +32,14 @@ class Adapter<T, V>(var data: MutableList<T>? = mutableListOf(), var context: Co
         this.data!!.add(newData)
         notifyItemInserted(this.data!!.size - 1)
     }
+
+    fun delete(index: Int) {
+        this.data!!.removeAt(index)
+        notifyItemRemoved(index)
+    }
+
+    fun update(newData: T, position: Int){
+        this.data!![position] = newData
+        notifyItemChanged(position)
+    }
 }

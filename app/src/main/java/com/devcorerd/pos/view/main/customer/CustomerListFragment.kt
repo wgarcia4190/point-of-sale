@@ -88,7 +88,7 @@ class CustomerListFragment : FragmentBase(), OnCustomerAddedListener {
 
                 for (customer in customerList) {
                     if (text.matches(Regex("[0-9]+"))) {
-                        if (customer.phone.contains(text))
+                        if (customer.socialID.contains(text))
                             tempCustomerList.add(customer)
                     } else if (customer.getFullName().contains(text) ||
                             customer.email.contains(text))

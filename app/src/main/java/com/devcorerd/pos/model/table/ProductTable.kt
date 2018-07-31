@@ -16,15 +16,17 @@ import ru.arturvasilov.sqlite.utils.TableBuilder
  */
 class ProductTable : BaseTable<Product>() {
 
-    lateinit var database: SQLiteDatabase
+
 
     companion object {
         val TABLE: Table<Product> = ProductTable()
+        lateinit var database: SQLiteDatabase
 
         const val sku = "sku"
         const val name = "name"
         const val description = "description"
         const val category = "category"
+        const val categoryColor = "categoryColor"
         const val soldBy = "soldBy"
         const val price = "price"
         const val barcode = "barcode"
@@ -37,13 +39,14 @@ class ProductTable : BaseTable<Product>() {
 
 
     override fun onCreate(database: SQLiteDatabase) {
-        this.database = database
+        ProductTable.database = database
 
         TableBuilder.create(this)
                 .textColumn(sku)
                 .textColumn(name)
                 .textColumn(description)
                 .textColumn(category)
+                .textColumn(categoryColor)
                 .textColumn(soldBy)
                 .realColumn(price)
                 .textColumn(barcode)
@@ -60,6 +63,7 @@ class ProductTable : BaseTable<Product>() {
         val name = cursor.getString(cursor.getColumnIndex(name))
         val description = cursor.getString(cursor.getColumnIndex(description))
         val category = cursor.getString(cursor.getColumnIndex(category))
+        val categoryColor = cursor.getString(cursor.getColumnIndex(categoryColor))
         val soldBy = cursor.getString(cursor.getColumnIndex(soldBy))
         val price = cursor.getDouble(cursor.getColumnIndex(price))
         val barcode = cursor.getString(cursor.getColumnIndex(barcode))
@@ -68,7 +72,7 @@ class ProductTable : BaseTable<Product>() {
         val isFavorite = cursor.getInt(cursor.getColumnIndex(isFavorite)) != 0
         val creationDate = cursor.getString(cursor.getColumnIndex(creationDate))
         val modificationDate = cursor.getString(cursor.getColumnIndex(modificationDate))
-        return Product(name, description, category, soldBy.single(), price, sku, barcode,
+        return Product(name, description, category, categoryColor, soldBy.single(), price, sku, barcode,
                 representation, hasImage, isFavorite, DateHelper.getStringAsDate(creationDate),
                 DateHelper.getStringAsDate(modificationDate))
     }
@@ -79,6 +83,7 @@ class ProductTable : BaseTable<Product>() {
         values.put(name, product.name)
         values.put(description, product.description)
         values.put(category, product.category)
+        values.put(categoryColor, product.categoryColor)
         values.put(soldBy, product.soldBy.toString())
         values.put(price, product.price)
         values.put(barcode, product.barcode)

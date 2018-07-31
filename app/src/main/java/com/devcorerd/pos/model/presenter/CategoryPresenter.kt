@@ -11,6 +11,9 @@ import com.devcorerd.pos.model.table.ProductTable
 import org.joda.time.DateTime
 import ru.arturvasilov.sqlite.core.Where
 import ru.arturvasilov.sqlite.rx.RxSQLite
+import android.content.ContentValues
+import com.devcorerd.pos.helper.ConstantsHelper
+
 
 /**
  * Created by wgarcia on 7/26/2018.
@@ -60,6 +63,18 @@ class CategoryPresenter(private val context: Context?,
         }).dispose()
     }
 
+    fun updateCategory(category: Category, successCallback: () -> Unit,
+                       errorCallback: (error: Throwable) -> Unit){
+        RxSQLite.get().update(CategoryTable.TABLE, Where.create()
+                .equalTo(CategoryTable.name, category.name), category).subscribe({
+            successCallback()
+        }, { error: Throwable ->
+            error.printStackTrace()
+            errorCallback(error)
+
+        })
+    }
+
     fun getProductsByCategory(categoryName: String, successCallback: (products: MutableList<Product>?) -> Unit,
                               errorCallback: (error: Throwable) -> Unit) {
         RxSQLite.get().query(ProductTable.TABLE, Where.create()
@@ -87,8 +102,7 @@ class CategoryPresenter(private val context: Context?,
         for (product in products) {
             product.modificationDate = DateTime.now()
             product.category = category.name
-            if (!product.hasImage)
-                product.representation = category.color
+            product.categoryColor = category.color
 
             RxSQLite.get().querySingle(CategoryTable.TABLE, Where.create()
                     .equalTo(CategoryTable.name, product.category)).subscribe {
@@ -106,5 +120,24 @@ class CategoryPresenter(private val context: Context?,
 
             }
         }
+    }
+
+    fun deleteCategory(category: Category, successCallback: () -> Unit,
+                       errorCallback: (error: Throwable) -> Unit){
+
+        RxSQLite.get().delete(CategoryTable.TABLE, Where.create().equalTo(CategoryTable.name,
+                category.name)).subscribe({
+
+            val cv = ContentValues()
+            val args = arrayOf(category.name)
+            cv.put(ProductTable.category, ConstantsHelper.defaultCategoryName)
+
+            ProductTable.database.update(ProductTable.TABLE.tableName, cv,
+                    "category = ?", args)
+            successCallback()
+        },{error: Throwable ->
+            error.printStackTrace()
+            errorCallback(error)
+        })
     }
 }

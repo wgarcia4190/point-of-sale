@@ -34,6 +34,7 @@ class BarcodePresenter(private val context: Context?,
                     successCallback(JSONObject(response.string()))
                 }, { error: Throwable ->
                     error.printStackTrace()
+                    errorCallback(error)
                 }), showLoading = false)
     }
 }

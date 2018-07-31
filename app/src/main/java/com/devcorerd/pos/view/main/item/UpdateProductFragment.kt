@@ -16,51 +16,50 @@ import com.devcorerd.pos.helper.ConstantsHelper
 import com.devcorerd.pos.helper.Helper
 import com.devcorerd.pos.helper.TextWatcher
 import com.devcorerd.pos.helper.UIHelper
-import com.devcorerd.pos.listener.OnProductAddedListener
-import com.devcorerd.pos.listener.OnScanCompleted
+import com.devcorerd.pos.listener.*
+import com.devcorerd.pos.model.entity.Category
 import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.model.presenter.BarcodePresenter
 import com.devcorerd.pos.model.presenter.ProductPresenter
 import com.devcorerd.pos.view.main.barcode.BarcodeReaderFragment
+import com.devcorerd.pos.view.main.category.CategorySelectorFragment
 import com.esafirm.imagepicker.features.ImagePicker
 import com.esafirm.imagepicker.model.Image
-import kotlinx.android.synthetic.main.add_product_fragment.*
+import kotlinx.android.synthetic.main.update_product_fragment.*
 import me.dm7.barcodescanner.zbar.Result
 import org.apache.commons.codec.binary.Base64
-import org.joda.time.DateTime
 import org.json.JSONObject
 import java.io.File
 import java.util.concurrent.Executors
-import com.devcorerd.pos.listener.OnCategorySelected
-import com.devcorerd.pos.model.entity.Category
-import com.devcorerd.pos.view.main.category.CategorySelectorFragment
 
-
-@Suppress("DEPRECATION")
 /**
- * @author Ing. Wilson Garcia
- * Created on 7/24/18
+ * Created by wgarcia on 7/31/2018.
  */
-class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
+class UpdateProductFragment: FragmentBase(), OnScanCompleted, OnCategorySelected {
 
     private var measureUnit: Char = 'U'
-    private lateinit var listener: OnProductAddedListener
+    private lateinit var updateListener: OnProductUpdated
+    private lateinit var deleteListener: OnProductDeleted
+    private lateinit var selectedProduct: Product
     private lateinit var imagePicker: ImagePicker
-    private lateinit var selectedCategory: Category
+    private var selectedCategory: Category? = null
     private var selectedImage: String? = null
+    private var position = 0
 
 
     private val barcodePresenter: BarcodePresenter = BarcodePresenter()
 
     companion object {
         @JvmStatic
-        fun newInstance(listener: OnProductAddedListener, category: Category? = ConstantsHelper.defaultCategory):
-                AddProductFragment {
-            val fragmentBase = AddProductFragment()
+        fun newInstance(updateListener: OnProductUpdated, deleteListener: OnProductDeleted,
+                        product: Product, position: Int): UpdateProductFragment {
+            val fragmentBase = UpdateProductFragment()
             val layout: Int = R.layout.add_product_fragment
 
-            fragmentBase.listener = listener
-            fragmentBase.selectedCategory = category!!
+            fragmentBase.updateListener = updateListener
+            fragmentBase.deleteListener = deleteListener
+            fragmentBase.selectedProduct = product
+            fragmentBase.position = position
             fragmentBase.createBundle(layout, ProductPresenter())
             return fragmentBase
         }
@@ -73,8 +72,21 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
         barcodePresenter.initService(activity!! as AppCompatActivity?)
         setupEvents()
 
-        categoryName.text = selectedCategory.name
-        productImage.setBackgroundColor(Color.parseColor(selectedCategory.color))
+        toolbarTitle.text = selectedProduct.name
+        categoryName.text = selectedProduct.category
+
+        name.setText(selectedProduct.name)
+        description.setText(selectedProduct.description)
+        price.setText(selectedProduct.price.toString())
+        sku.setText(selectedProduct.sku)
+        barcodeText.setText(selectedProduct.barcode)
+        soldByGroup.check(if (selectedProduct.soldBy == 'U') R.id.unityRadio else R.id.weightRadio )
+
+
+        if(!selectedProduct.hasImage)
+            productImage.setBackgroundColor(Color.parseColor(selectedProduct.categoryColor))
+        else
+            productImage.setImageBitmap(Helper.getBitmapFromString(selectedProduct.representation))
     }
 
     private fun setupEvents() {
@@ -83,25 +95,14 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
             activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
         }
 
-        addProductButton.setOnClickListener {
+        updateProductButton.setOnClickListener {
             val hasImage = selectedImage != null
-            val representation = if (hasImage) selectedImage!! else selectedCategory.color
-            val product = Product(name.text.toString(), description.text.toString(),
-                    selectedCategory.name, selectedCategory.color, measureUnit,
-                    price.text.toString().toDouble(), sku.text.toString(),
-                    barcodeText.text.toString(), representation, hasImage, false,
-                    DateTime.now(), DateTime.now())
 
-            (presenter as ProductPresenter).addProduct(product, {
-                updateCategory()
-
-                listener.onProductAdded(product)
-                backButton.performClick()
-            }, { error: Throwable ->
-                print(error)
-            })
-
-
+            selectedProduct.name = name.text.toString()
+            selectedProduct.description = description.text.toString()
+            selectedProduct.price = price.text.toString().toDouble()
+            selectedProduct.soldBy = measureUnit
+            selectedProduct.representation = if (hasImage) selectedImage!! else ""
         }
 
         soldByGroup.setOnCheckedChangeListener { group, checkedId ->
@@ -134,13 +135,6 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
         }
     }
 
-    private fun updateCategory() {
-        selectedCategory.totalItems += 1
-        selectedCategory.modificationDate = DateTime.now()
-
-        (presenter as ProductPresenter).updateCategoryProduct(selectedCategory)
-    }
-
     private fun setupTextWatcher(vararg editTexts: EditText) {
         for (editText in editTexts)
             editText.addTextChangedListener(object : TextWatcher() {
@@ -154,14 +148,7 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
                             break
                         }
                     }
-
-                    if (activateButton) {
-                        addProductButton.isEnabled = true
-                        addProductButton.setTextColor(resources.getColor(R.color.white))
-                    } else {
-                        addProductButton.isEnabled = false
-                        addProductButton.setTextColor(resources.getColor(R.color.deselected))
-                    }
+                    updateProductButton.isEnabled = activateButton
                 }
             })
     }
@@ -237,6 +224,11 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
         selectedCategory = category
         categoryName.text = category.name
 
+        selectedProduct.categoryColor = category.color
+        selectedProduct.category = category.name
         productImage.setBackgroundColor(Color.parseColor(category.color))
     }
+
+
+
 }

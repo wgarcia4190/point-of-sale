@@ -14,10 +14,9 @@ import ru.arturvasilov.sqlite.utils.TableBuilder
  */
 class CustomerTable : BaseTable<Customer>() {
 
-    lateinit var database: SQLiteDatabase
-
     companion object {
         val TABLE: Table<Customer> = CustomerTable()
+        lateinit var database: SQLiteDatabase
 
         const val name = "name"
         const val lastName = "lastName"
@@ -27,7 +26,7 @@ class CustomerTable : BaseTable<Customer>() {
 
 
     override fun onCreate(database: SQLiteDatabase) {
-        this.database = database
+        CustomerTable.database = database
 
         TableBuilder.create(this)
                 .textColumn(name)

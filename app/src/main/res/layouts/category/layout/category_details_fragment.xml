@@ -29,11 +29,6 @@
             android:layout_gravity="center_vertical|start"
             android:gravity="center_vertical" />
 
-        <ImageButton
-            android:id="@+id/addCategoryButton"
-            style="@style/ToolbarIcon"
-            app:srcCompat="@drawable/ic_add" />
-
     </android.support.v7.widget.Toolbar>
 
     <View
@@ -93,15 +88,33 @@
             android:id="@+id/createItemButton"
             style="@style/ButtonLower"
             android:layout_height="@dimen/button_height_big"
-            android:layout_marginBottom="@dimen/customer_add_m_t"
-            android:layout_marginEnd="@dimen/add_item_p_h"
-            android:layout_marginStart="@dimen/add_item_p_h"
-            android:layout_marginTop="@dimen/customer_add_m_t"
+            android:layout_marginBottom="@dimen/category_details_add_item_m_b"
+            android:layout_marginEnd="@dimen/category_details_m_h"
+            android:layout_marginStart="@dimen/category_details_m_h"
+            android:layout_marginTop="@dimen/category_details_m_v"
             android:background="@color/colorPrimary"
-            android:enabled="false"
-            android:text="@string/create_category"
-            android:textColor="@color/deselected"
+            android:text="@string/create_product"
+            android:textColor="@color/white"
             android:textSize="@dimen/button_text_size" />
+
+        <Button
+            android:id="@+id/editCategoryButton"
+            style="@style/ButtonLower"
+            android:layout_height="@dimen/button_height_big"
+            android:layout_marginBottom="@dimen/category_details_m_v"
+            android:layout_marginEnd="@dimen/category_details_m_h"
+            android:layout_marginStart="@dimen/category_details_m_h"
+            android:background="@color/colorPrimary"
+            android:text="@string/edit_category"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button_text_size" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/productListRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/category_details_m_h"
+            android:layout_marginStart="@dimen/category_details_m_h" />
 
     </LinearLayout>
 

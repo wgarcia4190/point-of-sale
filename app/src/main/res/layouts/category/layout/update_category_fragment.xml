@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:contentInsetEnd="16dp"
+        app:elevation="0dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            style="@style/ToolbarIcon"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginEnd="@dimen/toolbar_m_e"
+            android:rotation="90"
+            app:srcCompat="@drawable/ic_chevron" />
+
+        <TextView
+            android:id="@+id/toolbarTitle"
+            style="@style/ToolbarButton"
+            android:layout_gravity="center_vertical|start"
+            android:gravity="center_vertical" />
+
+        <ImageButton
+            android:id="@+id/updateCategoryButton"
+            style="@style/ToolbarIcon"
+            app:srcCompat="@drawable/ic_save"/>
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/add_item_p_h"
+        android:layout_marginStart="@dimen/add_item_p_h"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/name"
+            style="@style/EditTextUnderscore"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/add_category_m_t"
+            android:hint="@string/name"
+            android:inputType="textNoSuggestions"
+            android:textSize="@dimen/add_item_text_size" />
+
+        <LinearLayout
+            android:id="@+id/colorPickerButton"
+            style="@style/Clickable"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dropdown_height"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/colorIndicator"
+                android:layout_width="@dimen/dropdown_height"
+                android:layout_height="@dimen/dropdown_height"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/colorText"
+                style="@style/LightField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingEnd="@dimen/dropdown_p_s"
+                android:paddingStart="@dimen/dropdown_p_s"
+                android:text="@string/unassigned_color"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dropdown_text_size" />
+
+            <ImageView
+                android:layout_width="@dimen/dropdown_arrow_size"
+                android:layout_height="@dimen/dropdown_arrow_size"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/content_description"
+                android:scaleType="fitCenter"
+                android:tint="@color/black"
+                app:srcCompat="@drawable/ic_chevron" />
+
+
+        </LinearLayout>
+
+        <View
+            style="@style/SeparatorSmall"
+            android:layout_width="match_parent"
+            android:background="@color/black" />
+
+        <TextView
+            style="@style/LightField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/add_category_p"
+            android:maxLines="2"
+            android:text="@string/category_color_description"
+            android:textColor="@color/dark_gray"
+            android:textSize="@dimen/info_title_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/productsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/customer_add_m_t"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <View
+            style="@style/SeparatorSmall"
+            android:background="@color/deselected" />
+
+        <TextView
+            style="@style/MediumField"
+            android:layout_marginBottom="@dimen/add_category_m_b"
+            android:layout_marginEnd="@dimen/add_item_p_h"
+            android:layout_marginStart="@dimen/add_item_p_h"
+            android:layout_marginTop="@dimen/customer_add_m_t"
+            android:text="@string/assigned_products"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sub_title_size" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/productListRV"
+            android:layout_marginEnd="@dimen/add_item_p_h"
+            android:layout_marginStart="@dimen/add_item_p_h"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/deleteCategoryButton"
+        style="@style/BadButton"
+        android:layout_height="@dimen/button_height_big"
+        android:layout_marginBottom="@dimen/customer_add_m_t"
+        android:layout_marginEnd="@dimen/add_item_p_h"
+        android:layout_marginStart="@dimen/add_item_p_h"
+        android:layout_marginTop="@dimen/customer_add_m_t"
+        android:text="@string/delete_category"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_text_size" />
+
+    <TextView
+        style="@style/LightField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/add_category_p"
+        android:maxLines="2"
+        android:text="@string/delete_category_message"
+        android:textColor="@color/dark_gray"
+        android:textAlignment="center"
+        android:textSize="@dimen/info_title_size" />
+</LinearLayout>

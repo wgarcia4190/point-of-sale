@@ -48,6 +48,11 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="BadButton" parent="ButtonLower">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@color/delete</item>
+    </style>
+
     <style name="TitleField" parent="TextField">
         <item name="android:fontFamily">@font/regular</item>
         <item name="android:textSize">@dimen/title_size</item>

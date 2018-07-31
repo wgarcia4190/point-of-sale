@@ -50,10 +50,14 @@
     <string name="sku">SKU</string>
     <string name="barcode">Código de Barra</string>
     <string name="save_product">Guardar Producto</string>
+    <string name="delete_product">Eliminar Producto</string>
     <string name="create_category">Crear Categoria</string>
+    <string name="delete_category">Eliminar Categoria</string>
+    <string name="edit_category">Editar Categoria</string>
     <string name="unassigned_color">#000000</string>
     <string name="choose_color">Seleccione un color</string>
     <string name="category_color_description">Este color se aplicará a todos los articulos de esta categoria que no tengan un color o imagen configurados</string>
+    <string name="delete_category_message">Al eliminar esta categoria, los productos asociados a está no serán eliminados</string>
 
     <string name="toolbar_image_title">Tap para seleccionar</string>
     <string name="assigned_products">Productos a asignar</string>

@@ -43,7 +43,7 @@ class CategoryViewHolder(view: View): ViewHolder<Category>(view){
                     .plus(context.resources.getString(R.string.products))
 
         categoryContainer.setOnClickListener {
-            listener?.onClick(entity, null)
+            listener?.onClick(entity, layoutPosition)
         }
 
     }

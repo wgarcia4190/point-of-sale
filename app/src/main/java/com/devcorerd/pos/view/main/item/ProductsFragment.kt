@@ -9,6 +9,8 @@ import com.devcorerd.pos.core.adapter.Adapter
 import com.devcorerd.pos.core.ui.FragmentBase
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.listener.OnProductAddedListener
+import com.devcorerd.pos.listener.OnProductDeleted
+import com.devcorerd.pos.listener.OnProductUpdated
 import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.model.presenter.ProductPresenter
 import com.devcorerd.pos.view.viewholder.ProductItemViewHolder
@@ -18,7 +20,7 @@ import kotlinx.android.synthetic.main.products_fragment.*
  * @author Ing. Wilson Garcia
  * Created on 7/24/18
  */
-class ProductsFragment : FragmentBase(), OnProductAddedListener {
+class ProductsFragment : FragmentBase(), OnProductAddedListener, OnProductUpdated, OnProductDeleted {
 
     private lateinit var productList: MutableList<Product>
     private val adapter: Adapter<Product, ProductItemViewHolder> by lazy {
@@ -28,7 +30,9 @@ class ProductsFragment : FragmentBase(), OnProductAddedListener {
             ProductItemViewHolder(view, presenter as ProductPresenter)
         }, object:  OnClickListener<Product> {
             override fun onClick(entity: Product?, `object`: Any?) {
-
+                stackFragmentToTop(UpdateProductFragment.newInstance(
+                        this@ProductsFragment, this@ProductsFragment,
+                        entity!!, `object` as Int), R.id.mainContainer, false)
             }
 
         })
@@ -74,5 +78,13 @@ class ProductsFragment : FragmentBase(), OnProductAddedListener {
 
     override fun onProductAdded(product: Product) {
         adapter.add(product)
+    }
+
+    override fun onProductDeleted(position: Int) {
+        adapter.delete(position)
+    }
+
+    override fun onCategoryUpdated(position: Int, product: Product) {
+        adapter.update(product, position)
     }
 }

@@ -22,14 +22,14 @@ class CustomerListViewHolder(view: View): ViewHolder<Customer>(view){
 
     private val image: ImageView by lazy { view.findViewById<ImageView>(R.id.customerImage) }
     private val name: TextView by lazy { view.findViewById<TextView>(R.id.name) }
-    private val phone: TextView by lazy { view.findViewById<TextView>(R.id.phone) }
+    private val socialID: TextView by lazy { view.findViewById<TextView>(R.id.socialID) }
     private val email: TextView by lazy { view.findViewById<TextView>(R.id.email) }
 
     override fun bindElement(entity: Customer, context: Context,
                              listener: OnClickListener<Customer>?) {
 
         name.text = entity.getFullName()
-        phone.text = entity.phone
+        socialID.text = entity.socialID
         email.text = entity.email
 
         customerContainer.setOnClickListener {

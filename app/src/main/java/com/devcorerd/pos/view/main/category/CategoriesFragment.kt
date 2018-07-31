@@ -8,6 +8,8 @@ import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.Adapter
 import com.devcorerd.pos.core.ui.FragmentBase
 import com.devcorerd.pos.listener.OnCategoryAdded
+import com.devcorerd.pos.listener.OnCategoryDeleted
+import com.devcorerd.pos.listener.OnCategoryUpdated
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.model.entity.Category
 import com.devcorerd.pos.model.presenter.CategoryPresenter
@@ -18,7 +20,7 @@ import kotlinx.android.synthetic.main.categories_fragment.*
  * @author Ing. Wilson Garcia
  * Created on 7/29/18
  */
-class CategoriesFragment : FragmentBase(), OnCategoryAdded {
+class CategoriesFragment : FragmentBase(), OnCategoryAdded, OnCategoryUpdated, OnCategoryDeleted {
 
     private lateinit var categoryList: MutableList<Category>
     private val adapter: Adapter<Category, CategoryViewHolder> by lazy {
@@ -28,7 +30,9 @@ class CategoriesFragment : FragmentBase(), OnCategoryAdded {
             CategoryViewHolder(view)
         }, object : OnClickListener<Category> {
             override fun onClick(entity: Category?, `object`: Any?) {
-                stackFragmentToTop(CategoryDetailFragment.newInstance(entity!!),
+                stackFragmentToTop(CategoryDetailFragment.newInstance(entity!!,
+                        this@CategoriesFragment,
+                        this@CategoriesFragment, `object` as Int),
                         R.id.mainContainer, false)
             }
         })
@@ -80,6 +84,13 @@ class CategoriesFragment : FragmentBase(), OnCategoryAdded {
     override fun onCategoryAdded(category: Category) {
         adapter.add(category)
         reloadData()
+    }
+    override fun onCategoryDeleted(position: Int) {
+        adapter.delete(position)
+    }
+
+    override fun onCategoryUpdated(position: Int, category: Category) {
+        adapter.update(category, position)
     }
 
 

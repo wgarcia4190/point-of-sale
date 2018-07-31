@@ -8,6 +8,7 @@ import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.ViewHolder
 import com.devcorerd.pos.helper.Helper
 import com.devcorerd.pos.listener.OnClickListener
+import com.devcorerd.pos.model.entity.Category
 import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.view.custom.CircleImageView
 
@@ -15,7 +16,7 @@ import com.devcorerd.pos.view.custom.CircleImageView
  * @author Ing. Wilson Garcia
  * Created on 7/30/18
  */
-class ProductSelectionViewHolder(view: View) : ViewHolder<Product>(view) {
+class ProductSelectionViewHolder(view: View, val selectedCategory: Category?) : ViewHolder<Product>(view) {
 
     private val productImage: CircleImageView by lazy {
         view.findViewById<CircleImageView>(R.id.productImage)
@@ -40,14 +41,15 @@ class ProductSelectionViewHolder(view: View) : ViewHolder<Product>(view) {
         separator.visibility = if (layoutPosition == 0) View.VISIBLE else View.GONE
 
         if (!entity.hasImage)
-            productImage.setColor(entity.representation)
+            productImage.setColor(entity.categoryColor)
         else
             productImage.setImageBitmap(Helper.getBitmapFromString(entity.representation))
-
 
         productSelected.setOnCheckedChangeListener { _, isChecked ->
             listener?.onClick(entity, isChecked)
         }
+
+        productSelected.isChecked = selectedCategory != null && entity.category == selectedCategory.name
     }
 
 }

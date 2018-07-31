@@ -14,10 +14,11 @@ import ru.arturvasilov.sqlite.utils.TableBuilder
  */
 class CategoryTable : BaseTable<Category>() {
 
-    lateinit var database: SQLiteDatabase
+
 
     companion object {
         val TABLE: Table<Category> = CategoryTable()
+        lateinit var database: SQLiteDatabase
 
         const val name = "name"
         const val color = "color"
@@ -28,7 +29,7 @@ class CategoryTable : BaseTable<Category>() {
 
 
     override fun onCreate(database: SQLiteDatabase) {
-        this.database = database
+        CategoryTable.database = database
 
         TableBuilder.create(this)
                 .textColumn(name)

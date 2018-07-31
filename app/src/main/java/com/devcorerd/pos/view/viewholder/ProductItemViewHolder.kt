@@ -40,7 +40,7 @@ class ProductItemViewHolder(view: View, val presenter: ProductPresenter) : ViewH
         productPrice.text = "$".plus(String.format("%.2f", entity.price))
 
         if (!entity.hasImage)
-            productImage.setColor(entity.representation)
+            productImage.setColor(entity.categoryColor)
         else
             productImage.setImageBitmap(Helper.getBitmapFromString(entity.representation))
 
@@ -49,7 +49,7 @@ class ProductItemViewHolder(view: View, val presenter: ProductPresenter) : ViewH
                     android.graphics.PorterDuff.Mode.SRC_IN)
 
         productContainer.setOnClickListener {
-            listener?.onClick(entity, null)
+            listener?.onClick(entity, layoutPosition)
         }
 
         favoriteButton.setOnClickListener {

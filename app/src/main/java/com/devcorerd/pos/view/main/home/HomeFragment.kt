@@ -125,7 +125,7 @@ class HomeFragment : FragmentBase(),OnCustomerSelected {
     override fun onCustomerSelected(customer: Customer) {
         customerHeader.visibility = View.VISIBLE
         customerName.text = customer.getFullName()
-        customerPhone.text = customer.phone
+        customerSocialID.text = customer.socialID
         customerEmail.text = customer.email
     }
 }

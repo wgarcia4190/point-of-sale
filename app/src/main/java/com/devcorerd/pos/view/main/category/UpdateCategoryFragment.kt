@@ -8,27 +8,28 @@ import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.Adapter
 import com.devcorerd.pos.core.ui.FragmentBase
 import com.devcorerd.pos.helper.TextWatcher
-import com.devcorerd.pos.listener.OnCategoryAdded
+import com.devcorerd.pos.listener.OnCategoryDeleted
+import com.devcorerd.pos.listener.OnCategoryUpdated
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.model.entity.Category
 import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.model.presenter.CategoryPresenter
 import com.devcorerd.pos.view.viewholder.ProductSelectionViewHolder
-import kotlinx.android.synthetic.main.add_category_fragment.*
+import kotlinx.android.synthetic.main.update_category_fragment.*
 import org.joda.time.DateTime
 import petrov.kristiyan.colorpicker.ColorPicker
 import java.util.concurrent.Executors
 
-@Suppress("DEPRECATION")
 /**
- * @author Ing. Wilson Garcia
- * Created on 7/27/18
+ * Created by wgarcia on 7/31/2018.
  */
-class AddCategoryFragment : FragmentBase() {
+class UpdateCategoryFragment : FragmentBase() {
     private lateinit var colorPicker: ColorPicker
-    private lateinit var listener: OnCategoryAdded
-    private var showItems = false
+    private lateinit var updateListener: OnCategoryUpdated
+    private lateinit var deleteListener: OnCategoryDeleted
+    private lateinit var selectedCategory: Category
 
+    private var position: Int = 0
     private var selectedProducts: MutableList<Product> = mutableListOf()
 
     private lateinit var productList: MutableList<Product>
@@ -36,11 +37,10 @@ class AddCategoryFragment : FragmentBase() {
         Adapter(productList, productListRV.context, {
             val view: View = LayoutInflater.from(productListRV.context)
                     .inflate(R.layout.category_product_selection_item, productListRV, false)
-            ProductSelectionViewHolder(view, null)
+            ProductSelectionViewHolder(view, selectedCategory)
         }, object : OnClickListener<Product> {
             override fun onClick(entity: Product?, `object`: Any?) {
                 val isChecked: Boolean = `object` as Boolean
-
                 if (isChecked)
                     selectedProducts.add(entity!!)
                 else
@@ -52,14 +52,17 @@ class AddCategoryFragment : FragmentBase() {
 
     companion object {
         @JvmStatic
-        fun newInstance(listener: OnCategoryAdded, showItems: Boolean = false):
-                AddCategoryFragment {
+        fun newInstance(updateListener: OnCategoryUpdated, deleteListener: OnCategoryDeleted,
+                        position: Int, selectedCategory: Category):
+                UpdateCategoryFragment {
 
-            val fragmentBase = AddCategoryFragment()
-            val layout: Int = R.layout.add_category_fragment
+            val fragmentBase = UpdateCategoryFragment()
+            val layout: Int = R.layout.update_category_fragment
 
-            fragmentBase.listener = listener
-            fragmentBase.showItems = showItems
+            fragmentBase.updateListener = updateListener
+            fragmentBase.deleteListener = deleteListener
+            fragmentBase.selectedCategory = selectedCategory
+            fragmentBase.position = position
             fragmentBase.createBundle(layout, CategoryPresenter())
             return fragmentBase
         }
@@ -69,13 +72,11 @@ class AddCategoryFragment : FragmentBase() {
         super.onViewCreated(view, savedInstanceState)
         setupEvents()
 
+        name.setText(selectedCategory.name)
 
-        if (!showItems)
-            productsContainer.visibility = View.GONE
-        else {
-            productsContainer.visibility = View.VISIBLE
-            getProducts()
-        }
+        productsContainer.visibility = View.VISIBLE
+        getProducts()
+
     }
 
     private fun getProducts() {
@@ -98,38 +99,9 @@ class AddCategoryFragment : FragmentBase() {
         name.addTextChangedListener(object : TextWatcher() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 super.onTextChanged(s, start, before, count)
-
-                if (count > 0) {
-                    createCategoryButton.isEnabled = true
-                    createCategoryButton.setTextColor(resources.getColor(R.color.white))
-                } else {
-                    createCategoryButton.isEnabled = false
-                    createCategoryButton.setTextColor(resources.getColor(R.color.deselected))
-                }
+                updateCategoryButton.isEnabled = count > 0
             }
         })
-
-        createCategoryButton.setOnClickListener {
-            val category = Category(name.text.toString(), colorText.text.toString(),
-                    productList.size, DateTime.now(), DateTime.now())
-            (presenter as CategoryPresenter).addCategory(category, {
-
-                if (productList.isNotEmpty()) {
-                    Executors.newSingleThreadExecutor().submit {
-                        (presenter as CategoryPresenter).updateProducts(productList, category) {
-                            activity!!.runOnUiThread {
-                                listener.onCategoryAdded(category)
-                                backButton.performClick()
-                            }
-                        }
-                    }
-
-                }
-
-            }, { error: Throwable ->
-                error.printStackTrace()
-            })
-        }
 
         colorPickerButton.setOnClickListener {
             colorPicker = ColorPicker(activity!!)
@@ -144,8 +116,34 @@ class AddCategoryFragment : FragmentBase() {
                         }
 
                         override fun onCancel() {}
-
                     }).show()
+        }
+
+        updateCategoryButton.setOnClickListener {
+            selectedCategory.totalItems = productList.size
+            selectedCategory.modificationDate = DateTime.now()
+
+            (presenter as CategoryPresenter).updateCategory(selectedCategory, {
+                Executors.newSingleThreadExecutor().submit {
+                    (presenter as CategoryPresenter).updateProducts(productList, selectedCategory) {
+                        activity!!.runOnUiThread {
+                            updateListener.onCategoryUpdated(position, selectedCategory)
+                            backButton.performClick()
+                        }
+                    }
+                }
+            }, { error: Throwable ->
+                error.printStackTrace()
+            })
+        }
+
+        deleteCategoryButton.setOnClickListener {
+            (presenter as CategoryPresenter).deleteCategory(selectedCategory, {
+                deleteListener.onCategoryDeleted(position)
+                backButton.performClick()
+            }, { error: Throwable ->
+                error.printStackTrace()
+            })
         }
     }
 }

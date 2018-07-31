@@ -5,7 +5,7 @@
     <dimen name="m_v">15dp</dimen>
     <dimen name="button_height">45dp</dimen>
     <dimen name="button_height_big">55dp</dimen>
-    <dimen name="button_text_size">15sp</dimen>
+    <dimen name="button_text_size">13sp</dimen>
 
     <dimen name="dropdown_arrow_size">16dp</dimen>
     <dimen name="dropdown_height">52dp</dimen>
@@ -131,5 +131,9 @@
 
     <dimen name="category_color_m_e">8dp</dimen>
     <dimen name="category_name_text_size">15sp</dimen>
+    <dimen name="category_details_m_v">30dp</dimen>
+    <dimen name="category_details_m_h">20dp</dimen>
+    <dimen name="category_details_add_item_m_b">10dp</dimen>
+
 
 </resources>
