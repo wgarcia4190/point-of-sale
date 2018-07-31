@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/categoryContainer"
+    android:id="@+id/productContainer"
     style="@style/Clickable"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <View
+        style="@style/SeparatorSmall"
+        android:id="@+id/separator"
+        android:background="@color/deselected" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/home_products_m_h"
-        android:layout_marginStart="@dimen/home_products_m_h"
         android:layout_marginTop="@dimen/home_products_m_v"
+        android:layout_marginBottom="@dimen/home_products_m_v"
         android:orientation="horizontal">
 
         <com.devcorerd.pos.view.custom.CircleImageView
-            android:id="@+id/categoryColor"
+            android:id="@+id/productImage"
             android:layout_width="@dimen/items_image_size"
             android:layout_height="@dimen/items_image_size"
             android:layout_gravity="center_vertical"
@@ -34,14 +38,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/categoryName"
+                android:id="@+id/productName"
                 style="@style/MediumField"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="@dimen/category_name_text_size" />
 
             <TextView
-                android:id="@+id/totalProducts"
+                android:id="@+id/productCategory"
                 style="@style/LightField"
                 android:layout_marginEnd="@dimen/home_products_image_m_e"
                 android:textAllCaps="false"
@@ -51,15 +55,10 @@
 
         </LinearLayout>
 
-        <ImageView
-            style="@style/ImageView"
-            android:layout_width="@dimen/add_item_chevron_size"
-            android:layout_height="@dimen/add_item_chevron_size"
-            android:layout_gravity="center_vertical|start"
-            android:layout_marginEnd="@dimen/toolbar_m_e"
-            android:rotation="270"
-            android:tint="@color/black"
-            app:srcCompat="@drawable/ic_chevron" />
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/productSelected"
+            style="@style/RadioButton"
+            android:layout_gravity="center_vertical" />
 
 
     </LinearLayout>
@@ -67,7 +66,6 @@
 
     <View
         style="@style/SeparatorSmall"
-        android:layout_marginTop="@dimen/home_products_m_v"
         android:background="@color/deselected" />
 
 </LinearLayout>

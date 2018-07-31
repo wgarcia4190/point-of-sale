@@ -7,10 +7,10 @@ import android.view.View
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.Adapter
 import com.devcorerd.pos.core.ui.FragmentBase
+import com.devcorerd.pos.listener.OnCategoryAdded
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.model.entity.Category
 import com.devcorerd.pos.model.presenter.CategoryPresenter
-import com.devcorerd.pos.view.viewholder.CategorySelectorViewHolder
 import com.devcorerd.pos.view.viewholder.CategoryViewHolder
 import kotlinx.android.synthetic.main.categories_fragment.*
 
@@ -18,14 +18,19 @@ import kotlinx.android.synthetic.main.categories_fragment.*
  * @author Ing. Wilson Garcia
  * Created on 7/29/18
  */
-class CategoriesFragment: FragmentBase(){
+class CategoriesFragment : FragmentBase(), OnCategoryAdded {
 
     private lateinit var categoryList: MutableList<Category>
     private val adapter: Adapter<Category, CategoryViewHolder> by lazy {
         Adapter(categoryList, categoryListRV.context, {
             val view: View = LayoutInflater.from(categoryListRV.context)
                     .inflate(R.layout.category_item, categoryListRV, false)
-            CategoryViewHolder(view, 0)
+            CategoryViewHolder(view)
+        }, object : OnClickListener<Category> {
+            override fun onClick(entity: Category?, `object`: Any?) {
+                stackFragmentToTop(CategoryDetailFragment.newInstance(entity!!),
+                        R.id.mainContainer, false)
+            }
         })
     }
 
@@ -44,6 +49,11 @@ class CategoriesFragment: FragmentBase(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupEvents()
+        reloadData()
+    }
+
+    private fun reloadData() {
         (presenter as CategoryPresenter).getCategories({ categories: MutableList<Category> ->
 
             categoryList = categories
@@ -51,9 +61,26 @@ class CategoriesFragment: FragmentBase(){
             categoryListRV.layoutManager = LinearLayoutManager(context!!)
             categoryListRV.adapter = adapter
 
-        },{ error: Throwable ->  
+        }, { error: Throwable ->
             error.printStackTrace()
         })
     }
+
+    private fun setupEvents() {
+        backButton.setOnClickListener {
+            activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+        }
+
+        addCategoryButton.setOnClickListener {
+            stackFragmentToTop(AddCategoryFragment.newInstance(this, true),
+                    R.id.mainContainer, false)
+        }
+    }
+
+    override fun onCategoryAdded(category: Category) {
+        adapter.add(category)
+        reloadData()
+    }
+
 
 }

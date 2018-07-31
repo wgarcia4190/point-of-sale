@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Point of Sale</string>
+    <string name="app_name">Punto de Venta</string>
     <string name="xml_tracking_id">123123123</string>
     <string name="logo">Logo</string>
     <string name="sign_up">Registrarse</string>
@@ -35,6 +35,7 @@
     <string name="reports">Reportes</string>
     <string name="settings">Configuraciones</string>
     <string name="support">Soporte</string>
+    <string name="product">Producto</string>
     <string name="products">Productos</string>
     <string name="categories">Categorias</string>
     <string name="change_picture">Cambiar Imagen</string>
@@ -54,5 +55,7 @@
     <string name="category_color_description">Este color se aplicará a todos los articulos de esta categoria que no tengan un color o imagen configurados</string>
 
     <string name="toolbar_image_title">Tap para seleccionar</string>
+    <string name="assigned_products">Productos a asignar</string>
+    <string name="search_in">Buscar en</string>
 
 </resources>

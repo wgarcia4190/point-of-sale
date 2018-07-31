@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="m_h">20dp</dimen>
+    <dimen name="m_v">15dp</dimen>
     <dimen name="button_height">45dp</dimen>
     <dimen name="button_height_big">55dp</dimen>
     <dimen name="button_text_size">15sp</dimen>
@@ -30,15 +32,16 @@
 
     <dimen name="splash_logo_size">150dp</dimen>
     <dimen name="logo_size">100dp</dimen>
-    <dimen name="logo_m_t">200dp</dimen>
+    <dimen name="logo_m_t">40dp</dimen>
+    <dimen name="logo_m_h">40dp</dimen>
     <dimen name="logo_text_m_t">10dp</dimen>
     <dimen name="login_button_w">220dp</dimen>
     <dimen name="login_button_m_b">15dp</dimen>
-    <dimen name="login_buttons_container_m_b">100dp</dimen>
+    <dimen name="login_buttons_container_m_b">40dp</dimen>
 
     <dimen name="login_m_t">90dp</dimen>
     <dimen name="login_email_img_size">25dp</dimen>
-    <dimen name="login_controls_m_b">100dp</dimen>
+    <dimen name="login_controls_m_b">150dp</dimen>
     <dimen name="login_controls_m_h">35dp</dimen>
     <dimen name="login_controls_n_m_t">-8dp</dimen>
     <dimen name="login_controls_size">15sp</dimen>
@@ -123,6 +126,7 @@
     <dimen name="category_selector_item_m_v">10dp</dimen>
 
     <dimen name="add_category_m_t">20dp</dimen>
+    <dimen name="add_category_m_b">10dp</dimen>
     <dimen name="add_category_p">5dp</dimen>
 
     <dimen name="category_color_m_e">8dp</dimen>

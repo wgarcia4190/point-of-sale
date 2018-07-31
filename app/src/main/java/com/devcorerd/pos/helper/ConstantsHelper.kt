@@ -1,5 +1,7 @@
 package com.devcorerd.pos.helper
 
+import com.devcorerd.pos.model.entity.Category
+
 /**
  * Created by wgarcia on 7/16/2018.
  */
@@ -11,5 +13,7 @@ class ConstantsHelper private constructor(){
         const val cameraCode: Int = 8901
         const val defaultCategoryName = "Sin Asignar"
         const val defaultCategoryColor = "#7a7a7a"
+
+        var defaultCategory: Category? = null
     }
 }

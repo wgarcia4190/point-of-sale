@@ -47,8 +47,7 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
     private lateinit var listener: OnProductAddedListener
     private lateinit var imagePicker: ImagePicker
     private var selectedImage: String? = null
-    private var defaultCategoryColor: String = ConstantsHelper.defaultCategoryColor
-    private var defaultCategoryName: String = ConstantsHelper.defaultCategoryName
+    private var selectedCategory: Category? = ConstantsHelper.defaultCategory
 
     private val barcodePresenter: BarcodePresenter = BarcodePresenter()
 
@@ -81,14 +80,16 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
 
         addProductButton.setOnClickListener {
             val hasImage = selectedImage != null
-            val representation = if (hasImage) selectedImage!! else defaultCategoryColor
+            val representation = if (hasImage) selectedImage!! else selectedCategory!!.color
             val product = Product(name.text.toString(), description.text.toString(),
-                    defaultCategoryName, measureUnit, price.text.toString().toDouble(),
+                    selectedCategory!!.name, measureUnit, price.text.toString().toDouble(),
                     sku.text.toString(), barcodeText.text.toString(), representation,
                     hasImage, false, DateTime.now(), DateTime.now())
 
 
             (presenter as ProductPresenter).addProduct(product, {
+                updateCategory()
+
                 listener.onProductAdded(product)
                 backButton.performClick()
             }, { error: Throwable ->
@@ -126,6 +127,13 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
             stackFragmentToTop(CategorySelectorFragment.newInstance(this), R.id.mainContainer,
                     false)
         }
+    }
+
+    private fun updateCategory() {
+        selectedCategory!!.totalItems += 1
+        selectedCategory!!.modificationDate = DateTime.now()
+
+        (presenter as ProductPresenter).updateCategoryProduct(selectedCategory!!)
     }
 
     private fun setupTextWatcher(vararg editTexts: EditText) {
@@ -221,8 +229,7 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
     }
 
     override fun onCategorySelected(category: Category) {
-        defaultCategoryName = category.name
-        defaultCategoryColor = category.color
+        selectedCategory = category
         categoryName.text = category.name
 
         productImage.setBackgroundColor(Color.parseColor(category.color))

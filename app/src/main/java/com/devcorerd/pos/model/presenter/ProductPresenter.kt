@@ -3,8 +3,10 @@ package com.devcorerd.pos.model.presenter
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import com.devcorerd.pos.core.api.Presenter
+import com.devcorerd.pos.model.entity.Category
 import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.model.service.ProductService
+import com.devcorerd.pos.model.table.CategoryTable
 import com.devcorerd.pos.model.table.ProductTable
 import ru.arturvasilov.sqlite.core.Where
 import ru.arturvasilov.sqlite.rx.RxSQLite
@@ -36,27 +38,27 @@ class ProductPresenter(private val context: Context?,
     }
 
     fun getProducts(successCallback: (products: MutableList<Product>) -> Unit,
-                    errorCallback: (error: Throwable) -> Unit){
+                    errorCallback: (error: Throwable) -> Unit) {
 
-        RxSQLite.get().query(ProductTable.TABLE).subscribe({products: MutableList<Product>? ->
+        RxSQLite.get().query(ProductTable.TABLE).subscribe({ products: MutableList<Product>? ->
             successCallback(products!!)
-        },{error: Throwable ->
+        }, { error: Throwable ->
             errorCallback(error)
 
         })
     }
 
     fun getFavoriteProducts(successCallback: (products: MutableList<Product>) -> Unit,
-                    errorCallback: (error: Throwable) -> Unit){
+                            errorCallback: (error: Throwable) -> Unit) {
 
         RxSQLite.get().query(ProductTable.TABLE,
                 Where.create().equalTo("isFavorite", 1))
                 .subscribe({ products: MutableList<Product>? ->
-            successCallback(products!!)
-        },{error: Throwable ->
-            errorCallback(error)
+                    successCallback(products!!)
+                }, { error: Throwable ->
+                    errorCallback(error)
 
-        })
+                })
     }
 
     fun updateProduct(product: Product, successCallback: () -> Unit,
@@ -65,10 +67,16 @@ class ProductPresenter(private val context: Context?,
                 Where.create().equalTo("name", product.name), product)
                 .subscribe({
                     successCallback()
-                },{error: Throwable ->
+                }, { error: Throwable ->
                     errorCallback(error)
 
                 })
+    }
+
+    fun updateCategoryProduct(category: Category) {
+        RxSQLite.get().update(CategoryTable.TABLE,
+                Where.create().equalTo("name", category.name), category)
+                .subscribe({})
     }
 
 }

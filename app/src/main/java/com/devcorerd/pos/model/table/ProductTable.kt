@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.database.Cursor
 import com.devcorerd.pos.helper.DateHelper
 import com.devcorerd.pos.model.entity.Product
-import org.joda.time.DateTime
 import org.sqlite.database.sqlite.SQLiteDatabase
 import ru.arturvasilov.sqlite.core.BaseTable
 import ru.arturvasilov.sqlite.core.Table
@@ -16,6 +15,8 @@ import ru.arturvasilov.sqlite.utils.TableBuilder
  * Created on 7/23/18
  */
 class ProductTable : BaseTable<Product>() {
+
+    lateinit var database: SQLiteDatabase
 
     companion object {
         val TABLE: Table<Product> = ProductTable()
@@ -35,8 +36,9 @@ class ProductTable : BaseTable<Product>() {
     }
 
 
-
     override fun onCreate(database: SQLiteDatabase) {
+        this.database = database
+
         TableBuilder.create(this)
                 .textColumn(sku)
                 .textColumn(name)

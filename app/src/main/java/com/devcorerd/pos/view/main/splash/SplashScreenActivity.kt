@@ -26,15 +26,18 @@ class SplashScreenActivity : ActivityBase(layout = R.layout.splashscreen_activit
                 (presenter as CategoryPresenter).getCategory { category: Category? ->
                     if (category == null) {
                         val newCategory = Category(ConstantsHelper.defaultCategoryName,
-                                ConstantsHelper.defaultCategoryColor,
+                                ConstantsHelper.defaultCategoryColor, 0,
                                 DateTime.now(), DateTime.now())
                         (presenter as CategoryPresenter).addCategory(newCategory, {
+                            ConstantsHelper.defaultCategory = newCategory
                             UIHelper.startActivity(this, LoginActivity::class.java)
                         }, { error: Throwable ->
                             error.printStackTrace()
                         })
-                    } else
+                    } else {
+                        ConstantsHelper.defaultCategory = category
                         UIHelper.startActivity(this, LoginActivity::class.java)
+                    }
                 }
             } catch (ex: Exception) {
                 ex.printStackTrace()

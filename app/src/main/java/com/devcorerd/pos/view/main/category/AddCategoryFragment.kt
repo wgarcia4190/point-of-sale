@@ -1,17 +1,25 @@
 package com.devcorerd.pos.view.main.category
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
 import android.view.View
 import com.devcorerd.pos.R
+import com.devcorerd.pos.core.adapter.Adapter
 import com.devcorerd.pos.core.ui.FragmentBase
 import com.devcorerd.pos.helper.TextWatcher
 import com.devcorerd.pos.listener.OnCategoryAdded
+import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.model.entity.Category
+import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.model.presenter.CategoryPresenter
+import com.devcorerd.pos.view.viewholder.ProductSelectionViewHolder
 import kotlinx.android.synthetic.main.add_category_fragment.*
 import org.joda.time.DateTime
 import petrov.kristiyan.colorpicker.ColorPicker
+import java.util.concurrent.Executors
 
+@Suppress("DEPRECATION")
 /**
  * @author Ing. Wilson Garcia
  * Created on 7/27/18
@@ -19,16 +27,39 @@ import petrov.kristiyan.colorpicker.ColorPicker
 class AddCategoryFragment : FragmentBase() {
     private lateinit var colorPicker: ColorPicker
     private lateinit var listener: OnCategoryAdded
+    private var showItems = false
+
+    private var selectedProducts: MutableList<Product> = mutableListOf()
+
+    private lateinit var productList: MutableList<Product>
+    private val adapter: Adapter<Product, ProductSelectionViewHolder> by lazy {
+        Adapter(productList, productListRV.context, {
+            val view: View = LayoutInflater.from(productListRV.context)
+                    .inflate(R.layout.category_product_selection_item, productListRV, false)
+            ProductSelectionViewHolder(view)
+        }, object : OnClickListener<Product> {
+            override fun onClick(entity: Product?, data: Any?) {
+                val isChecked: Boolean = data as Boolean
+
+                if (isChecked)
+                    selectedProducts.add(entity!!)
+                else
+                    selectedProducts.remove(entity!!)
+            }
+
+        })
+    }
 
     companion object {
         @JvmStatic
-        fun newInstance(listener: OnCategoryAdded):
+        fun newInstance(listener: OnCategoryAdded, showItems: Boolean = false):
                 AddCategoryFragment {
 
             val fragmentBase = AddCategoryFragment()
             val layout: Int = R.layout.add_category_fragment
 
             fragmentBase.listener = listener
+            fragmentBase.showItems = showItems
             fragmentBase.createBundle(layout, CategoryPresenter())
             return fragmentBase
         }
@@ -37,10 +68,24 @@ class AddCategoryFragment : FragmentBase() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupEvents()
+
+        if (!showItems)
+            productsContainer.visibility = View.GONE
+        else {
+            productsContainer.visibility = View.VISIBLE
+            (presenter as CategoryPresenter).getProducts({
+                productList = it
+
+                productListRV.setHasFixedSize(false)
+                productListRV.layoutManager = LinearLayoutManager(context!!)
+                productListRV.adapter = adapter
+            }, { error: Throwable ->
+                error.printStackTrace()
+            })
+        }
     }
 
     private fun setupEvents() {
-
         backButton.setOnClickListener {
             activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
         }
@@ -49,16 +94,33 @@ class AddCategoryFragment : FragmentBase() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 super.onTextChanged(s, start, before, count)
 
-                createCategoryButton.isEnabled = count > 0
+                if (count > 0) {
+                    createCategoryButton.isEnabled = true
+                    createCategoryButton.setTextColor(resources.getColor(R.color.white))
+                } else {
+                    createCategoryButton.isEnabled = false
+                    createCategoryButton.setTextColor(resources.getColor(R.color.deselected))
+                }
             }
         })
 
         createCategoryButton.setOnClickListener {
             val category = Category(name.text.toString(), colorText.text.toString(),
-                    DateTime.now(), DateTime.now())
+                    productList.size, DateTime.now(), DateTime.now())
             (presenter as CategoryPresenter).addCategory(category, {
-                listener.onCategoryAdded(category)
-                backButton.performClick()
+
+                if (productList.isNotEmpty()) {
+                    Executors.newSingleThreadExecutor().submit {
+                        (presenter as CategoryPresenter).updateProducts(productList, category) {
+                            activity!!.runOnUiThread {
+                                listener.onCategoryAdded(category)
+                                backButton.performClick()
+                            }
+                        }
+                    }
+
+                }
+
             }, { error: Throwable ->
                 error.printStackTrace()
             })

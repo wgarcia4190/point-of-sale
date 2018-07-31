@@ -8,6 +8,7 @@ import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.model.service.CustomerService
 import com.devcorerd.pos.model.table.CategoryTable
 import com.devcorerd.pos.model.table.ProductTable
+import org.joda.time.DateTime
 import ru.arturvasilov.sqlite.core.Where
 import ru.arturvasilov.sqlite.rx.RxSQLite
 
@@ -60,15 +61,50 @@ class CategoryPresenter(private val context: Context?,
     }
 
     fun getProductsByCategory(categoryName: String, successCallback: (products: MutableList<Product>?) -> Unit,
-                              errorCallback: (error: Throwable) -> Unit){
+                              errorCallback: (error: Throwable) -> Unit) {
         RxSQLite.get().query(ProductTable.TABLE, Where.create()
                 .equalTo(ProductTable.category, categoryName))
                 .subscribe({ products: MutableList<Product>? ->
+                    successCallback(products!!)
+                }, { error: Throwable ->
+                    error.printStackTrace()
+                    errorCallback(error)
+                }).dispose()
+    }
+
+    fun getProducts(successCallback: (products: MutableList<Product>) -> Unit,
+                    errorCallback: (error: Throwable) -> Unit) {
+
+        RxSQLite.get().query(ProductTable.TABLE).subscribe({ products: MutableList<Product>? ->
             successCallback(products!!)
         }, { error: Throwable ->
-            error.printStackTrace()
             errorCallback(error)
-        }).dispose()
 
+        })
+    }
+
+    fun updateProducts(products: MutableList<Product>, category: Category, successCallback: () -> Unit) {
+        for (product in products) {
+            product.modificationDate = DateTime.now()
+            product.category = category.name
+            if (!product.hasImage)
+                product.representation = category.color
+
+            RxSQLite.get().querySingle(CategoryTable.TABLE, Where.create()
+                    .equalTo(CategoryTable.name, product.category)).subscribe {
+                it.totalItems -= 1
+                it.modificationDate = DateTime.now()
+
+                RxSQLite.get().update(CategoryTable.TABLE, Where.create().equalTo(CategoryTable.name,
+                        it.name), it).subscribe {
+
+                    RxSQLite.get().update(ProductTable.TABLE, Where.create()
+                            .equalTo(ProductTable.name, product.name), product).subscribe {
+                        successCallback()
+                    }
+                }
+
+            }
+        }
     }
 }

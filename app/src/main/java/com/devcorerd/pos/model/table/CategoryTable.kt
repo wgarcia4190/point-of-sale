@@ -14,20 +14,26 @@ import ru.arturvasilov.sqlite.utils.TableBuilder
  */
 class CategoryTable : BaseTable<Category>() {
 
+    lateinit var database: SQLiteDatabase
+
     companion object {
         val TABLE: Table<Category> = CategoryTable()
 
         const val name = "name"
         const val color = "color"
+        const val totalItems = "totalItems"
         const val creationDate = "creationDate"
         const val modificationDate = "modificationDate"
     }
 
 
     override fun onCreate(database: SQLiteDatabase) {
+        this.database = database
+
         TableBuilder.create(this)
                 .textColumn(name)
                 .textColumn(color)
+                .intColumn(totalItems)
                 .textColumn(creationDate)
                 .textColumn(modificationDate)
                 .execute(database)
@@ -36,10 +42,11 @@ class CategoryTable : BaseTable<Category>() {
     override fun fromCursor(cursor: Cursor): Category {
         val name = cursor.getString(cursor.getColumnIndex(name))
         val color = cursor.getString(cursor.getColumnIndex(color))
+        val totalItems = cursor.getInt(cursor.getColumnIndex(totalItems))
         val creationDate = cursor.getString(cursor.getColumnIndex(creationDate))
         val modificationDate = cursor.getString(cursor.getColumnIndex(modificationDate))
 
-        return Category(name, color, DateHelper.getStringAsDate(creationDate),
+        return Category(name, color, totalItems, DateHelper.getStringAsDate(creationDate),
                 DateHelper.getStringAsDate(modificationDate))
     }
 
@@ -47,6 +54,7 @@ class CategoryTable : BaseTable<Category>() {
         val values = ContentValues()
         values.put(name, category.name)
         values.put(color, category.color)
+        values.put(totalItems, category.totalItems)
         values.put(creationDate, DateHelper.getDateAsString(category.creationDate))
         values.put(modificationDate, DateHelper.getDateAsString(category.modificationDate))
 

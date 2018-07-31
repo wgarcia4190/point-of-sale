@@ -94,28 +94,64 @@
             android:background="@color/black" />
 
         <TextView
+            style="@style/LightField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/LightField"
-            android:textSize="@dimen/info_title_size"
+            android:layout_marginTop="@dimen/add_category_p"
             android:maxLines="2"
-            android:textColor="@color/dark_gray"
             android:text="@string/category_color_description"
-            android:layout_marginTop="@dimen/add_category_p"/>
+            android:textColor="@color/dark_gray"
+            android:textSize="@dimen/info_title_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/productsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/customer_add_m_t"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone">
 
 
-        <Button
-            android:id="@+id/createCategoryButton"
-            style="@style/ButtonLower"
+        <View
+            style="@style/SeparatorSmall"
+            android:background="@color/deselected" />
+
+        <TextView
+            style="@style/MediumField"
+            android:layout_marginBottom="@dimen/add_category_m_b"
+            android:layout_marginEnd="@dimen/add_item_p_h"
+            android:layout_marginStart="@dimen/add_item_p_h"
             android:layout_marginTop="@dimen/customer_add_m_t"
-            android:layout_height="@dimen/button_height_big"
-            android:background="@color/colorPrimary"
-            android:enabled="false"
-            android:text="@string/create_category"
-            android:textColor="@color/deselected"
-            android:textSize="@dimen/button_text_size" />
+            android:text="@string/assigned_products"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sub_title_size" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/productListRV"
+            android:layout_marginEnd="@dimen/add_item_p_h"
+            android:layout_marginStart="@dimen/add_item_p_h"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 
     </LinearLayout>
+
+
+    <Button
+        android:id="@+id/createCategoryButton"
+        style="@style/ButtonLower"
+        android:layout_height="@dimen/button_height_big"
+        android:layout_marginBottom="@dimen/customer_add_m_t"
+        android:layout_marginEnd="@dimen/add_item_p_h"
+        android:layout_marginStart="@dimen/add_item_p_h"
+        android:layout_marginTop="@dimen/customer_add_m_t"
+        android:background="@color/colorPrimary"
+        android:enabled="false"
+        android:text="@string/create_category"
+        android:textColor="@color/deselected"
+        android:textSize="@dimen/button_text_size" />
 </LinearLayout>

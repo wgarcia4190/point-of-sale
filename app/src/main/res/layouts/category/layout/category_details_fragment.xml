@@ -24,10 +24,10 @@
             app:srcCompat="@drawable/ic_chevron" />
 
         <TextView
+            android:id="@+id/toolbarTitle"
             style="@style/ToolbarButton"
             android:layout_gravity="center_vertical|start"
-            android:gravity="center_vertical"
-            android:text="@string/categories" />
+            android:gravity="center_vertical" />
 
         <ImageButton
             android:id="@+id/addCategoryButton"
@@ -61,7 +61,6 @@
             style="@style/EditTextDeselected"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:hint="@string/search_category_hint"
             android:inputType="textNoSuggestions" />
 
         <ImageView
@@ -82,9 +81,29 @@
         style="@style/SeparatorSmall"
         android:background="@color/deselected" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/categoryListRV"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/m_h"
+        android:layout_marginStart="@dimen/m_h"
+        android:layout_marginTop="@dimen/m_v"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/createItemButton"
+            style="@style/ButtonLower"
+            android:layout_height="@dimen/button_height_big"
+            android:layout_marginBottom="@dimen/customer_add_m_t"
+            android:layout_marginEnd="@dimen/add_item_p_h"
+            android:layout_marginStart="@dimen/add_item_p_h"
+            android:layout_marginTop="@dimen/customer_add_m_t"
+            android:background="@color/colorPrimary"
+            android:enabled="false"
+            android:text="@string/create_category"
+            android:textColor="@color/deselected"
+            android:textSize="@dimen/button_text_size" />
+
+    </LinearLayout>
+
 
 </LinearLayout>
