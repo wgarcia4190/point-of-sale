@@ -79,4 +79,15 @@ class QuantitySelector(context: Context, attrSet: AttributeSet?, defStyleInt: In
 
         return tempQuantity
     }
+
+    fun setQuantity(tempQuantity: Int) {
+        quantity = tempQuantity
+
+        quantityText.setText(quantity.toString())
+        if (quantity > 1 && !minusButton.isEnabled) {
+            minusButton.isEnabled = true
+            minusButton.setColorFilter(ContextCompat.getColor(context, R.color.black),
+                    android.graphics.PorterDuff.Mode.SRC_IN)
+        }
+    }
 }

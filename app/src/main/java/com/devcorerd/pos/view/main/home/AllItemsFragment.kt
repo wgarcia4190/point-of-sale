@@ -6,20 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.Adapter
-import com.devcorerd.pos.core.ui.FragmentBase
+import com.devcorerd.pos.core.ui.ProductSearchFragment
+import com.devcorerd.pos.helper.Helper
+import com.devcorerd.pos.helper.UIHelper
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.model.presenter.ProductPresenter
 import com.devcorerd.pos.view.viewholder.ProductListViewHolder
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.all_items_fragment.*
-import org.joda.time.DateTime
 
 /**
  * @author Ing. Wilson Garcia
  * Created on 7/17/18
  */
-class AllItemsFragment : FragmentBase() {
+class AllItemsFragment : ProductSearchFragment() {
 
     private lateinit var productList: MutableList<Product>
     private val adapter: Adapter<Product, ProductListViewHolder> by lazy {
@@ -27,7 +28,7 @@ class AllItemsFragment : FragmentBase() {
             val view: View = LayoutInflater.from(productListRV.context)
                     .inflate(R.layout.product_list_item, productListRV, false)
             ProductListViewHolder(view)
-        }, object:  OnClickListener<Product>{
+        }, object : OnClickListener<Product> {
             override fun onClick(entity: Product?, `object`: Any?) {
                 (activity!! as HomeActivity).makeFlyAnimation(`object` as CircleImageView,
                         entity?.productQuantity)
@@ -52,15 +53,37 @@ class AllItemsFragment : FragmentBase() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (presenter as ProductPresenter).getProducts({products: MutableList<Product> ->
-            productList = products
+        (presenter as ProductPresenter).getProducts({ products: MutableList<Product> ->
+            if(products.isEmpty() && Helper.isInternetAvailable(context!!)) {
+                (presenter as ProductPresenter).getProductsFromServer({
+                    fillList(it)
+                }, { error: Throwable ->
+                    UIHelper.showMessage(context!!, "Error cargando Productos", error.message!!)
+                })
+            }else
+                fillList(products)
 
-            productListRV.setHasFixedSize(false)
-            productListRV.layoutManager = LinearLayoutManager(context!!)
-            productListRV.adapter = adapter
-        }, {error: Throwable ->
-            print(error.message)
+
+        }, { error: Throwable ->
+            UIHelper.showMessage(context!!, "Error cargando Productos", error.message!!)
         })
+    }
 
+    private fun fillList(products: MutableList<Product>) {
+        productList = products
+        toggleList(productList)
+
+        productListRV.setHasFixedSize(false)
+        productListRV.layoutManager = LinearLayoutManager(context)
+        productListRV.adapter = adapter
+
+        setupEvents(productList, adapter)
+    }
+
+    private fun toggleList(products: MutableList<Product>) {
+        if (products.isEmpty())
+            productListRV.visibility = View.GONE
+        else
+            productListRV.visibility = View.VISIBLE
     }
 }

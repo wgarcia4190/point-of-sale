@@ -8,6 +8,7 @@ import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.Adapter
 import com.devcorerd.pos.core.ui.FragmentBase
 import com.devcorerd.pos.helper.TextWatcher
+import com.devcorerd.pos.helper.UIHelper
 import com.devcorerd.pos.listener.OnCategoryDeleted
 import com.devcorerd.pos.listener.OnCategoryUpdated
 import com.devcorerd.pos.listener.OnClickListener
@@ -73,6 +74,7 @@ class UpdateCategoryFragment : FragmentBase() {
         setupEvents()
 
         name.setText(selectedCategory.name)
+        toolbarTitle.text = selectedCategory.name
 
         productsContainer.visibility = View.VISIBLE
         getProducts()
@@ -88,12 +90,13 @@ class UpdateCategoryFragment : FragmentBase() {
             productListRV.adapter = adapter
         }, { error: Throwable ->
             error.printStackTrace()
+            UIHelper.showMessage(context!!, "Error cargando productos", error.message!!)
         })
     }
 
     private fun setupEvents() {
         backButton.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+            removeFragment()
         }
 
         name.addTextChangedListener(object : TextWatcher() {
@@ -134,6 +137,7 @@ class UpdateCategoryFragment : FragmentBase() {
                 }
             }, { error: Throwable ->
                 error.printStackTrace()
+                UIHelper.showMessage(context!!, "Error actualizando producto", error.message!!)
             })
         }
 
@@ -143,6 +147,7 @@ class UpdateCategoryFragment : FragmentBase() {
                 backButton.performClick()
             }, { error: Throwable ->
                 error.printStackTrace()
+                UIHelper.showMessage(context!!, "Error eliminando productos", error.message!!)
             })
         }
     }

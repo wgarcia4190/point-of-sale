@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/productSearchContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:visibility="gone">
+
+    <ImageView
+        style="@style/ImageView"
+        android:layout_width="@dimen/home_search_size"
+        android:layout_height="@dimen/home_search_size"
+        android:layout_marginEnd="@dimen/home_cat_separator_m_v"
+        android:layout_marginStart="@dimen/home_cat_separator_m_v"
+        android:contentDescription="@string/content_description"
+        android:tint="@color/black"
+        app:srcCompat="@drawable/ic_search" />
+
+    <EditText
+        android:id="@+id/searchProductText"
+        style="@style/EditTextDeselected"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:hint="@string/search_product_hint"
+        android:inputType="textNoSuggestions" />
+
+    <ImageView
+        android:id="@+id/clearSearch"
+        style="@style/ImageView"
+        android:layout_width="@dimen/home_search_size"
+        android:layout_height="@dimen/home_search_size"
+        android:layout_marginEnd="@dimen/home_cat_separator_m_v"
+        android:layout_marginStart="@dimen/home_cat_separator_m_v"
+        android:contentDescription="@string/content_description"
+        android:tint="@color/black"
+        app:srcCompat="@drawable/ic_x" />
+
+</LinearLayout>

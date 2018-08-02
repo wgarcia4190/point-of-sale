@@ -1,37 +1,64 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dropdownContainer"
     style="@style/Clickable"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dropdown_height"
-    android:orientation="horizontal">
-
-    <TextView
-        android:id="@+id/dropdownText"
-        style="@style/MediumField"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:paddingEnd="@dimen/dropdown_p_s"
-        android:paddingStart="@dimen/dropdown_p_s"
-        android:text="@string/all_categories"
-        android:textColor="@color/black"
-        android:textSize="@dimen/dropdown_text_size" />
-
-    <ImageView
-        android:layout_width="@dimen/dropdown_arrow_size"
-        android:layout_height="@dimen/dropdown_arrow_size"
-        android:layout_gravity="center_vertical"
-        android:contentDescription="@string/content_description"
-        android:scaleType="fitCenter"
-        android:tint="@color/black"
-        app:srcCompat="@drawable/ic_chevron" />
+    android:layout_height="@dimen/dropdown_height">
 
     <Spinner
         android:id="@+id/dropdownSpinner"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:spinnerMode="dropdown" />
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="start"
+        android:layout_marginStart="@dimen/dropdown_p_s"
+        android:gravity="start"
+        android:spinnerMode="dropdown"
+        android:tag="false" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/dropdownText"
+        style="@style/MediumField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:paddingEnd="@dimen/dropdown_p_s"
+        android:paddingStart="@dimen/dropdown_p_s"
+        android:text="@string/all_categories"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dropdown_text_size"
+        tools:ignore="RelativeOverlap" />
+
+    <ImageView
+        android:id="@+id/clearFilter"
+        style="@style/ImageView"
+        android:layout_width="@dimen/home_search_size"
+        android:layout_height="@dimen/home_search_size"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/home_cat_separator_m_v"
+        android:layout_marginStart="@dimen/home_cat_separator_m_v"
+        android:layout_toStartOf="@+id/chevron"
+        android:contentDescription="@string/content_description"
+        android:tint="@color/black"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_x" />
+
+    <ImageView
+        android:id="@+id/chevron"
+        android:layout_width="@dimen/dropdown_arrow_size"
+        android:layout_height="@dimen/dropdown_arrow_size"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/home_cat_separator_m_v"
+        android:contentDescription="@string/content_description"
+        android:scaleType="fitCenter"
+        android:tint="@color/black"
+        app:srcCompat="@drawable/ic_chevron" />
+
+
+</RelativeLayout>

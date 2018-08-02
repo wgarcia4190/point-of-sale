@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:contentInsetEnd="16dp"
+        app:elevation="0dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            style="@style/ToolbarIcon"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginEnd="@dimen/toolbar_m_e"
+            android:rotation="90"
+            app:srcCompat="@drawable/ic_chevron" />
+
+        <TextView
+            android:id="@+id/toolbarTitle"
+            style="@style/ToolbarButton"
+            android:layout_gravity="center_vertical|start"
+            android:gravity="center_vertical"
+            android:text="@string/cash_method"
+            android:visibility="visible" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <EditText
+        android:id="@+id/amount"
+        style="@style/EditTextLine"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/payment_type_m_h"
+        android:layout_marginEnd="@dimen/payment_type_m_h"
+        android:layout_marginStart="@dimen/payment_type_m_h"
+        android:layout_marginTop="@dimen/payment_type_m_t_b"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/chargeButton"
+        style="@style/ButtonLower"
+        android:layout_height="@dimen/button_height_big"
+        android:layout_marginEnd="@dimen/payment_type_m_h"
+        android:layout_marginStart="@dimen/payment_type_m_h"
+        android:background="@color/colorPrimary"
+        android:text="@string/charge_verb"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_text_size" />
+
+</LinearLayout>

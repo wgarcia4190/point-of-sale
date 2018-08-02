@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.Adapter
-import com.devcorerd.pos.core.ui.FragmentBase
+import com.devcorerd.pos.core.ui.ProductSearchFragment
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.model.presenter.ProductPresenter
@@ -17,14 +17,14 @@ import kotlinx.android.synthetic.main.all_items_fragment.*
 /**
  * Created by wgarcia on 7/24/2018.
  */
-class FavoriteItemsFragment: FragmentBase(){
+class FavoriteItemsFragment : ProductSearchFragment() {
     private lateinit var productList: MutableList<Product>
     private val adapter: Adapter<Product, ProductListViewHolder> by lazy {
         Adapter(productList, productListRV.context, {
             val view: View = LayoutInflater.from(productListRV.context)
                     .inflate(R.layout.product_list_item, productListRV, false)
             ProductListViewHolder(view)
-        }, object:  OnClickListener<Product> {
+        }, object : OnClickListener<Product> {
             override fun onClick(entity: Product?, `object`: Any?) {
                 (activity!! as HomeActivity).makeFlyAnimation(`object` as CircleImageView,
                         entity?.productQuantity)
@@ -55,9 +55,10 @@ class FavoriteItemsFragment: FragmentBase(){
             productListRV.setHasFixedSize(false)
             productListRV.layoutManager = LinearLayoutManager(context!!)
             productListRV.adapter = adapter
-        }, {error: Throwable ->
+        }, { error: Throwable ->
             print(error.message)
         })
 
+        setupEvents(productList, adapter)
     }
 }

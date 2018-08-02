@@ -54,7 +54,7 @@ class UpdateProductFragment: FragmentBase(), OnScanCompleted, OnCategorySelected
         fun newInstance(updateListener: OnProductUpdated, deleteListener: OnProductDeleted,
                         product: Product, position: Int): UpdateProductFragment {
             val fragmentBase = UpdateProductFragment()
-            val layout: Int = R.layout.add_product_fragment
+            val layout: Int = R.layout.update_product_fragment
 
             fragmentBase.updateListener = updateListener
             fragmentBase.deleteListener = deleteListener
@@ -92,7 +92,7 @@ class UpdateProductFragment: FragmentBase(), OnScanCompleted, OnCategorySelected
     private fun setupEvents() {
         setupTextWatcher(name, price, sku)
         backButton.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+            removeFragment()
         }
 
         updateProductButton.setOnClickListener {
@@ -160,16 +160,16 @@ class UpdateProductFragment: FragmentBase(), OnScanCompleted, OnCategorySelected
         when (requestCode) {
             ConstantsHelper.writeReadCode -> {
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED)
-                /*UIHelper.showMessage(context!!, "Error",
-                        context!!.getString(R.string.not_file_permission_granted))*/
+                    UIHelper.showMessage(context!!, "Error",
+                            context!!.getString(R.string.not_file_permission_granted))
                 else
                     imagePicker.start()
 
             }
             ConstantsHelper.cameraCode -> {
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED)
-                /*UIHelper.showMessage(context!!, "Error",
-                        context!!.getString(R.string.not_file_permission_granted))*/
+                    UIHelper.showMessage(context!!, "Error",
+                            context!!.getString(R.string.not_file_permission_granted))
                 else
                     stackFragmentToTop(BarcodeReaderFragment.newInstance(this), R.id.mainContainer,
                             false)
@@ -216,6 +216,7 @@ class UpdateProductFragment: FragmentBase(), OnScanCompleted, OnCategorySelected
                         }
                     }, { error: Throwable ->
                 error.printStackTrace()
+                UIHelper.showMessage(context!!, "Error obteniendo información del producto", error.message!!)
             })
         }
     }

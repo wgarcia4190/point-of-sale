@@ -2,6 +2,7 @@ package com.devcorerd.pos.core.db
 
 import com.devcorerd.pos.model.table.CategoryTable
 import com.devcorerd.pos.model.table.CustomerTable
+import com.devcorerd.pos.model.table.PrinterTable
 import com.devcorerd.pos.model.table.ProductTable
 import ru.arturvasilov.sqlite.core.SQLiteConfig
 import ru.arturvasilov.sqlite.core.SQLiteContentProvider
@@ -20,6 +21,7 @@ class SQLiteProvider: SQLiteContentProvider() {
         schema.register(ProductTable.TABLE)
         schema.register(CustomerTable.TABLE)
         schema.register(CategoryTable.TABLE)
+        schema.register(PrinterTable.TABLE)
     }
 
     override fun prepareConfig(config: SQLiteConfig) {

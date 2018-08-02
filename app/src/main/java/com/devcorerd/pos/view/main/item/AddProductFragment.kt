@@ -16,12 +16,15 @@ import com.devcorerd.pos.helper.ConstantsHelper
 import com.devcorerd.pos.helper.Helper
 import com.devcorerd.pos.helper.TextWatcher
 import com.devcorerd.pos.helper.UIHelper
+import com.devcorerd.pos.listener.OnCategorySelected
 import com.devcorerd.pos.listener.OnProductAddedListener
 import com.devcorerd.pos.listener.OnScanCompleted
+import com.devcorerd.pos.model.entity.Category
 import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.model.presenter.BarcodePresenter
 import com.devcorerd.pos.model.presenter.ProductPresenter
 import com.devcorerd.pos.view.main.barcode.BarcodeReaderFragment
+import com.devcorerd.pos.view.main.category.CategorySelectorFragment
 import com.esafirm.imagepicker.features.ImagePicker
 import com.esafirm.imagepicker.model.Image
 import kotlinx.android.synthetic.main.add_product_fragment.*
@@ -31,9 +34,6 @@ import org.joda.time.DateTime
 import org.json.JSONObject
 import java.io.File
 import java.util.concurrent.Executors
-import com.devcorerd.pos.listener.OnCategorySelected
-import com.devcorerd.pos.model.entity.Category
-import com.devcorerd.pos.view.main.category.CategorySelectorFragment
 
 
 @Suppress("DEPRECATION")
@@ -80,7 +80,7 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
     private fun setupEvents() {
         setupTextWatcher(name, price, sku)
         backButton.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+            removeFragment()
         }
 
         addProductButton.setOnClickListener {
@@ -129,6 +129,7 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
         }
 
         categoryButton.setOnClickListener {
+            Helper.hideKeyboard(activity!!)
             stackFragmentToTop(CategorySelectorFragment.newInstance(this), R.id.mainContainer,
                     false)
         }
@@ -173,16 +174,16 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
         when (requestCode) {
             ConstantsHelper.writeReadCode -> {
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED)
-                /*UIHelper.showMessage(context!!, "Error",
-                        context!!.getString(R.string.not_file_permission_granted))*/
+                    UIHelper.showMessage(context!!, "Error",
+                            context!!.getString(R.string.not_file_permission_granted))
                 else
                     imagePicker.start()
 
             }
             ConstantsHelper.cameraCode -> {
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED)
-                /*UIHelper.showMessage(context!!, "Error",
-                        context!!.getString(R.string.not_file_permission_granted))*/
+                    UIHelper.showMessage(context!!, "Error",
+                            getString(R.string.not_file_permission_granted))
                 else
                     stackFragmentToTop(BarcodeReaderFragment.newInstance(this), R.id.mainContainer,
                             false)
@@ -228,7 +229,7 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
                             selectedImage = Helper.getBitmapAsBase64(productImage.drawingCache)
                         }
                     }, { error: Throwable ->
-                error.printStackTrace()
+                UIHelper.showMessage(context!!, "Error de escaneo", error.message!!)
             })
         }
     }

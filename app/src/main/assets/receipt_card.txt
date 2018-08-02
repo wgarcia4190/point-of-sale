@@ -1,0 +1,15 @@
+        {{store_name}}
+       {{store_phone}}
+--------------------------------
+CÓDIGO DE CLIENTE: {{customer_code}}
+
+{{products}}
+===============================
+TOTAL	            {{total}}
+VOUCHER             {{voucher}}
+================================
+CASH TENDERED
+
+
+
+

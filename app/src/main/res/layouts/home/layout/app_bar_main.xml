@@ -43,13 +43,15 @@
                 <RelativeLayout
                     android:layout_width="@dimen/badge_container_width"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|end">
+                    android:layout_gravity="center_vertical|end"
+                    android:clickable="false">
 
                     <ImageView
                         android:id="@+id/cartButton"
                         style="@style/ToolbarIcon"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
+                        android:clickable="false"
                         android:contentDescription="@string/content_description"
                         android:foreground="@null"
                         app:srcCompat="@drawable/ic_cart" />
@@ -68,8 +70,15 @@
             <ImageButton
                 android:id="@+id/customerButton"
                 style="@style/ToolbarIcon"
+                android:layout_marginStart="@dimen/toolbar_icon_m_s"
                 android:contentDescription="@string/content_description"
                 app:srcCompat="@drawable/ic_customer_search" />
+
+            <ImageButton
+                android:id="@+id/barReaderButton"
+                style="@style/ToolbarIcon"
+                android:contentDescription="@string/content_description"
+                app:srcCompat="@drawable/ic_barcode" />
 
 
         </android.support.v7.widget.Toolbar>

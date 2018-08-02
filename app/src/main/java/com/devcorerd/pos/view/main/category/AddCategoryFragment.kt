@@ -8,6 +8,7 @@ import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.Adapter
 import com.devcorerd.pos.core.ui.FragmentBase
 import com.devcorerd.pos.helper.TextWatcher
+import com.devcorerd.pos.helper.UIHelper
 import com.devcorerd.pos.listener.OnCategoryAdded
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.model.entity.Category
@@ -85,14 +86,18 @@ class AddCategoryFragment : FragmentBase() {
             productListRV.setHasFixedSize(false)
             productListRV.layoutManager = LinearLayoutManager(context!!)
             productListRV.adapter = adapter
+
+            if (productList.isEmpty())
+                productsContainer.visibility = View.GONE
         }, { error: Throwable ->
+            UIHelper.showMessage(context!!, "Error cargando productos", error.message!!)
             error.printStackTrace()
         })
     }
 
     private fun setupEvents() {
         backButton.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+            removeFragment()
         }
 
         name.addTextChangedListener(object : TextWatcher() {
@@ -124,9 +129,13 @@ class AddCategoryFragment : FragmentBase() {
                         }
                     }
 
+                } else {
+                    listener.onCategoryAdded(category)
+                    backButton.performClick()
                 }
 
             }, { error: Throwable ->
+                UIHelper.showMessage(context!!, "Error creando categoria", error.message!!)
                 error.printStackTrace()
             })
         }

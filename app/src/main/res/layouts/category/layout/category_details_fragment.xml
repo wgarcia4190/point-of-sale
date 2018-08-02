@@ -52,7 +52,7 @@
             app:srcCompat="@drawable/ic_search" />
 
         <EditText
-            android:id="@+id/searchCategory"
+            android:id="@+id/searchProduct"
             style="@style/EditTextDeselected"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -84,30 +84,38 @@
         android:layout_marginTop="@dimen/m_v"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/createItemButton"
-            style="@style/ButtonLower"
-            android:layout_height="@dimen/button_height_big"
-            android:layout_marginBottom="@dimen/category_details_add_item_m_b"
-            android:layout_marginEnd="@dimen/category_details_m_h"
-            android:layout_marginStart="@dimen/category_details_m_h"
-            android:layout_marginTop="@dimen/category_details_m_v"
-            android:background="@color/colorPrimary"
-            android:text="@string/create_product"
-            android:textColor="@color/white"
-            android:textSize="@dimen/button_text_size" />
+        <LinearLayout
+            android:id="@+id/buttonsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/editCategoryButton"
-            style="@style/ButtonLower"
-            android:layout_height="@dimen/button_height_big"
-            android:layout_marginBottom="@dimen/category_details_m_v"
-            android:layout_marginEnd="@dimen/category_details_m_h"
-            android:layout_marginStart="@dimen/category_details_m_h"
-            android:background="@color/colorPrimary"
-            android:text="@string/edit_category"
-            android:textColor="@color/white"
-            android:textSize="@dimen/button_text_size" />
+            <Button
+                android:id="@+id/createItemButton"
+                style="@style/ButtonLower"
+                android:layout_height="@dimen/button_height_big"
+                android:layout_marginBottom="@dimen/category_details_add_item_m_b"
+                android:layout_marginEnd="@dimen/category_details_m_h"
+                android:layout_marginStart="@dimen/category_details_m_h"
+                android:layout_marginTop="@dimen/category_details_m_v"
+                android:background="@color/colorPrimary"
+                android:text="@string/create_product"
+                android:textColor="@color/white"
+                android:textSize="@dimen/button_text_size" />
+
+            <Button
+                android:id="@+id/editCategoryButton"
+                style="@style/ButtonLower"
+                android:layout_height="@dimen/button_height_big"
+                android:layout_marginBottom="@dimen/category_details_m_v"
+                android:layout_marginEnd="@dimen/category_details_m_h"
+                android:layout_marginStart="@dimen/category_details_m_h"
+                android:background="@color/colorPrimary"
+                android:text="@string/edit_category"
+                android:textColor="@color/white"
+                android:textSize="@dimen/button_text_size" />
+
+        </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/productListRV"

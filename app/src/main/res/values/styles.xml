@@ -65,6 +65,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="BoldField" parent="TitleField">
+        <item name="android:fontFamily">@font/bold</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="LightField" parent="TitleField">
         <item name="android:fontFamily">@font/light</item>
         <item name="android:textStyle">normal</item>
@@ -118,6 +123,12 @@
     <style name="EditTextUnderscore" parent="EditTextLine">
         <item name="android:background">@drawable/shape_edit_text_underscore</item>
         <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="EditTextUnderscoreSmall" parent="EditTextLine">
+        <item name="android:background">@drawable/shape_edit_text_underscore</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_height">@dimen/edit_text_height_small</item>
     </style>
 
     <style name="TextLabel" parent="TextAppearance.AppCompat">
@@ -236,6 +247,82 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="CommonDialogBackground">
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/dialog_background</item>
+        <item name="android:paddingTop">@dimen/padding_24</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="DialogImageContainer">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_4</item>
+        <item name="android:layout_marginBottom">@dimen/margin_24</item>
+    </style>
+
+    <style name="DialogImageContainerImage">
+        <item name="android:layout_width">@dimen/image_dialog_width</item>
+        <item name="android:layout_height">@dimen/image_dialog_height</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <style name="DialogImageContainerText">
+        <item name="android:textSize">@dimen/text_8</item>
+        <item name="android:textColor">@color/black_56</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/margin_4</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:fontFamily">@font/light</item>
+    </style>
+
+    <style name="CommonDialogTitle">
+        <item name="android:textSize">@dimen/text_size_h3</item>
+        <item name="android:textColor">@color/black_80</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/margin_16</item>
+        <item name="android:layout_marginRight">@dimen/margin_16</item>
+        <item name="android:layout_marginBottom">@dimen/margin_16</item>
+        <item name="android:fontFamily">@font/light</item>
+    </style>
+
+    <style name="CommonDialogMessage">
+        <item name="android:textSize">@dimen/text_size_primary</item>
+        <item name="android:textColor">@color/black_56</item>
+        <item name="android:textColorLink">@color/black_56</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/margin_16</item>
+        <item name="android:layout_marginRight">@dimen/margin_16</item>
+        <item name="android:layout_marginBottom">@dimen/margin_24</item>
+        <item name="android:fontFamily">@font/light</item>
+    </style>
+
+    <style name="CommonDialogButton">
+        <item name="android:textSize">@dimen/text_size_primary_button</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:layout_width">0.0dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/margin_8</item>
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/light</item>
+    </style>
+    <style name="CommonDialogButton.Negative" parent="@style/CommonDialogButton">
+        <item name="android:textColor">@color/delete</item>
+    </style>
+    <style name="CommonDialogButton.Positive" parent="@style/CommonDialogButton">
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
 

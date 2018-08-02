@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:viewportWidth="52"
+    android:viewportHeight="52"
+    android:width="@dimen/login_email_img_size"
+    android:height="@dimen/login_email_img_size">
+    <path
+        android:pathData="M11.960022 50l28.089966 0 0 -18 -28.089966 0 0 18zm6.854126 -13.003174l14.188476 0 0 2 -14.188476 0 0 -2zm0 6l14.188476 0 0 2 -14.188476 0 0 -2z"
+        android:fillColor="#000000" />
+    <path
+        android:pathData="M37.002625 19.996826l0 -2 -1.002625 0L36 2 16 2l0 15.996826 -0.997376 0 0 2 0.997376 0 0 0.0032 20 0 0 -0.0032z"
+        android:fillColor="#000000" />
+    <path
+        android:pathData="M43.029968 10l-5.029785 0 0 5.996826 1.002442 0 0 6 -1.002442 0 0 0.0034 -24 0 0 -0.0034 -0.997558 0 0 -6 0.997558 0 0 -5.996826 -5.0301513 0C5.1300049 10 2 13.119995 2 16.969971L2 40l7.960144 0 0 -9.999756 32.089844 0 0 9.999756L50 40 50 16.969971C50 13.119995 46.880005 10 43.029968 10Z"
+        android:fillColor="#000000" />
+</vector>

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.Adapter
-import com.devcorerd.pos.core.ui.FragmentBase
+import com.devcorerd.pos.core.ui.ProductSearchFragment
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.listener.OnProductAddedListener
 import com.devcorerd.pos.listener.OnProductDeleted
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.products_fragment.*
  * @author Ing. Wilson Garcia
  * Created on 7/24/18
  */
-class ProductsFragment : FragmentBase(), OnProductAddedListener, OnProductUpdated, OnProductDeleted {
+class ProductsFragment : ProductSearchFragment(), OnProductAddedListener, OnProductUpdated, OnProductDeleted {
 
     private lateinit var productList: MutableList<Product>
     private val adapter: Adapter<Product, ProductItemViewHolder> by lazy {
@@ -28,11 +28,13 @@ class ProductsFragment : FragmentBase(), OnProductAddedListener, OnProductUpdate
             val view: View = LayoutInflater.from(productListRV.context)
                     .inflate(R.layout.product_item, productListRV, false)
             ProductItemViewHolder(view, presenter as ProductPresenter)
-        }, object:  OnClickListener<Product> {
+        }, object : OnClickListener<Product> {
             override fun onClick(entity: Product?, `object`: Any?) {
+                val index = if (!isFilter) `object` as Int else productList.indexOf(entity)
+
                 stackFragmentToTop(UpdateProductFragment.newInstance(
                         this@ProductsFragment, this@ProductsFragment,
-                        entity!!, `object` as Int), R.id.mainContainer, false)
+                        entity!!, index), R.id.mainContainer, false)
             }
 
         })
@@ -59,16 +61,18 @@ class ProductsFragment : FragmentBase(), OnProductAddedListener, OnProductUpdate
             productListRV.setHasFixedSize(false)
             productListRV.layoutManager = LinearLayoutManager(context!!)
             productListRV.adapter = adapter
-        }, {error: Throwable ->
+        }, { error: Throwable ->
             print(error.message)
         })
 
-        setupEvents()
+        setupEvents(productList, adapter)
     }
 
-    private fun setupEvents() {
+    override fun setupEvents(productList: MutableList<Product>, adapter: Adapter<Product, *>) {
+        super.setupEvents(productList, adapter)
+
         backButton.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+            removeFragment()
         }
 
         addProductButton.setOnClickListener {
@@ -77,14 +81,17 @@ class ProductsFragment : FragmentBase(), OnProductAddedListener, OnProductUpdate
     }
 
     override fun onProductAdded(product: Product) {
+        clearFilters(productList, adapter)
         adapter.add(product)
     }
 
     override fun onProductDeleted(position: Int) {
+        clearFilters(productList, adapter)
         adapter.delete(position)
     }
 
-    override fun onCategoryUpdated(position: Int, product: Product) {
+    override fun onProductUpdated(position: Int, product: Product) {
+        clearFilters(productList, adapter)
         adapter.update(product, position)
     }
 }

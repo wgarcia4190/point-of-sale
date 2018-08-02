@@ -11,9 +11,14 @@ import org.joda.time.format.DateTimeFormat
  */
 class DateHelper private constructor() {
     companion object {
-        var dtf = DateTimeFormat.forPattern("MM/dd/yyyy")
+        var dtf = DateTimeFormat.forPattern("dd/MM/yyyy")
 
         fun getDateAsString(dateTime: DateTime): String{
+            return dtf.print(dateTime)
+        }
+
+        fun getDateHourAsString(dateTime: DateTime): String{
+            val dtf = DateTimeFormat.forPattern("dd/MM/yyyy hh:mm a")
             return dtf.print(dateTime)
         }
 

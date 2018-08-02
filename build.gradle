@@ -7,6 +7,7 @@ buildscript {
     ext.firebase_perf_version = '16.0.0'
     ext.firebase_messagin_version = '17.1.0'
     ext.firebase_plugin_version = '1.1.5'
+    ext.google_services_lib_version = '15.0.2'
     ext.constraint_layout_version = '1.1.2'
     ext.multidex_version = '1.0.3'
     ext.google_services_version = '3.3.0'
@@ -23,6 +24,7 @@ buildscript {
     ext.color_picker_version = '1.1.8'
     ext.db = '0.2.0'
     ext.zbar = '1.9.8'
+    ext.mailjet_version = '4.0.5'
 
     repositories {
         google()

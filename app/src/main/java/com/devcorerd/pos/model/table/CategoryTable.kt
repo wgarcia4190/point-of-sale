@@ -37,6 +37,7 @@ class CategoryTable : BaseTable<Category>() {
                 .intColumn(totalItems)
                 .textColumn(creationDate)
                 .textColumn(modificationDate)
+                .primaryKey(name)
                 .execute(database)
     }
 

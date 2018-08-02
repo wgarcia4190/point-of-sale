@@ -41,7 +41,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/phone"
+                    android:id="@+id/socialID"
                     style="@style/LightField"
                     android:layout_marginEnd="@dimen/customer_avatar_data_m_e"
                     android:textColor="@color/black"

@@ -20,6 +20,8 @@ android {
 
         buildConfigField "String", "SET_COOKIE", '"Set-Cookie"'
         buildConfigField "String", "Locale", '"es"'
+        buildConfigField "String", "PUBLIC_KEY", '"b7a93121a20dbc2d9f3ffd32ed199f1e"'
+        buildConfigField "String", "SECRET_KEY", '"7108972fedc2b5bcf71043da654ba8ca"'
     }
     androidExtensions {
         experimental = true
@@ -43,9 +45,23 @@ android {
         }
     }
 
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+
     sourceSets {
         main {
             res.srcDirs = [
+                    'src/main/res/layouts/ocr',
+                    'src/main/res/layouts/settings',
+                    'src/main/res/layouts/checkout',
                     'src/main/res/layouts/category',
                     'src/main/res/layouts/items',
                     'src/main/res/layouts/customer',
@@ -73,6 +89,7 @@ dependencies {
     implementation "com.android.support:support-compat:$support_version"
     implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
     implementation "com.android.support:multidex:$multidex_version"
+    implementation "com.google.android.gms:play-services-vision:$google_services_lib_version"
 
     /** Retrofit */
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -107,6 +124,11 @@ dependencies {
     implementation "me.dm7.barcodescanner:zbar:$zbar"
     implementation "petrov.kristiyan:colorpicker-library:$color_picker_version"
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.10'
+    implementation 'com.mcxiaoke.volley:library-aar:1.0.0'
+    implementation 'io.card:android-sdk:5.5.0'
+
+    /** Email Sender */
+    implementation group: 'com.mailjet', name: 'mailjet-client', version: "$mailjet_version"
 
     /** Database **/
     implementation "ru.arturvasilov:sqlite:$db"

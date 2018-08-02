@@ -22,6 +22,7 @@ class CustomerTable : BaseTable<Customer>() {
         const val lastName = "lastName"
         const val socialID = "socialID"
         const val email = "email"
+        const val card = "card"
     }
 
 
@@ -33,6 +34,7 @@ class CustomerTable : BaseTable<Customer>() {
                 .textColumn(lastName)
                 .textColumn(socialID)
                 .textColumn(email)
+                .textColumn(card)
                 .primaryKey(socialID)
                 .execute(database)
     }
@@ -42,8 +44,9 @@ class CustomerTable : BaseTable<Customer>() {
         val lastName = cursor.getString(cursor.getColumnIndex(lastName))
         val phone = cursor.getString(cursor.getColumnIndex(socialID))
         val email = cursor.getString(cursor.getColumnIndex(email))
+        val card = cursor.getString(cursor.getColumnIndex(card))
 
-        return Customer(name, lastName, phone, email)
+        return Customer(name, lastName, phone, email, card)
     }
 
     override fun toValues(customer: Customer): ContentValues {
@@ -52,6 +55,7 @@ class CustomerTable : BaseTable<Customer>() {
         values.put(lastName, customer.lastName)
         values.put(socialID, customer.socialID)
         values.put(email, customer.email)
+        values.put(card, customer.card)
 
         return values
     }

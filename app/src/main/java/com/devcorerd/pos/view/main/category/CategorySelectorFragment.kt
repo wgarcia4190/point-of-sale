@@ -66,6 +66,7 @@ class CategorySelectorFragment : FragmentBase(), OnCategoryAdded {
 
         }, { error: Throwable ->
             error.printStackTrace()
+            UIHelper.showMessage(context!!, "Error cargando categorias", error.message!!)
         })
 
         setupEvents()
@@ -73,7 +74,7 @@ class CategorySelectorFragment : FragmentBase(), OnCategoryAdded {
 
     private fun setupEvents() {
         backButton.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+            removeFragment()
         }
 
         addCategoryButton.setOnClickListener {

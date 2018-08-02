@@ -13,10 +13,11 @@ import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.ViewPagerAdapter
 import com.devcorerd.pos.core.ui.FragmentBase
 import com.devcorerd.pos.core.ui.Tab
+import com.devcorerd.pos.helper.ConstantsHelper
 import com.devcorerd.pos.listener.OnCustomerSelected
 import com.devcorerd.pos.listener.OnUpdateToolbarListener
 import com.devcorerd.pos.model.entity.Customer
-import com.devcorerd.pos.model.entity.Product
+import com.devcorerd.pos.view.main.checkout.CheckoutFragment
 import kotlinx.android.synthetic.main.customer_header.*
 import kotlinx.android.synthetic.main.home_fragment.*
 
@@ -25,9 +26,10 @@ import kotlinx.android.synthetic.main.home_fragment.*
  * @author Ing. Wilson Garcia
  * Created on 7/17/18
  */
-class HomeFragment : FragmentBase(),OnCustomerSelected {
+class HomeFragment : FragmentBase(), OnCustomerSelected {
 
     private lateinit var listener: OnUpdateToolbarListener
+    private var price: Double = 0.0
     private val tabs: MutableList<Tab> by lazy {
         mutableListOf(
                 Tab(getString(R.string.all), R.drawable.ic_list),
@@ -54,6 +56,7 @@ class HomeFragment : FragmentBase(),OnCustomerSelected {
         setupEvents()
 
         listener.onUpdateToolbar(null)
+        onCustomerSelected(ConstantsHelper.selectedCustomer!!)
     }
 
     private fun setupViewPager() {
@@ -101,6 +104,12 @@ class HomeFragment : FragmentBase(),OnCustomerSelected {
             }
 
         })
+
+        chargeButton.setOnClickListener {
+            stackFragmentToTop(CheckoutFragment.newInstance(price,
+                    (activity!! as HomeActivity).products), R.id.mainContainer,
+                    false)
+        }
     }
 
     private fun updateTab(tab: TabLayout.Tab?, color: Int) {
@@ -114,12 +123,20 @@ class HomeFragment : FragmentBase(),OnCustomerSelected {
                 PorterDuff.Mode.SRC_IN)
     }
 
-    fun updateCharge(price: Double){
+    fun updateCharge(price: Double) {
+        this.price = price
         val charge: String = resources.getString(R.string.charge_wildcard)
                 .replace("{price}", String.format("%.2f", price))
-        chargeButton.isEnabled = true
-        chargeButton.setTextColor(resources.getColor(R.color.white))
+
         chargeButton.text = charge
+        if (price > 0.0) {
+            chargeButton.isEnabled = true
+            chargeButton.setTextColor(resources.getColor(R.color.white))
+        } else {
+            chargeButton.isEnabled = false
+            chargeButton.setTextColor(resources.getColor(R.color.deselected))
+        }
+
     }
 
     override fun onCustomerSelected(customer: Customer) {

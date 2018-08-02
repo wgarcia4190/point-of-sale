@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.ViewHolder
 import com.devcorerd.pos.helper.Helper
+import com.devcorerd.pos.helper.UIHelper
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.model.presenter.ProductPresenter
@@ -63,6 +64,7 @@ class ProductItemViewHolder(view: View, val presenter: ProductPresenter) : ViewH
                             android.graphics.PorterDuff.Mode.SRC_IN)
 
             }, { error: Throwable ->
+                UIHelper.showMessage(context!!, "Error actualizando producto", error.message!!)
                 error.printStackTrace()
             })
         }

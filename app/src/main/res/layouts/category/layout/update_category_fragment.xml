@@ -34,7 +34,7 @@
         <ImageButton
             android:id="@+id/updateCategoryButton"
             style="@style/ToolbarIcon"
-            app:srcCompat="@drawable/ic_save"/>
+            app:srcCompat="@drawable/ic_save" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -133,14 +133,14 @@
             android:text="@string/assigned_products"
             android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textSize="@dimen/sub_title_size" />
+            android:textSize="@dimen/info_title_size_b" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/productListRV"
-            android:layout_marginEnd="@dimen/add_item_p_h"
-            android:layout_marginStart="@dimen/add_item_p_h"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/add_item_p_h"
+            android:layout_marginStart="@dimen/add_item_p_h" />
 
 
     </LinearLayout>
@@ -150,7 +150,6 @@
         android:id="@+id/deleteCategoryButton"
         style="@style/BadButton"
         android:layout_height="@dimen/button_height_big"
-        android:layout_marginBottom="@dimen/customer_add_m_t"
         android:layout_marginEnd="@dimen/add_item_p_h"
         android:layout_marginStart="@dimen/add_item_p_h"
         android:layout_marginTop="@dimen/customer_add_m_t"
@@ -162,10 +161,12 @@
         style="@style/LightField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/add_category_p"
+        android:layout_marginBottom="@dimen/delete_category_info_m_v"
+        android:layout_marginTop="@dimen/delete_category_info_m_v"
+        android:layout_marginEnd="@dimen/add_item_p_h"
+        android:layout_marginStart="@dimen/add_item_p_h"
         android:maxLines="2"
         android:text="@string/delete_category_message"
         android:textColor="@color/dark_gray"
-        android:textAlignment="center"
         android:textSize="@dimen/info_title_size" />
 </LinearLayout>

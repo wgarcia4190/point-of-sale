@@ -29,6 +29,11 @@
             android:gravity="center_vertical"
             android:text="@string/add_customer" />
 
+        <ImageButton
+            android:id="@+id/ocrReaderButton"
+            style="@style/ToolbarIcon"
+            app:srcCompat="@drawable/ic_ocr"/>
+
     </android.support.v7.widget.Toolbar>
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -78,7 +83,17 @@
         android:layout_marginEnd="@dimen/customer_add_m_h"
         android:layout_marginStart="@dimen/customer_add_m_h"
         android:hint="@string/social_id"
-        android:inputType="phone" />
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/card"
+        style="@style/EditTextLine"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/customer_add_m_b"
+        android:layout_marginEnd="@dimen/customer_add_m_h"
+        android:layout_marginStart="@dimen/customer_add_m_h"
+        android:hint="@string/card"
+        android:inputType="number" />
 
     <Button
         android:id="@+id/addCustomerButton"

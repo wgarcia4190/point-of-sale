@@ -46,27 +46,43 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
+        <LinearLayout
+            android:id="@+id/categoryDropdownContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <include
+                layout="@layout/dropdown"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dropdown_height"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/deselected" />
+
+            <ImageButton
+                android:id="@+id/searchProduct"
+                style="@style/ImageButton"
+                android:layout_width="@dimen/home_search_size"
+                android:layout_height="@dimen/home_search_size"
+                android:layout_marginEnd="@dimen/home_cat_separator_m_v"
+                android:layout_marginStart="@dimen/home_cat_separator_m_v"
+                android:contentDescription="@string/content_description"
+                android:tint="@color/black"
+                app:srcCompat="@drawable/ic_search" />
+
+        </LinearLayout>
+
         <include
-            layout="@layout/dropdown"
+            layout="@layout/product_search"
             android:layout_width="0dp"
             android:layout_height="@dimen/dropdown_height"
-            android:layout_marginEnd="@dimen/home_cat_separator_m_v"
             android:layout_weight="1" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/deselected" />
-
-        <ImageButton
-            style="@style/ImageButton"
-            android:layout_width="@dimen/home_search_size"
-            android:layout_height="@dimen/home_search_size"
-            android:layout_marginEnd="@dimen/home_cat_separator_m_v"
-            android:layout_marginStart="@dimen/home_cat_separator_m_v"
-            android:contentDescription="@string/content_description"
-            android:tint="@color/black"
-            app:srcCompat="@drawable/ic_search" />
 
     </LinearLayout>
 

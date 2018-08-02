@@ -3,22 +3,30 @@ package com.devcorerd.pos.helper
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.AssetManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.os.Build
+import android.os.Environment
 import android.util.Base64
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.HurlStack
+import com.android.volley.toolbox.Volley
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.security.InvalidKeyException
 import java.security.NoSuchAlgorithmException
 import java.security.SignatureException
 import java.util.*
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
+import kotlin.collections.HashMap
 
 
 /**
@@ -49,6 +57,12 @@ class Helper private constructor() {
                 view = View(activity)
             }
             imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+
+        fun showKeyboard(activity: Activity) {
+            val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE)
+                    as InputMethodManager
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
         }
 
         fun getBitmapFromString(encodedImage: String): Bitmap {
@@ -108,6 +122,55 @@ class Helper private constructor() {
             mac.init(signingKey)
             return mac.doFinal(data.toByteArray())
         }
+
+        fun readAsset(mgr: AssetManager, path: String): String {
+            return mgr.open(path).bufferedReader().use {
+                it.readText()
+            }
+        }
+
+        fun convertHtmlToPdf(context: Context, html: String, callback: (File) -> Unit) {
+            val apiKey = "3f163366-fb91-493e-8f7b-322aea95f11a"
+            val apiURL = "http://api.html2pdfrocket.com/pdf"
+            val params = HashMap<String, String>()
+            params["apiKey"] = apiKey
+            params["value"] = html
+
+
+            val request = InputStreamReader(Request.Method.POST, apiURL,
+                    Response.Listener<ByteArray> { response ->
+                        try {
+                            if (response != null) {
+                                val i1 = Date().time
+                                val root = File(Environment.getExternalStorageDirectory(), "WebPageToPdf")
+                                if (!root.exists()) {
+                                    root.mkdirs()
+                                }
+                                if (root.exists()) {
+
+                                    val file = File(root, "recibo-$i1.pdf")
+                                    val op = FileOutputStream(file)
+                                    file.setWritable(true)
+                                    op.write(response)
+                                    op.flush()
+                                    op.close()
+
+                                    callback.invoke(file)
+                                }
+
+
+                            }
+
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            UIHelper.showMessage(context, "Error generando recibo", e.message!!)
+                        }
+                    }, Response.ErrorListener { error -> error.printStackTrace() }, params)
+            val mRequestQueue = Volley.newRequestQueue(context, HurlStack())
+            mRequestQueue.add(request)
+        }
+
     }
+
 
 }

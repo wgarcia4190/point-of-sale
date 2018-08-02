@@ -200,8 +200,6 @@
                 style="@style/BadButton"
                 android:layout_marginTop="@dimen/customer_add_m_t"
                 android:layout_height="@dimen/button_height_big"
-                android:layout_marginEnd="@dimen/customer_add_m_h"
-                android:layout_marginStart="@dimen/customer_add_m_h"
                 android:text="@string/delete_product"
                 android:textColor="@color/white"
                 android:textSize="@dimen/button_text_size" />

@@ -5,7 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
         <LinearLayout
+            android:id="@+id/categoryDropdownContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -15,7 +22,6 @@
                 layout="@layout/dropdown"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dropdown_height"
-                android:layout_marginEnd="@dimen/home_cat_separator_m_v"
                 android:layout_weight="1" />
 
             <View
@@ -24,6 +30,7 @@
                 android:background="@color/deselected" />
 
             <ImageButton
+                android:id="@+id/searchProduct"
                 style="@style/ImageButton"
                 android:layout_width="@dimen/home_search_size"
                 android:layout_height="@dimen/home_search_size"
@@ -35,13 +42,34 @@
 
         </LinearLayout>
 
-        <View
-            style="@style/SeparatorBig"
-            android:background="@color/deselected" />
+        <include
+            layout="@layout/product_search"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dropdown_height"
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
+
+    <View
+        style="@style/SeparatorBig"
+        android:background="@color/deselected" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/productListRV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <TextView
+        style="@style/MediumField"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="No hay products registrados"
+        android:textAlignment="center"
+        android:textColor="@color/deselected"
+        android:textSize="@dimen/no_data_text_size" />
 
 </LinearLayout>

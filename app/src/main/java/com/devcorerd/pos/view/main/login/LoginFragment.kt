@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.view.View
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.ui.FragmentBase
+import com.devcorerd.pos.helper.PreferencesHelper
 import com.devcorerd.pos.helper.UIHelper
-import com.devcorerd.pos.view.main.home.HomeActivity
+import com.devcorerd.pos.view.main.customer.CustomerActivity
 import kotlinx.android.synthetic.main.login_fragment.*
 
 /**
@@ -33,7 +34,12 @@ class LoginFragment : FragmentBase() {
 
     private fun setupEvents() {
         login.setOnClickListener {
-            UIHelper.startActivity(activity!!, HomeActivity::class.java)
+            if(email.text.toString() == "admin@adess.com" && password.text.toString() == "123456") {
+                UIHelper.startActivity(activity!!, CustomerActivity::class.java)
+                PreferencesHelper.instance.saveBoolean("isLoggedIn", true)
+            }else
+                UIHelper.showMessage(context!!, "Error de Autenticación", "Las credenciales introducidas no son correctas")
+
         }
     }
 

@@ -1,5 +1,8 @@
 package com.devcorerd.pos.view.main.customer
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -7,24 +10,33 @@ import android.view.View
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.adapter.Adapter
 import com.devcorerd.pos.core.ui.FragmentBase
+import com.devcorerd.pos.helper.ConstantsHelper
 import com.devcorerd.pos.helper.Helper
 import com.devcorerd.pos.helper.TextWatcher
+import com.devcorerd.pos.helper.UIHelper
 import com.devcorerd.pos.listener.OnClickListener
 import com.devcorerd.pos.listener.OnCustomerAddedListener
 import com.devcorerd.pos.listener.OnCustomerSelected
+import com.devcorerd.pos.listener.OnScanCompleted
 import com.devcorerd.pos.model.entity.Customer
 import com.devcorerd.pos.model.presenter.CustomerPresenter
+import com.devcorerd.pos.view.main.barcode.BarcodeReaderFragment
 import com.devcorerd.pos.view.viewholder.CustomerListViewHolder
+import io.card.payment.CardIOActivity
 import kotlinx.android.synthetic.main.customer_list_fragment.*
+import me.dm7.barcodescanner.zbar.Result
+
 
 /**
  * Created by wgarcia on 7/23/2018.
  */
-class CustomerListFragment : FragmentBase(), OnCustomerAddedListener {
+class CustomerListFragment : FragmentBase(), OnCustomerAddedListener, OnScanCompleted {
     private lateinit var customerList: MutableList<Customer>
     private var tempCustomerList: MutableList<Customer> = mutableListOf()
 
     private lateinit var listener: OnCustomerSelected
+
+    private val fragment = AddCustomerFragment.newInstance(this)
 
     private val adapter: Adapter<Customer, CustomerListViewHolder> by lazy {
         Adapter(customerList, customerRVList.context, {
@@ -34,8 +46,6 @@ class CustomerListFragment : FragmentBase(), OnCustomerAddedListener {
         }, object : OnClickListener<Customer> {
             override fun onClick(entity: Customer?, `object`: Any?) {
                 listener.onCustomerSelected(entity!!)
-                Helper.hideKeyboard(activity!!)
-                backButton.performClick()
             }
         })
     }
@@ -62,13 +72,22 @@ class CustomerListFragment : FragmentBase(), OnCustomerAddedListener {
 
     private fun setupEvents() {
         backButton.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+            removeFragment()
         }
 
         clearSearch.setOnClickListener {
             searchCustomer.setText("")
             it.visibility = View.GONE
             adapter.swap(customerList)
+        }
+
+        barReaderButton.setOnClickListener {
+            if (!Helper.checkPermissions(context!!, Manifest.permission.CAMERA)) {
+                requestPermissions(arrayOf(Manifest.permission.CAMERA),
+                        ConstantsHelper.cameraCode)
+            } else
+                stackFragmentToTop(BarcodeReaderFragment.newInstance(this), R.id.mainContainer,
+                        false)
         }
 
         searchCustomer.addTextChangedListener(object : TextWatcher() {
@@ -88,7 +107,7 @@ class CustomerListFragment : FragmentBase(), OnCustomerAddedListener {
 
                 for (customer in customerList) {
                     if (text.matches(Regex("[0-9]+"))) {
-                        if (customer.socialID.contains(text))
+                        if (customer.socialID.contains(text) || customer.card.contains(text))
                             tempCustomerList.add(customer)
                     } else if (customer.getFullName().contains(text) ||
                             customer.email.contains(text))
@@ -96,27 +115,92 @@ class CustomerListFragment : FragmentBase(), OnCustomerAddedListener {
                 }
 
                 adapter.swap(tempCustomerList)
+                toggleList(tempCustomerList)
             }
         })
 
         addCustomerButton.setOnClickListener {
-            stackFragmentToTop(AddCustomerFragment.newInstance(this), R.id.mainContainer, false)
+            stackFragmentToTop(fragment, R.id.mainContainer, false)
+        }
+
+        creditCardButton.setOnClickListener {
+            val scanIntent = Intent(activity!!, CardIOActivity::class.java)
+
+            scanIntent.putExtra(CardIOActivity.EXTRA_SCAN_INSTRUCTIONS, false)
+            scanIntent.putExtra(CardIOActivity.EXTRA_KEEP_APPLICATION_THEME, true)
+            scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_CONFIRMATION, true)
+            scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_MANUAL_ENTRY, true)
+            scanIntent.putExtra(CardIOActivity.EXTRA_HIDE_CARDIO_LOGO, true)
+            scanIntent.putExtra(CardIOActivity.EXTRA_SCAN_INSTRUCTIONS, "")
+            scanIntent.putExtra(CardIOActivity.EXTRA_LANGUAGE_OR_LOCALE, "ES")
+            startActivityForResult(scanIntent, ConstantsHelper.cardScanCode)
         }
     }
 
     private fun load() {
         (presenter as CustomerPresenter).getCustomers({ customers: MutableList<Customer> ->
-            customerList = customers
 
-            customerRVList.setHasFixedSize(false)
-            customerRVList.layoutManager = LinearLayoutManager(context)
-            customerRVList.adapter = adapter
+            customerList = customers
+            if (customers.isEmpty() && Helper.isInternetAvailable(context!!)) {
+                (presenter as CustomerPresenter).getCustomersFromServer({
+                    fillList(it)
+                }, { error: Throwable ->
+                    UIHelper.showMessage(context!!, "Error cargando Clientes", error.message!!)
+                })
+            } else
+                fillList(customers)
         }, { error: Throwable ->
-            print(error.message)
+            UIHelper.showMessage(context!!, "Error cargando Clientes", error.message!!)
         })
+    }
+
+    private fun fillList(customers: MutableList<Customer>) {
+        customerList = customers
+        toggleList(customerList)
+
+        customerRVList.setHasFixedSize(false)
+        customerRVList.layoutManager = LinearLayoutManager(context)
+        customerRVList.adapter = adapter
+    }
+
+    private fun toggleList(customerList: MutableList<Customer>) {
+        if (customerList.isEmpty())
+            customerRVList.visibility = View.GONE
+        else
+            customerRVList.visibility = View.VISIBLE
     }
 
     override fun onCustomerAdded(customer: Customer) {
         adapter.add(customer)
+    }
+
+    fun setValuesFromOCR(value: String) {
+        fragment.setValuesFromOCR(value)
+    }
+
+    fun searchByCreditCard(value: String) {
+        searchCustomer.setText(value)
+    }
+
+    override fun onScanComple(barcode: Result?) {
+        val barcodeStr = barcode?.contents!!
+        searchCustomer.setText(barcodeStr.substring(1, barcodeStr.length - 1))
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
+                                            grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when (requestCode) {
+            ConstantsHelper.cameraCode -> {
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED)
+                    UIHelper.showMessage(context!!, "Error",
+                            getString(R.string.not_file_permission_granted))
+                else
+                    stackFragmentToTop(BarcodeReaderFragment.newInstance(this), R.id.mainContainer,
+                            false)
+
+            }
+        }
     }
 }

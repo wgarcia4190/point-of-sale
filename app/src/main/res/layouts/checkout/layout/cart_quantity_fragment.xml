@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:contentInsetEnd="16dp"
+        app:elevation="0dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            style="@style/ToolbarIcon"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginEnd="@dimen/toolbar_m_e"
+            android:rotation="90"
+            app:srcCompat="@drawable/ic_chevron" />
+
+        <TextView
+            android:id="@+id/productName"
+            style="@style/ToolbarButton"
+            android:layout_gravity="center_vertical|start"
+            android:gravity="center_vertical" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        style="@style/LightField"
+        android:layout_gravity="start"
+        android:layout_marginBottom="@dimen/cart_item_quantity_m_v_b"
+        android:layout_marginStart="@dimen/add_item_p_h"
+        android:layout_marginTop="@dimen/customer_add_m_t"
+        android:text="@string/quantity"
+        android:textColor="@color/black"
+        android:textSize="@dimen/cart_item_quantity_title_text" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/add_item_p_h"
+        android:layout_marginStart="@dimen/add_item_p_h"
+        android:orientation="vertical">
+
+        <View
+            style="@style/SeparatorSmall"
+            android:layout_marginBottom="@dimen/cart_item_quantity_m_v"
+            android:background="@color/black" />
+
+        <com.devcorerd.pos.view.custom.QuantitySelector
+            android:id="@+id/quantitySelector"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height_big" />
+
+        <View
+            style="@style/SeparatorSmall"
+            android:layout_marginTop="@dimen/cart_item_quantity_m_v"
+            android:background="@color/black" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/updateCartButton"
+        style="@style/ButtonLower"
+        android:layout_height="@dimen/button_height_big"
+        android:layout_marginBottom="@dimen/customer_add_m_t"
+        android:layout_marginEnd="@dimen/add_item_p_h"
+        android:layout_marginStart="@dimen/add_item_p_h"
+        android:layout_marginTop="@dimen/customer_add_m_t"
+        android:background="@color/colorPrimary"
+        android:text="@string/update_cart"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_text_size" />
+</LinearLayout>

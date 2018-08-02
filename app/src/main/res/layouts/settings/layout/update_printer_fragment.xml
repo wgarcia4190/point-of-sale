@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:contentInsetEnd="16dp"
+        app:elevation="0dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            style="@style/ToolbarIcon"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginEnd="@dimen/toolbar_m_e"
+            android:rotation="90"
+            app:srcCompat="@drawable/ic_chevron" />
+
+        <TextView
+            style="@style/ToolbarButton"
+            android:layout_gravity="center_vertical|start"
+            android:gravity="center_vertical"
+            android:text="@string/printer_setting" />
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/add_item_image_m_t"
+        android:paddingEnd="@dimen/add_item_p_h"
+        android:paddingStart="@dimen/add_item_p_h">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/printerName"
+                style="@style/EditTextUnderscore"
+                android:layout_width="match_parent"
+                android:hint="@string/printer_name"
+                android:inputType="text"
+                android:textSize="@dimen/add_item_text_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/printerId"
+                    style="@style/EditTextUnderscore"
+                    android:layout_width="0dp"
+                    android:layout_marginEnd="@dimen/add_item_radio_m_e_b"
+                    android:layout_weight="1"
+                    android:hint="@string/choose_device"
+                    android:inputType="textNoSuggestions"
+                    android:textSize="@dimen/add_item_text_size" />
+
+                <ImageButton
+                    android:id="@+id/searchPrinter"
+                    style="@style/ImageButton"
+                    android:layout_width="@dimen/add_item_barcode_size"
+                    android:layout_height="@dimen/add_item_barcode_size"
+                    android:tint="@color/black"
+                    app:srcCompat="@drawable/ic_add_printer" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/dropdownContainer"
+                style="@style/Clickable"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dropdown_height">
+
+                <Spinner
+                    android:id="@+id/dropdownSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/dropdown_p_s"
+                    android:gravity="start"
+                    android:spinnerMode="dialog"
+                    android:entries="@array/paper_width"
+                    android:tag="false" />
+
+                <TextView
+                    android:id="@+id/paperWidth"
+                    style="@style/EditTextUnderscore"
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd="@dimen/add_item_radio_m_e_b"
+                    android:textSize="@dimen/add_item_text_size" />
+
+
+                <ImageView
+                    android:id="@+id/chevron"
+                    android:layout_width="@dimen/dropdown_arrow_size"
+                    android:layout_height="@dimen/dropdown_arrow_size"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/home_cat_separator_m_v"
+                    android:contentDescription="@string/content_description"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/black"
+                    app:srcCompat="@drawable/ic_chevron" />
+
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/textPrinter"
+                style="@style/ButtonLower"
+                android:layout_height="@dimen/button_height_big"
+                android:layout_marginTop="@dimen/customer_add_m_t"
+                android:background="@color/colorPrimary"
+                android:text="@string/test_printer"
+                android:textColor="@color/white"
+                android:textSize="@dimen/button_text_size" />
+
+            <Button
+                android:id="@+id/addPrinter"
+                style="@style/ButtonLower"
+                android:layout_height="@dimen/button_height_big"
+                android:layout_marginTop="@dimen/customer_add_p"
+                android:background="@color/colorPrimary"
+                android:text="@string/create_printer"
+                android:textColor="@color/white"
+                android:textSize="@dimen/button_text_size" />
+
+            <Button
+                android:id="@+id/deletePrinter"
+                style="@style/BadButton"
+                android:layout_height="@dimen/button_height_big"
+                android:layout_marginTop="@dimen/customer_add_p"
+                android:text="@string/delete_printer"
+                android:textColor="@color/white"
+                android:textSize="@dimen/button_text_size" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

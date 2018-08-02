@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:padding="@dimen/checkout_m">
+
+    <ImageButton
+        android:id="@+id/closeButton"
+        style="@style/ImageButton"
+        android:layout_width="@dimen/checkout_x_size"
+        android:layout_height="@dimen/checkout_x_size"
+        android:contentDescription="@string/content_description"
+        android:tint="@color/black"
+        app:srcCompat="@drawable/ic_x" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/totalText"
+                style="@style/MediumField"
+                android:layout_marginBottom="@dimen/checkout_total_m_b"
+                android:text="$0.04"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/checkout_total_text_size" />
+
+            <TextView
+                style="@style/LightField"
+                android:text="@string/select_payment_method"
+                android:textAlignment="center"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/checkout_sub_title_text_size" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.devcorerd.pos.view.custom.PaymentType
+            android:id="@+id/cashType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/payment_type_m_t"
+            app:payment="@string/cash" />
+
+        <com.devcorerd.pos.view.custom.PaymentType
+            android:id="@+id/creditCardType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/payment_type_m_b"
+            app:payment="@string/credit_card" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

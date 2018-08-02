@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -85,5 +86,27 @@ open class FragmentBase: Fragment() {
             transaction.hide(this)
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         transaction.add(layout, fragment, fragment.tag).commit()
+    }
+
+    protected fun removeFragment(){
+        activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (view == null) {
+            return
+        }
+
+        view!!.isFocusableInTouchMode = true
+        view!!.requestFocus()
+        view!!.setOnKeyListener { _, keyCode, event ->
+            if(event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                activity!!.supportFragmentManager.beginTransaction().remove(this@FragmentBase).commit()
+                true
+            }else
+                false
+        }
     }
 }

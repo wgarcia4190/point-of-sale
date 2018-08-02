@@ -38,6 +38,7 @@
 
         <android.support.v7.widget.AppCompatEditText
             style="@style/EditText"
+            android:id="@+id/email"
             android:inputType="textEmailAddress"
             android:layout_height="@dimen/login_control_height"
             android:drawableStart="@drawable/ic_email"
@@ -47,6 +48,7 @@
 
         <android.support.v7.widget.AppCompatEditText
             style="@style/EditText"
+            android:id="@+id/password"
             android:inputType="textPassword"
             android:layout_height="@dimen/login_control_height"
             android:drawableStart="@drawable/ic_password"
