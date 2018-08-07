@@ -21,7 +21,7 @@ import com.devcorerd.pos.view.main.checkout.CheckoutFragment
 import kotlinx.android.synthetic.main.customer_header.*
 import kotlinx.android.synthetic.main.home_fragment.*
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "PLUGIN_WARNING")
 /**
  * @author Ing. Wilson Garcia
  * Created on 7/17/18

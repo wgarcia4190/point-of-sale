@@ -40,4 +40,9 @@ open class ActivityBase(private val layout: Int, protected var presenter: Presen
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         supportActionBar?.hide()
     }
+
+    protected fun switchFragment(fragment: FragmentBase) {
+        supportFragmentManager.beginTransaction().replace(R.id.container,
+                fragment).commit()
+    }
 }

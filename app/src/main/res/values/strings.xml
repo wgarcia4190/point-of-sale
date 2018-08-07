@@ -108,6 +108,8 @@
     <string name="change">Cambio</string>
     <string name="voucher">Voucher</string>
 
+    <string name="no_products_data">No hay products registrados</string>
+
     <string-array name="paper_width">
         <item>58 mm</item>
         <item>80 mm</item>

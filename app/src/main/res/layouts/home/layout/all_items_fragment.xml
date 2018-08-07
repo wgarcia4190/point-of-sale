@@ -67,7 +67,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="No hay products registrados"
+        android:text="@string/no_products_data"
         android:textAlignment="center"
         android:textColor="@color/deselected"
         android:textSize="@dimen/no_data_text_size" />

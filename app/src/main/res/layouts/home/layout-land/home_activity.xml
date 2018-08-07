@@ -10,7 +10,6 @@
     tools:openDrawer="start">
 
     <RelativeLayout
-        android:id="@+id/mainContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -22,6 +21,13 @@
             app:contentInsetEnd="16dp"
             app:elevation="0dp"
             app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/landToolbar"/>
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

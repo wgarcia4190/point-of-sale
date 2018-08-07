@@ -87,11 +87,6 @@ class HomeActivity : ActivityBase(R.layout.home_activity, ProductPresenter()),
         return true
     }
 
-    private fun switchFragment(fragment: FragmentBase) {
-        supportFragmentManager.beginTransaction().replace(R.id.container,
-                fragment).commit()
-    }
-
     private fun setupEvents() {
         customerButton.setOnClickListener {
             searchCustomer.performClick()

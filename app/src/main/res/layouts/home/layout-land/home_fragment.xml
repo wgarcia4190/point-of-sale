@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="@dimen/hamburger_menu_height"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:id="@+id/drawerButton"
+            android:layout_width="@dimen/hamburger_menu_size"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:tint="@color/white"
+            android:contentDescription="@string/content_description"
+            app:srcCompat="@drawable/ic_hamburger" />
+
+        <LinearLayout
+            android:id="@+id/allItemsTab"
+            style="@style/Clickable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/hamburger_menu_tab_p_h"
+            android:orientation="vertical"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/tab_icon_ht"
+                android:layout_height="@dimen/tab_icon_ht"
+                android:scaleType="fitCenter"
+                android:tint="@color/white"
+                android:contentDescription="@string/content_description"
+                android:layout_marginBottom="@dimen/hamburger_menu_tab_m_v"
+                app:srcCompat="@drawable/ic_list" />
+
+            <TextView
+                style="@style/LightField"
+                android:textColor="@color/white"
+                android:text="@string/all"
+                android:textSize="@dimen/tab_text_ht" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/favoriteItemsTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Clickable"
+            android:padding="@dimen/hamburger_menu_tab_p_h"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/tab_icon_ht"
+                android:layout_height="@dimen/tab_icon_ht"
+                android:scaleType="fitCenter"
+                android:tint="@color/white"
+                android:contentDescription="@string/content_description"
+                android:layout_marginBottom="@dimen/hamburger_menu_tab_m_v"
+                app:srcCompat="@drawable/ic_favorite" />
+
+            <TextView
+                style="@style/LightField"
+                android:textColor="@color/white"
+                android:text="@string/favorites"
+                android:textSize="@dimen/tab_text_ht" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.60"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:id="@+id/categoryDropdownContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <include
+                    layout="@layout/dropdown"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dropdown_height"
+                    android:layout_weight="1" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/deselected" />
+
+                <ImageButton
+                    android:id="@+id/searchProduct"
+                    style="@style/ImageButton"
+                    android:layout_width="@dimen/home_search_size"
+                    android:layout_height="@dimen/home_search_size"
+                    android:layout_marginEnd="@dimen/home_cat_separator_m_v"
+                    android:layout_marginStart="@dimen/home_cat_separator_m_v"
+                    android:contentDescription="@string/content_description"
+                    android:tint="@color/black"
+                    app:srcCompat="@drawable/ic_search" />
+
+            </LinearLayout>
+
+            <include
+                layout="@layout/product_search"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dropdown_height"
+                android:layout_weight="1" />
+
+
+        </LinearLayout>
+
+        <View
+            style="@style/SeparatorBig"
+            android:background="@color/deselected" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/productListRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <TextView
+            style="@style/MediumField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/no_products_data"
+            android:textAlignment="center"
+            android:textColor="@color/deselected"
+            android:textSize="@dimen/no_data_text_size" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_height="match_parent"
+        android:layout_width="1dp"
+        android:background="@color/deselected" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.40"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/customer_header"
+            android:background="@drawable/shape_white_background_no_border_left_deselected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:visibility="visible" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cartListRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/customerHeader"
+            android:layout_above="@+id/chargeButton" />
+
+        <Button
+            android:id="@+id/chargeButton"
+            style="@style/ButtonLower"
+            android:layout_height="@dimen/home_button_height"
+            android:background="@color/colorPrimary"
+            android:text="@string/charge"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/home_button_text" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>
