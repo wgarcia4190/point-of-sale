@@ -25,6 +25,8 @@ buildscript {
     ext.db = '0.2.0'
     ext.zbar = '1.9.8'
     ext.mailjet_version = '4.0.5'
+    ext.iocard_version = '5.5.0'
+    ext.stickyheaders_version = '0.7.6'
 
     repositories {
         google()

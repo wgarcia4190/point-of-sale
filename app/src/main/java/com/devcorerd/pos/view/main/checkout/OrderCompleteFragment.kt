@@ -14,12 +14,16 @@ import com.devcorerd.pos.core.ui.FragmentBase
 import com.devcorerd.pos.helper.*
 import com.devcorerd.pos.model.entity.CartItem
 import com.devcorerd.pos.model.entity.Printer
+import com.devcorerd.pos.model.entity.Transaction
+import com.devcorerd.pos.model.entity.TransactionDetails
 import com.devcorerd.pos.model.enum.PaymentType
 import com.devcorerd.pos.model.presenter.TransactionPresenter
 import com.devcorerd.pos.view.main.customer.CustomerActivity
 import kotlinx.android.synthetic.main.order_complete_fragment.*
 import org.joda.time.DateTime
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.Executors
 
 
@@ -89,25 +93,38 @@ class OrderCompleteFragment : FragmentBase() {
             whatsappContainer.visibility = View.GONE
         }
 
-        (presenter as TransactionPresenter).getPrinter({
-            if (it == null)
-                printButtonContainer.visibility = View.GONE
-            else
-                printer = it
+        getPrinters()
+        saveTransaction()
+    }
+
+    private fun saveTransaction(){
+        val transaction = Transaction(Transaction.getID(), "181", paymentType.description, total,
+                amount, voucher, /*ConstantsHelper.selectedCustomer!!.name*/"3341",
+                DateTime.now(), DateTime.now(), mutableListOf())
+
+        for(item in items){
+            transaction.transactionDetails!!.add(TransactionDetails(transaction.id, item.product.name,
+                    item.product.sku, item.product.price, item.quantity))
+        }
+
+        (presenter as TransactionPresenter).addTransaction(transaction, {
+            if(Helper.isInternetAvailable(context!!))
+                saveTransactionInServer(transaction)
         }, { error: Throwable ->
-            UIHelper.showMessage(context!!, "Error obteniendo impresora", error.message!!)
-            error.printStackTrace()
+            UIHelper.showMessage(context!!, "Error creando factura", error.message!!)
         })
+    }
 
-        (presenter as TransactionPresenter).createInvoiceHeader("3341", "181",
-                DateHelper.getDateAsString(DateTime.now()), 1, {
+    private fun saveTransactionInServer(transaction: Transaction) {
+        (presenter as TransactionPresenter).createInvoiceHeader(transaction.customer, transaction.cashier,
+                DateHelper.getDateAsString(DateTime.now()), transaction.id, {
 
-            for (index in 1 until items.size) {
+            for (index in 0 until items.size) {
                 val item = items[index]
                 val final = if (index == items.size - 1) "S" else "N"
                 (presenter as TransactionPresenter).createInvoiceDetail(
-                        item.product.soldBy.toString(), item.product.sku, 1,
-                        item.product.price, item.quantity, "181", final, {
+                        item.product.soldBy.toString(), item.product.sku, transaction.id,
+                        item.product.price, item.quantity, transaction.cashier, final, {
 
                 }, { error: Throwable ->
                     UIHelper.showMessage(context!!, "Error creando factura", error.message!!)
@@ -116,6 +133,18 @@ class OrderCompleteFragment : FragmentBase() {
 
         }, { error: Throwable ->
             UIHelper.showMessage(context!!, "Error creando factura", error.message!!)
+        })
+    }
+
+    private fun getPrinters() {
+        (presenter as TransactionPresenter).getPrinter({
+            if (it == null)
+                printButtonContainer.visibility = View.GONE
+            else
+                printer = it
+        }, { error: Throwable ->
+            UIHelper.showMessage(context!!, "Error obteniendo impresora", error.message!!)
+            error.printStackTrace()
         })
     }
 
@@ -140,12 +169,14 @@ class OrderCompleteFragment : FragmentBase() {
             val receipt = if (paymentType == PaymentType.CASH)
                 Helper.readAsset(context!!.assets, "receipt.txt")
                         .replace("{{products}}", productsReceipt)
+                        .replace("{{customer_code}}", ConstantsHelper.selectedCustomer!!.socialID)
                         .replace("{{total}}", String.format("%.2f", total))
                         .replace("{{amount}}", String.format("%.2f", amount))
                         .replace("{{change}}", String.format("%.2f", change))
             else
                 Helper.readAsset(context!!.assets, "receipt_card.txt")
                         .replace("{{products}}", productsReceipt)
+                        .replace("{{customer_code}}", ConstantsHelper.selectedCustomer!!.socialID)
                         .replace("{{total}}", String.format("%.2f", total))
                         .replace("{{voucher}}", voucher)
 
@@ -155,6 +186,7 @@ class OrderCompleteFragment : FragmentBase() {
             Executors.newSingleThreadExecutor().submit {
                 BluetoothHelper.openBT(activity!!, {
                     BluetoothHelper.print(context!!, receipt)
+                    BluetoothHelper.closeBT()
                     UIHelper.hideLoadingDialog()
                 }, {
                     UIHelper.showMessage(context!!, "Error de Impresora",

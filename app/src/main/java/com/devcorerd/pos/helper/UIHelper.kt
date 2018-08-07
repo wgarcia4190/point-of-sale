@@ -53,22 +53,26 @@ class UIHelper private constructor() {
             firstActivity.finish()
         }
 
+        @JvmStatic
         fun startSubActivity(firstActivity: Activity, secondActivity: Class<*>) {
             val mainIntent = Intent(firstActivity, secondActivity)
             firstActivity.startActivity(mainIntent)
         }
 
+        @JvmStatic
         fun startSubActivityForResult(firstActivity: Activity, secondActivity: Class<*>, requestCode: Int) {
             val mainIntent = Intent(firstActivity, secondActivity)
             firstActivity.startActivityForResult(mainIntent, requestCode)
         }
 
+        @JvmStatic
         fun clearEditText(vararg editTexts: EditText) {
             for (editText in editTexts) {
                 editText.setText("")
             }
         }
 
+        @JvmStatic
         fun createImagePicker(context: FragmentBase): ImagePicker {
             return ImagePicker.create(context)
                     .returnMode(ReturnMode.ALL)
@@ -80,6 +84,7 @@ class UIHelper private constructor() {
                     .enableLog(true)
         }
 
+        @JvmStatic
         fun addLoadingToImage(context: Context?, imageView: ImageView) {
             val circularProgressDrawable = CircularProgressDrawable(context!!)
             circularProgressDrawable.strokeWidth = 5f
@@ -89,6 +94,7 @@ class UIHelper private constructor() {
             imageView.setImageDrawable(circularProgressDrawable)
         }
 
+        @JvmStatic
         fun addBitmapToImage(file: File, imageView: ImageView) {
             if (file.exists()) {
                 val fi = FileInputStream(file)
@@ -99,6 +105,7 @@ class UIHelper private constructor() {
             }
         }
 
+        @JvmStatic
         fun loadImage(context: Context, url: String, imageView: ImageView, addPlaceholder: Boolean,
                       callback: () -> Unit) {
             if (addPlaceholder) {
@@ -137,6 +144,7 @@ class UIHelper private constructor() {
             }
         }
 
+        @JvmStatic
         fun fillSpinner(context: Context, list: MutableList<String>, spinner: Spinner) {
             val adapter: ArrayAdapter<String> = ArrayAdapter(context,
                     android.R.layout.simple_spinner_item, list)
@@ -145,6 +153,7 @@ class UIHelper private constructor() {
             spinner.adapter = adapter
         }
 
+        @JvmStatic
         fun setSpinnerEvent(spinner: Spinner, container: View,
                             callback: (data: Any?) -> Unit) {
             container.setOnClickListener { _: View? ->
@@ -154,6 +163,7 @@ class UIHelper private constructor() {
             (spinner.adapter as SpinnerAdapter<*>).onItemClickedCallback = callback
         }
 
+        @JvmStatic
         fun setSpinnerEvent(spinner: Spinner, textview: TextView, container: View) {
             container.setOnClickListener { _: View? ->
                 spinner.performClick()
@@ -178,27 +188,40 @@ class UIHelper private constructor() {
         }
 
 
+        @JvmStatic
         fun showMessage(context: Context, title: String, message: String) {
             showAlertMessage(context as AppCompatActivity, message, title)
         }
 
+        @JvmStatic
         fun showMessage(context: Context, message: String, title: String, callback: (() -> Unit)?) {
             showAlertMessage(context as AppCompatActivity, message, title, callback)
         }
 
+        @JvmStatic
+        fun showMessage(context: Context, message: String, title: String, callback: (() -> Unit)?, positive: String, negative: String) {
+            showAlertMessage(context as AppCompatActivity, message, title,
+                    positive, negative,0, callback, null)
+
+        }
+
+        @JvmStatic
         fun showAlertMessage(context: AppCompatActivity, message: String, title: String): CommonDialogFragment {
             return showAlertMessage(context, message, title, null)
         }
 
+        @JvmStatic
         fun showAlertMessage(context: AppCompatActivity, message: String, title: String, callback: (() -> Unit)?): CommonDialogFragment {
             return showAlertMessage(context, message, title, "Ok", null, 0, callback, null, null)
         }
 
+        @JvmStatic
         fun showAlertMessage(context: AppCompatActivity, message: String, title: String, buttonText: String, image: Int,
                              callback: (() -> Unit)?, initCallback: (() -> Unit)?): CommonDialogFragment {
             return showAlertMessage(context, message, title, buttonText, null, image, callback, null, initCallback)
         }
 
+        @JvmStatic
         fun showAlertMessage(context: AppCompatActivity, message: String, title: String,
                              positiveButtonText: String, negativeButtonText: String,
                              image: Int, callbackPositive: (() -> Unit)?,
@@ -208,6 +231,7 @@ class UIHelper private constructor() {
                     image, callbackPositive, negaviteCallback, null)
         }
 
+        @JvmStatic
         fun showAlertMessage(context: AppCompatActivity, message: String, title: String,
                              positiveButtonText: String, negativeButtonText: String?,
                              image: Int, callbackPositive: (() -> Unit)?,

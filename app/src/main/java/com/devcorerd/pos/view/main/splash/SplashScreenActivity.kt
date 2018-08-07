@@ -57,7 +57,7 @@ class SplashScreenActivity : ActivityBase(layout = R.layout.splashscreen_activit
     }
 
     private fun goToNextScreen() {
-        val previousLogin = PreferencesHelper.instance.getBoolean("isLoggedIn")
+        val previousLogin = PreferencesHelper.instance.getBoolean(ConstantsHelper.logInKey)
 
         if (previousLogin)
             UIHelper.startActivity(this, CustomerActivity::class.java)

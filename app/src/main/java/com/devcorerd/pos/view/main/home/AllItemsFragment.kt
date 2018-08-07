@@ -71,19 +71,12 @@ class AllItemsFragment : ProductSearchFragment() {
 
     private fun fillList(products: MutableList<Product>) {
         productList = products
-        toggleList(productList)
+        toggleList(productList, productListRV)
 
         productListRV.setHasFixedSize(false)
         productListRV.layoutManager = LinearLayoutManager(context)
         productListRV.adapter = adapter
 
         setupEvents(productList, adapter)
-    }
-
-    private fun toggleList(products: MutableList<Product>) {
-        if (products.isEmpty())
-            productListRV.visibility = View.GONE
-        else
-            productListRV.visibility = View.VISIBLE
     }
 }

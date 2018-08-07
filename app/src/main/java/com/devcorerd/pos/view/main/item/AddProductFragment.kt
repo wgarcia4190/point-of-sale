@@ -168,7 +168,7 @@ class AddProductFragment : FragmentBase(), OnScanCompleted, OnCategorySelected {
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
-                                            grantResults: IntArray) {
+                                             grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         when (requestCode) {

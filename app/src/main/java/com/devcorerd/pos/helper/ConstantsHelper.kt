@@ -16,6 +16,7 @@ class ConstantsHelper private constructor(){
         const val cardScanCode: Int = 8000
         const val defaultCategoryName = "Sin Asignar"
         const val defaultCategoryColor = "#7a7a7a"
+        const val logInKey = "isLoggedIn"
 
         val categoryList: MutableList<Category> = mutableListOf()
         var defaultCategory: Category? = null

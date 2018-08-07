@@ -59,6 +59,7 @@ android {
     sourceSets {
         main {
             res.srcDirs = [
+                    'src/main/res/layouts/transaction',
                     'src/main/res/layouts/ocr',
                     'src/main/res/layouts/settings',
                     'src/main/res/layouts/checkout',
@@ -125,7 +126,8 @@ dependencies {
     implementation "petrov.kristiyan:colorpicker-library:$color_picker_version"
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.10'
     implementation 'com.mcxiaoke.volley:library-aar:1.0.0'
-    implementation 'io.card:android-sdk:5.5.0'
+    implementation "io.card:android-sdk:$iocard_version"
+    implementation "org.zakariya.stickyheaders:stickyheaders:$stickyheaders_version"
 
     /** Email Sender */
     implementation group: 'com.mailjet', name: 'mailjet-client', version: "$mailjet_version"

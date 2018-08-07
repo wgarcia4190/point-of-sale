@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.update_printer_fragment.*
 import org.joda.time.DateTime
 import java.util.concurrent.Executors
 
+@Suppress("DEPRECATION")
 /**
  * @author Ing. Wilson Garcia
  * Created on 8/1/18

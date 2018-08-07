@@ -233,5 +233,18 @@
 
     <dimen name="no_data_text_size">18sp</dimen>
 
+    <dimen name="transaction_height">55dp</dimen>
+    <dimen name="transaction_icon_size">30dp</dimen>
+    <dimen name="transaction_m_v">25dp</dimen>
+    <dimen name="transaction_m_h">20dp</dimen>
+    <dimen name="transaction_header_text">15sp</dimen>
+    <dimen name="transaction_header_sub_text">13sp</dimen>
+
+    <dimen name="transaction_details_m">20dp</dimen>
+    <dimen name="transaction_details_m_b">10dp</dimen>
+    <dimen name="transaction_details_m_b_b">16dp</dimen>
+    <dimen name="transaction_details_title_size">17sp</dimen>
+    <dimen name="transaction_details_text_size">15sp</dimen>
+
 
 </resources>

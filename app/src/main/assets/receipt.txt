@@ -1,13 +1,13 @@
         {{store_name}}
        {{store_phone}}
 --------------------------------
-CÓDIGO DE CLIENTE: {{customer_code}}
+CODIGO DE CLIENTE: {{customer_code}}
 
 {{products}}
 ===============================
-TOTAL	            {{total}}
-MONTO	            {{amount}}
-CAMBIO	            {{change}}
+TOTAL                {{total}}
+MONTO                {{amount}}
+CAMBIO               {{change}}
 ================================
 CASH TENDERED
 

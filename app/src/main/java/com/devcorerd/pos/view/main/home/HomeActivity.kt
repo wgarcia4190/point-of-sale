@@ -28,12 +28,14 @@ import com.devcorerd.pos.view.main.checkout.CartFragment
 import com.devcorerd.pos.view.main.customer.CustomerListFragment
 import com.devcorerd.pos.view.main.item.ItemsFragment
 import com.devcorerd.pos.view.main.settings.SettingsFragment
+import com.devcorerd.pos.view.main.transactions.TransactionsFragment
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.customer_container.*
 import kotlinx.android.synthetic.main.home_activity.*
 import me.dm7.barcodescanner.zbar.Result
 
+@Suppress("PLUGIN_WARNING")
 /**
  * @author Ing. Wilson Garcia
  * Created on 7/17/18
@@ -79,6 +81,7 @@ class HomeActivity : ActivityBase(R.layout.home_activity, ProductPresenter()),
         when (item.itemId) {
             R.id.sales -> switchFragment(homeFragment)
             R.id.items -> switchFragment(ItemsFragment.newInstance(this))
+            R.id.transactions -> switchFragment(TransactionsFragment.newInstance(this))
             R.id.settings -> switchFragment(SettingsFragment.newInstance(this))
         }
         return true
@@ -104,7 +107,7 @@ class HomeActivity : ActivityBase(R.layout.home_activity, ProductPresenter()),
         searchCustomer.setOnClickListener {
             customerContainer.performClick()
             supportFragmentManager.beginTransaction().add(R.id.mainContainer,
-                    CustomerListFragment.newInstance(homeFragment)).commit()
+                    CustomerListFragment.newInstance(homeFragment, true)).commit()
         }
 
         cartButtonContainer.setOnClickListener {

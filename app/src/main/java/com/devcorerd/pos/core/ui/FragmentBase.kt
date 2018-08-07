@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.RecyclerView
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -90,6 +91,13 @@ open class FragmentBase: Fragment() {
 
     protected fun removeFragment(){
         activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+    }
+
+    protected fun toggleList(data: MutableList<*>, list: RecyclerView) {
+        if (data.isEmpty())
+            list.visibility = View.GONE
+        else
+            list.visibility = View.VISIBLE
     }
 
     override fun onResume() {

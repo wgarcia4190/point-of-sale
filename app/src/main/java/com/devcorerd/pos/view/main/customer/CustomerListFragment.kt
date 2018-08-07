@@ -33,9 +33,9 @@ import me.dm7.barcodescanner.zbar.Result
 class CustomerListFragment : FragmentBase(), OnCustomerAddedListener, OnScanCompleted {
     private lateinit var customerList: MutableList<Customer>
     private var tempCustomerList: MutableList<Customer> = mutableListOf()
+    private var showBack: Boolean = true
 
     private lateinit var listener: OnCustomerSelected
-
     private val fragment = AddCustomerFragment.newInstance(this)
 
     private val adapter: Adapter<Customer, CustomerListViewHolder> by lazy {
@@ -52,12 +52,13 @@ class CustomerListFragment : FragmentBase(), OnCustomerAddedListener, OnScanComp
 
     companion object {
         @JvmStatic
-        fun newInstance(listener: OnCustomerSelected):
+        fun newInstance(listener: OnCustomerSelected, showBack: Boolean):
                 CustomerListFragment {
             val fragmentBase = CustomerListFragment()
             val layout: Int = R.layout.customer_list_fragment
 
             fragmentBase.listener = listener
+            fragmentBase.showBack = showBack
             fragmentBase.createBundle(layout, CustomerPresenter())
             return fragmentBase
         }
@@ -68,6 +69,11 @@ class CustomerListFragment : FragmentBase(), OnCustomerAddedListener, OnScanComp
 
         load()
         setupEvents()
+
+        if(showBack)
+            backButton.visibility = View.VISIBLE
+        else
+            backButton.visibility = View.GONE
     }
 
     private fun setupEvents() {
@@ -115,7 +121,7 @@ class CustomerListFragment : FragmentBase(), OnCustomerAddedListener, OnScanComp
                 }
 
                 adapter.swap(tempCustomerList)
-                toggleList(tempCustomerList)
+                toggleList(tempCustomerList, customerRVList)
             }
         })
 
@@ -156,18 +162,11 @@ class CustomerListFragment : FragmentBase(), OnCustomerAddedListener, OnScanComp
 
     private fun fillList(customers: MutableList<Customer>) {
         customerList = customers
-        toggleList(customerList)
+        toggleList(customerList, customerRVList)
 
         customerRVList.setHasFixedSize(false)
         customerRVList.layoutManager = LinearLayoutManager(context)
         customerRVList.adapter = adapter
-    }
-
-    private fun toggleList(customerList: MutableList<Customer>) {
-        if (customerList.isEmpty())
-            customerRVList.visibility = View.GONE
-        else
-            customerRVList.visibility = View.VISIBLE
     }
 
     override fun onCustomerAdded(customer: Customer) {

@@ -8,7 +8,7 @@ import com.devcorerd.pos.helper.ConstantsHelper
 import com.devcorerd.pos.helper.UIHelper
 import com.devcorerd.pos.listener.OnCustomerSelected
 import com.devcorerd.pos.model.entity.Customer
-import com.devcorerd.pos.view.main.home.HomeActivity
+import com.devcorerd.pos.view.main.home.land.HomeActivity
 import io.card.payment.CardIOActivity
 import io.card.payment.CreditCard
 
@@ -19,7 +19,7 @@ import io.card.payment.CreditCard
  */
 class CustomerActivity : ActivityBase(R.layout.customer_activity), OnCustomerSelected {
 
-    private val fragment = CustomerListFragment.newInstance(this)
+    private val fragment = CustomerListFragment.newInstance(this, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,8 @@ class CustomerActivity : ActivityBase(R.layout.customer_activity), OnCustomerSel
         when (requestCode) {
             ConstantsHelper.scanCode -> {
                 val result = data?.getStringExtra("scan_results")
-                fragment.setValuesFromOCR(result!!)
+                if (result != null)
+                    fragment.setValuesFromOCR(result!!)
             }
             else -> {
                 if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {

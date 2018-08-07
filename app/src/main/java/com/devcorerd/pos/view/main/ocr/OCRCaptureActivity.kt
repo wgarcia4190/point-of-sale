@@ -85,8 +85,8 @@ class OCRCaptureActivity : ActivityBase(R.layout.ocr_activity) {
         val context: Context = applicationContext
 
         textRecognizer = TextRecognizer.Builder(context).build()!!
-        textRecognizer!!.setProcessor(OcrDetectorProcessor((graphicOverlay
-                as GraphicOverlay<OcrGraphic>)))
+        textRecognizer!!.setProcessor(OcrDetectorProcessor(graphicOverlay
+                as GraphicOverlay<OcrGraphic>))
         if (!textRecognizer!!.isOperational) {
 
             val lowStorageFilter = IntentFilter(Intent.ACTION_DEVICE_STORAGE_LOW)

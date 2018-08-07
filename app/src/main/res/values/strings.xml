@@ -101,6 +101,13 @@
     <string name="not_file_permission_granted">Esta aplicación necesita permisos para funcionar correctamente</string>
     <string name="printers">Impresoras</string>
 
+    <string name="logout">Cerrar Sesión</string>
+    <string name="logout_questions">¿Está seguro que desea cerrar sesión?</string>
+    <string name="total">Total</string>
+    <string name="amount">Monto</string>
+    <string name="change">Cambio</string>
+    <string name="voucher">Voucher</string>
+
     <string-array name="paper_width">
         <item>58 mm</item>
         <item>80 mm</item>

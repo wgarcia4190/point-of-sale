@@ -64,7 +64,7 @@ class ProductItemViewHolder(view: View, val presenter: ProductPresenter) : ViewH
                             android.graphics.PorterDuff.Mode.SRC_IN)
 
             }, { error: Throwable ->
-                UIHelper.showMessage(context!!, "Error actualizando producto", error.message!!)
+                UIHelper.showMessage(context, "Error actualizando producto", error.message!!)
                 error.printStackTrace()
             })
         }

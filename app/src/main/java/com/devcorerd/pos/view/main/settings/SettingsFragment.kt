@@ -4,7 +4,11 @@ import android.os.Bundle
 import android.view.View
 import com.devcorerd.pos.R
 import com.devcorerd.pos.core.ui.FragmentBase
+import com.devcorerd.pos.helper.ConstantsHelper
+import com.devcorerd.pos.helper.PreferencesHelper
+import com.devcorerd.pos.helper.UIHelper
 import com.devcorerd.pos.listener.OnUpdateToolbarListener
+import com.devcorerd.pos.view.main.login.LoginActivity
 import kotlinx.android.synthetic.main.settings_fragment.*
 
 /**
@@ -38,6 +42,13 @@ class SettingsFragment : FragmentBase() {
         printersButton.setOnClickListener {
             stackFragmentToTop(PrintersFragment.newInstance(), R.id.mainContainer,
                     false)
+        }
+
+        logout.setOnClickListener {
+            UIHelper.showMessage(context!!, resources.getString(R.string.logout_questions), "Cerrar Sesión", {
+                PreferencesHelper.instance.saveBoolean(ConstantsHelper.logInKey, false)
+                UIHelper.startActivity(activity!!, LoginActivity::class.java)
+            }, "Si", "No")
         }
     }
 }

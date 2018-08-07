@@ -28,7 +28,7 @@ class TransactionService(context: Context?, baseUrl: String, storeHeaders: Boole
                          @Query("PFECHA") date: String,
                          @Query("PFACTURA") invoiceId: Int): Observable<Response<ResponseBody>>
 
-        @POST("encabft")
+        @POST("detaft")
         fun createDetail(@Query("PUNIDAD") unit: String,
                          @Query("PPRODUCTO") sku: String,
                          @Query("PFACTURA") invoiceId: Int,
