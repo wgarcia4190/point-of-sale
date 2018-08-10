@@ -233,5 +233,30 @@
 
     <dimen name="no_data_text_size">18sp</dimen>
 
+    <dimen name="transaction_height">55dp</dimen>
+    <dimen name="transaction_icon_size">30dp</dimen>
+    <dimen name="transaction_m_v">25dp</dimen>
+    <dimen name="transaction_m_h">20dp</dimen>
+    <dimen name="transaction_header_text">15sp</dimen>
+    <dimen name="transaction_header_sub_text">13sp</dimen>
+
+    <dimen name="transaction_details_m">20dp</dimen>
+    <dimen name="transaction_details_m_b">10dp</dimen>
+    <dimen name="transaction_details_m_b_b">16dp</dimen>
+    <dimen name="transaction_details_title_size">17sp</dimen>
+    <dimen name="transaction_details_text_size">15sp</dimen>
+
+    <dimen name="hamburger_menu_size">30dp</dimen>
+    <dimen name="hamburger_menu_tab_p_h">5dp</dimen>
+    <dimen name="hamburger_menu_tab_m_v">3dp</dimen>
+    <dimen name="hamburger_menu_height">80dp</dimen>
+
+    <dimen name="tab_text_ht">14sp</dimen>
+    <dimen name="tab_icon_ht">25dp</dimen>
+
+    <dimen name="product_card_image_size">180dp</dimen>
+    <dimen name="product_card_name_text_size_s">14sp</dimen>
+    <dimen name="product_card_data_m_b">5dp</dimen>
+
 
 </resources>

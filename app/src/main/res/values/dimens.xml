@@ -254,5 +254,10 @@
     <dimen name="tab_text_ht">14sp</dimen>
     <dimen name="tab_icon_ht">25dp</dimen>
 
+    <dimen name="product_card_image_size">120dp</dimen>
+    <dimen name="product_card_p">10dp</dimen>
+    <dimen name="product_card_name_text_size_s">16sp</dimen>
+    <dimen name="product_card_price_text_size_s">14sp</dimen>
+
 
 </resources>
