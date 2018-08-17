@@ -1,6 +1,7 @@
 package com.devcorerd.pos.view.main.customer
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -20,6 +21,7 @@ import com.devcorerd.pos.listener.OnCustomerSelected
 import com.devcorerd.pos.listener.OnScanCompleted
 import com.devcorerd.pos.model.entity.Customer
 import com.devcorerd.pos.model.presenter.CustomerPresenter
+import com.devcorerd.pos.model.presenter.customer.CustomerPresenterAdapter
 import com.devcorerd.pos.view.main.barcode.BarcodeReaderFragment
 import com.devcorerd.pos.view.viewholder.CustomerListViewHolder
 import io.card.payment.CardIOActivity
@@ -52,14 +54,15 @@ class CustomerListFragment : FragmentBase(), OnCustomerAddedListener, OnScanComp
 
     companion object {
         @JvmStatic
-        fun newInstance(listener: OnCustomerSelected, showBack: Boolean):
+        fun newInstance(listener: OnCustomerSelected, showBack: Boolean, context: Context):
                 CustomerListFragment {
             val fragmentBase = CustomerListFragment()
             val layout: Int = R.layout.customer_list_fragment
 
             fragmentBase.listener = listener
             fragmentBase.showBack = showBack
-            fragmentBase.createBundle(layout, CustomerPresenter())
+            fragmentBase.createBundle(layout, CustomerPresenterAdapter
+                    .getPresenter(context))
             return fragmentBase
         }
     }
@@ -145,16 +148,8 @@ class CustomerListFragment : FragmentBase(), OnCustomerAddedListener, OnScanComp
 
     private fun load() {
         (presenter as CustomerPresenter).getCustomers({ customers: MutableList<Customer> ->
-
             customerList = customers
-            if (customers.isEmpty() && Helper.isInternetAvailable(context!!)) {
-                (presenter as CustomerPresenter).getCustomersFromServer({
-                    fillList(it)
-                }, { error: Throwable ->
-                    UIHelper.showMessage(context!!, "Error cargando Clientes", error.message!!)
-                })
-            } else
-                fillList(customers)
+            fillList(customerList)
         }, { error: Throwable ->
             UIHelper.showMessage(context!!, "Error cargando Clientes", error.message!!)
         })

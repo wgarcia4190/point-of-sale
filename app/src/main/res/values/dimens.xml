@@ -258,6 +258,7 @@
     <dimen name="product_card_p">10dp</dimen>
     <dimen name="product_card_name_text_size_s">16sp</dimen>
     <dimen name="product_card_price_text_size_s">14sp</dimen>
+    <dimen name="product_card_data_m_b">5dp</dimen>
 
 
 </resources>

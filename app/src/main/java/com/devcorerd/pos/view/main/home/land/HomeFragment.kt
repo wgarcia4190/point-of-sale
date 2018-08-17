@@ -24,7 +24,7 @@ import com.devcorerd.pos.model.entity.Product
 import com.devcorerd.pos.model.presenter.ProductPresenter
 import com.devcorerd.pos.view.viewholder.CartItemViewHolder
 import com.devcorerd.pos.view.viewholder.ProductCardViewHolder
-import kotlinx.android.synthetic.main.customer_header.*
+import kotlinx.android.synthetic.main.customer_land_header.*
 import kotlinx.android.synthetic.main.home_fragment.*
 
 @Suppress("PLUGIN_WARNING", "DEPRECATION", "UNCHECKED_CAST")
@@ -207,7 +207,7 @@ class HomeFragment : ProductSearchFragment(), OnCustomerSelected {
 
 
     override fun onCustomerSelected(customer: Customer) {
-        customerHeader.visibility = View.VISIBLE
+        customerLandHeader.visibility = View.VISIBLE
         customerName.text = customer.getFullName()
         customerSocialID.text = customer.socialID
         customerEmail.text = customer.email

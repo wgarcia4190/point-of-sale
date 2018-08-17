@@ -102,7 +102,7 @@ class HomeActivity : ActivityBase(R.layout.home_activity, ProductPresenter()),
         searchCustomer.setOnClickListener {
             customerContainer.performClick()
             supportFragmentManager.beginTransaction().add(R.id.mainContainer,
-                    CustomerListFragment.newInstance(homeFragment, true)).commit()
+                    CustomerListFragment.newInstance(homeFragment, true, this)).commit()
         }
 
         cartButtonContainer.setOnClickListener {

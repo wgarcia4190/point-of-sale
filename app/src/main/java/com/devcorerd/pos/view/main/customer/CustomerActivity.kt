@@ -19,7 +19,7 @@ import io.card.payment.CreditCard
  */
 class CustomerActivity : ActivityBase(R.layout.customer_activity), OnCustomerSelected {
 
-    private val fragment = CustomerListFragment.newInstance(this, false)
+    private val fragment = CustomerListFragment.newInstance(this, false, this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,7 @@ class CustomerActivity : ActivityBase(R.layout.customer_activity), OnCustomerSel
             ConstantsHelper.scanCode -> {
                 val result = data?.getStringExtra("scan_results")
                 if (result != null)
-                    fragment.setValuesFromOCR(result!!)
+                    fragment.setValuesFromOCR(result)
             }
             else -> {
                 if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {

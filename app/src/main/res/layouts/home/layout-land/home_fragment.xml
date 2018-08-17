@@ -165,8 +165,8 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/customer_header"
-            android:background="@drawable/shape_white_background_no_border_left_deselected"
+            layout="@layout/customer_land_header"
+            android:id="@+id/customerLandHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -176,7 +176,7 @@
             android:id="@+id/cartListRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/customerHeader"
+            android:layout_below="@+id/customerLandHeader"
             android:layout_above="@+id/chargeButton" />
 
         <Button

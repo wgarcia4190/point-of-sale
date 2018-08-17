@@ -12,6 +12,7 @@ import com.devcorerd.pos.helper.UIHelper
 import com.devcorerd.pos.listener.OnCustomerAddedListener
 import com.devcorerd.pos.model.entity.Customer
 import com.devcorerd.pos.model.presenter.CustomerPresenter
+import com.devcorerd.pos.model.presenter.customer.CustomerDBPresenter
 import com.devcorerd.pos.view.main.ocr.OCRCaptureActivity
 import kotlinx.android.synthetic.main.add_customer_fragment.*
 
@@ -32,7 +33,7 @@ class AddCustomerFragment : FragmentBase() {
             val layout: Int = R.layout.add_customer_fragment
 
             fragmentBase.listener = listener
-            fragmentBase.createBundle(layout, CustomerPresenter())
+            fragmentBase.createBundle(layout, CustomerDBPresenter())
             return fragmentBase
         }
     }
@@ -54,7 +55,7 @@ class AddCustomerFragment : FragmentBase() {
             val customer = Customer(name.text.toString(), lastName.text.toString(),
                     socialID.text.toString(), email.text.toString(), card.text.toString())
 
-            (presenter as CustomerPresenter).addCustomer(customer, {
+            (presenter as CustomerDBPresenter).addCustomer(customer, {
                 listener.onCustomerAdded(customer)
 
                 UIHelper.clearEditText(name, lastName, email, socialID, card)
